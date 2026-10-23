@@ -1,5 +1,2 @@
-<section class="box">
-  <h2>Funding</h2>
-  <p class="raised">Raised <strong>{{ .raised }}</strong> of {{ .amount }} XMR</p>
-  <p class="pending">{{ .contributors }} contributors</p>
-</section>
+<p class="progress-label">Completed {{ .done }} of {{ .milestones }} milestones · raised {{ .raised }} of {{ .amount }} XMR</p>
+<div class="segments">{{ partial "segments.html" . }}</div>

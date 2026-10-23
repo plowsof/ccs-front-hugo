@@ -1,38 +1,49 @@
 {{ define "main" }}
 {{- $s := .Params.s -}}{{- $st := index (partial "stages.html" .) $s -}}
-{{- $v := .Params.v -}}{{- if .Params.placeholders }}{{ $v = partial "placeholders.html" . }}{{ end -}}
+{{- $ph := .Params.placeholders | default false -}}
+{{- $v := .Params.v -}}{{- if $ph }}{{ $v = partial "placeholders.html" . }}{{ end -}}
 <article class="proposal">
   <div class="side"><a class="back" href="{{ $st.page }}">{{ partial "icon.html" "back" }}{{ $st.label }}</a></div>
   <header class="card head {{ $s }}">
     <span class="tag">{{ partial "icon.html" $st.icon }}{{ $st.tag }}</span>
     <h1>{{ $v.name }}</h1>
     {{ partial "meta.html" (dict "s" $s "v" $v) }}
+    {{ if eq $s "fr" -}}
+    {{ partial "marker.html" "donate" }}
+    {{ partial "donate.html" (merge $v (dict "qr" (cond $ph $v.qr (`<img src="/assets/example-qr.svg" alt="QR code of the address below">` | safeHTML)))) }}
+    {{ partial "marker.html" "/donate" }}
+    {{- else -}}
+    {{ partial "marker.html" "funded" }}
+    {{ partial "funded.html" $v }}
+    {{ partial "marker.html" "/funded" }}
+    {{- end }}
   </header>
-  <div class="columns">
-    <div class="body">
-      {{ if .Params.placeholders }}{{ $v.body }}{{ else }}{{ .Content }}{{ end }}
-      <p><a {{ printf "href=%q" $v.gitlab_url | safeHTMLAttr }}>Discussion and updates on GitLab {{ partial "icon.html" "external" }}</a></p>
-    </div>
-    <div class="{{ $s }}">
-      {{ if eq $s "fr" -}}
-      {{ partial "marker.html" "donate" }}
-      {{ partial "donate.html" (merge $v (dict "qr" (cond (.Params.placeholders | default false) $v.qr (`<img src="/assets/example-qr.svg" alt="QR code of the address below">` | safeHTML)))) }}
-      {{ partial "marker.html" "/donate" }}
-      {{- else -}}
-      {{ partial "marker.html" "funded" }}
-      {{ partial "funded.html" $v }}
-      {{ partial "marker.html" "/funded" }}
-      {{- end }}
-      <section class="box wip">
-        <h2>Milestones</h2>
-        {{ partial "marker.html" "milestones" }}
-        <ol class="milestones">
-          {{- if .Params.placeholders }}{{ "{{milestones_list}}" }}{{ else }}{{ range .Params.milestone_list }}
-          {{ partial "milestone.html" . }}{{ end }}{{ end }}
-        </ol>
-        {{ partial "marker.html" "/milestones" }}
-      </section>
-    </div>
+
+  {{- /* Tabs without JavaScript: radio buttons, and CSS shows the panel of the checked one. */}}
+  <div class="tabs {{ $s }}">
+    <input type="radio" name="tab" id="tab-proposal" checked><label for="tab-proposal">Proposal</label>
+    <input type="radio" name="tab" id="tab-milestones"><label for="tab-milestones">Milestones</label>
+    <input type="radio" name="tab" id="tab-payouts"><label for="tab-payouts">Payouts</label>
+
+    <section class="panel panel-proposal body">
+      {{ if $ph }}{{ $v.body }}{{ else }}{{ .Content }}{{ end }}
+      <h2>Community discussion and updates</h2>
+      <p><a {{ printf "href=%q" $v.gitlab_url | safeHTMLAttr }}>Comments and updates on GitLab {{ partial "icon.html" "external" }}</a></p>
+    </section>
+
+    <section class="panel panel-milestones">
+      {{ partial "marker.html" "milestones" }}
+      {{- if $ph }}{{ "{{milestones_list}}" }}{{ else }}{{ range .Params.milestone_list }}
+      {{ partial "milestone.html" . }}{{ else }}<p class="empty">No milestones.</p>{{ end }}{{ end }}
+      {{ partial "marker.html" "/milestones" }}
+    </section>
+
+    <section class="panel panel-payouts">
+      {{ partial "marker.html" "payouts" }}
+      {{- if $ph }}{{ "{{payouts_list}}" }}{{ else }}{{ range .Params.payout_list }}
+      {{ partial "payout.html" . }}{{ else }}<p class="empty">No payouts yet.</p>{{ end }}{{ end }}
+      {{ partial "marker.html" "/payouts" }}
+    </section>
   </div>
 </article>
 {{ end }}
