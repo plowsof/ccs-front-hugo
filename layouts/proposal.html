@@ -4,8 +4,8 @@
 {{- $v := .Params.v -}}{{- if $ph }}{{ $v = partial "placeholders.html" . }}{{ end -}}
 <article class="proposal">
   <div class="side"><a class="back" href="{{ $st.page }}">{{ partial "icon.html" "back" }}{{ $st.label }}</a></div>
+  {{- /* no stage label: the link above already names the stage, the strip shows its colour */}}
   <header class="card head {{ $s }}">
-    <span class="tag">{{ partial "icon.html" $st.icon }}{{ $st.tag }}</span>
     <h1>{{ $v.name }}</h1>
     {{ partial "meta.html" (dict "s" $s "v" $v) }}
     {{ if eq $s "fr" -}}

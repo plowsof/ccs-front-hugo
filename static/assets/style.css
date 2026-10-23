@@ -246,7 +246,7 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 /* proposal page */
 .proposal { max-width: 1000px; margin: 24px auto 56px; padding: 0 max(16px, 4vw); }
 .proposal .head { position: relative; padding: 26px 26px 22px; }
-.proposal .head h1 { margin: 4px 110px 12px 0; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; }
+.proposal .head h1 { margin: 4px 0 12px; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; }
 .columns { display: grid; grid-template-columns: 1fr 330px; gap: 32px; margin-top: 28px; align-items: start; }
 .body { min-width: 0; overflow-wrap: anywhere; }
 .body img { max-width: 100%; }
