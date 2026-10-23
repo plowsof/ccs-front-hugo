@@ -4,7 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
-<title>{{ if .IsHome }}Monero Community Crowdfunding System{{ else }}{{ .Title }} · Monero CCS{{ end }}</title>
+{{- /* the 404 page is served at any address (/a/b/c): its links are relative to the site's root */}}
+{{- /* &#47; is "/" to a browser, and relativeURLs (which would make it "./") leaves it alone */}}
+{{- if eq .Kind "404" }}{{ `<base href="&#47;">` | safeHTML }}{{ end }}
+<title>{{ if .IsHome }}Monero Community Crowdfunding System{{ else if eq .Kind "404" }}Page not found · Monero CCS{{ else }}{{ .Title }} · Monero CCS{{ end }}</title>
 {{- /* named by its hash (assets/style.<sha256>.css): a changed stylesheet is a new file, so no
    browser keeps showing an old one; beside fonts/, so its url()s still work */}}
 {{- $css := resources.Get "assets/style.css" | fingerprint "sha256" }}
