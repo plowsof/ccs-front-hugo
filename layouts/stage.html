@@ -8,13 +8,29 @@
 <div class="explorer">
   {{ partial "sidebar.html" . }}
   <section class="list" aria-label="{{ .Title }}">
+    {{- $tag := .Params.tag | default "" }}
+    {{- if $tag }}
+    <h1 class="list-title">Tagged {{ partial "marker.html" "title" }}
+{{ $tag }}
+{{ partial "marker.html" "/title" }}</h1>
+    {{- else }}
     <h1 class="list-title">{{ .Title }}</h1>
+    {{- end }}
+    {{- if eq .Params.page "explore" }}
+    {{ partial "marker.html" "filters" }}
+    {{ partial "filters.html" (dict "active" $tag) }}
+    {{ partial "marker.html" "/filters" }}
+    {{- end }}
     {{- range .Params.show }}{{ $s := . }}
     {{ partial "marker.html" (printf "list %s" $s) }}
     {{- range index $lists $s }}
+    {{- if or (not $tag) (in .tags $tag) }}
     {{ partial "card.html" (dict "s" $s "v" (partial "values.html" .)) }}
+    {{- end }}
     {{- else }}
+    {{- if not $tag }}
     <p class="empty">Nothing here right now.</p>
+    {{- end }}
     {{- end }}
     {{ partial "marker.html" (printf "/list %s" $s) }}
     {{- end }}

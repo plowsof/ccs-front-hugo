@@ -39,7 +39,8 @@
                 "amount-pending": 1.5,
                 "author": "example",
                 "date": "December 25, 2025",
-                "funding-required-date": "January 2, 2026"
+                "funding-required-date": "January 2, 2026",
+                "tags": []
             },
             {
                 "name": "Example: a full-time auditor for six months",
@@ -55,7 +56,10 @@
                 "amount-pending": 0,
                 "author": "example",
                 "date": "December 2, 2025",
-                "funding-required-date": "December 9, 2025"
+                "funding-required-date": "December 9, 2025",
+                "tags": [
+                    "Available to pick up"
+                ]
             },
             {
                 "name": "Example: conference travel",
@@ -71,7 +75,8 @@
                 "amount-pending": 0.25,
                 "author": "example",
                 "date": "November 20, 2025",
-                "funding-required-date": null
+                "funding-required-date": null,
+                "tags": []
             }
         ]
     },
@@ -89,7 +94,8 @@
                 "amount-funded": "200.0000",
                 "amount-pending": 0,
                 "author": "example",
-                "date": "December 14, 2025"
+                "date": "December 14, 2025",
+                "tags": []
             },
             {
                 "name": "Example: node software maintenance",
@@ -102,7 +108,11 @@
                 "amount-funded": "120.0000",
                 "amount-pending": 0,
                 "author": "example",
-                "date": "November 1, 2025"
+                "date": "November 1, 2025",
+                "tags": [
+                    "Abandoned",
+                    "Available to pick up"
+                ]
             }
         ]
     }

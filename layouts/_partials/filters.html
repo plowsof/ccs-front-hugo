@@ -1,0 +1,8 @@
+{{- /* The tag filters on Explore: All, then each tag with its count; .active is the shown one. */ -}}
+{{- $active := .active -}}
+<nav class="filters" aria-label="Filter by tag">
+  {{- partial "filter.html" (dict "tag" "All" "href" "/explore/" "count" "" "active" (cond (eq $active "") " active" "")) }}
+  {{- range partial "tags.html" . }}
+  {{- partial "filter.html" (dict "tag" .tag "href" "/explore/tag/example/" "count" .count "active" (cond (eq $active .tag) " active" "")) }}
+  {{- end }}
+</nav>

@@ -3,6 +3,11 @@
 {{- $p := . -}}
 {{- $pending := index $p "amount-pending" | default 0 -}}
 {{- $since := index $p "funding-required-date" -}}
+{{- $labels := "" -}}{{- $links := "" -}}
+{{- range $p.tags }}
+  {{- $labels = print $labels (partial "label.html" (dict "tag" .)) -}}
+  {{- $links = print $links (partial "label.html" (dict "tag" . "link" true "href" "/explore/tag/example/")) -}}
+{{- end -}}
 {{- return dict
   "url" (or (index $p "local-url") (index $p "gitlab-url"))
   "gitlab_url" (index $p "gitlab-url")
@@ -15,4 +20,5 @@
   "percentage" $p.percentage
   "milestones" $p.milestones "done" (index $p "milestones-completed")
   "address" (index $p "donate-address")
+  "tags" $labels "tag_links" $links
 -}}
