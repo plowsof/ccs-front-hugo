@@ -1,0 +1,7 @@
+{{- /* A stage's number of proposals, between markers ccs-front-bash fills: "count fr" in the
+   stage menu, "number fr" on the home page's cards (a marker is used once a page). Here the
+   example data's. */ -}}
+{{- $d := hugo.Data.example -}}
+{{- $n := len (index (dict "idea" (index $d.proposals 0).proposals "fr" (index $d.proposals 1).proposals "wip" (index $d.proposals 2).proposals "cp" (index (index $d "completed-proposals") 0).proposals) .s) -}}
+<span class="count">{{ partial "marker.html" (printf "%s %s" .name .s) }}{{ $n }}{{ partial "marker.html" (printf "/%s %s" .name .s) }}</span>
+{{- /**/ -}}

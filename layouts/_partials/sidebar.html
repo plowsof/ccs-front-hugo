@@ -1,20 +1,23 @@
+{{- /* The stages (with how many proposals each has) and the tags: once per page. On a wide screen
+   the left column of the stage and tag pages; on a phone, on every page, the drawer the menu
+   button opens from the left (a checkbox and CSS, no JavaScript), with the site's links too.
+   ccs-front-bash fills the counts and the tags. */ -}}
 {{- $stages := partial "stages.html" . -}}
-<aside class="side">
-  <a class="back" href="/">{{ partial "icon.html" "back" }}Home</a>
+<aside class="side drawer" aria-label="Proposals">
   <nav class="stage-menu" aria-label="Stages">
     {{- range slice "idea" "fr" "wip" "cp" }}{{ $st := index $stages . }}
-    <a class="{{ . }} tab-{{ if eq . "idea" }}ideas{{ else }}{{ . }}{{ end }}" href="{{ $st.page }}">{{ partial "icon.html" $st.icon }}{{ $st.label }}</a>
+    <a class="{{ . }} tab-{{ if eq . "idea" }}ideas{{ else }}{{ . }}{{ end }}" href="{{ $st.page }}">{{ partial "icon.html" $st.icon }}{{ $st.label }}{{ partial "count.html" (dict "s" . "name" "count") }}</a>
     {{- end }}
   </nav>
-  {{- /* Explore and the tag pages: the tag filters (ccs-front-bash fills them) */}}
-  {{- if eq .Params.page "explore" }}
   {{ partial "marker.html" "filters" }}
   {{ partial "filters.html" (dict "active" (.Params.tag | default "")) }}
   {{ partial "marker.html" "/filters" }}
-  {{- end }}
   {{- /* only on the Ideas page */}}
-  {{- if eq (delimit .Params.show ",") "idea" }}
+  {{- if eq (delimit (.Params.show | default slice) ",") "idea" }}
   <hr>
   <a class="button primary block" href="/how-to-ccs/">Submit Idea</a>
   {{- end }}
+  <nav class="drawer-links" aria-label="Site">
+    {{- partial "site-links.html" . }}
+  </nav>
 </aside>
