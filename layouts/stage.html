@@ -5,9 +5,7 @@
   "fr" (index $d.proposals 1).proposals
   "wip" (index $d.proposals 2).proposals
   "cp" (index (index $d "completed-proposals") 0).proposals -}}
-<div class="explorer">
-  {{ partial "sidebar.html" . }}
-  <section class="list" aria-label="{{ .Title }}">
+<section class="list" aria-label="{{ .Title }}">
     {{- $tag := .Params.tag | default "" }}
     {{- if $tag }}
     <h1 class="list-title">Tagged {{ partial "marker.html" "title" }}
@@ -29,6 +27,5 @@
     {{- end }}
     {{ partial "marker.html" (printf "/list %s" $s) }}
     {{- end }}
-  </section>
-</div>
+</section>
 {{ end }}
