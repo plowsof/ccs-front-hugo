@@ -5,7 +5,7 @@ locale = "en"
 title = "Monero CCS"
 relativeURLs = true
 uglyURLs = false
-disableKinds = ["taxonomy", "term", "section", "rss", "sitemap", "robotstxt", "404"]
+disableKinds = ["taxonomy", "term", "section", "rss", "sitemap", "robotstxt"]
 
 [markup.goldmark.renderer]
   unsafe = false   # raw HTML in Markdown is dropped, never passed through
