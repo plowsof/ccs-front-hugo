@@ -1,3 +1,3 @@
-{{- /* The icon sprite, named by its hash (assets/icons.<sha256>.svg) like the stylesheet: a new
-   icon is a new file, so no browser keeps drawing from an old sprite. */ -}}
-{{- return (resources.Get "assets/icons.svg" | fingerprint "sha256").RelPermalink -}}
+{{- /* An icon's PNG ("menu-2x"), named by its hash (assets/icons/menu-2x.<sha256>.png) like the
+   stylesheet: a changed icon is a new file, so no browser keeps drawing an old one. */ -}}
+{{- return (resources.Get (printf "assets/icons/%s.png" .) | fingerprint "sha256").RelPermalink -}}
