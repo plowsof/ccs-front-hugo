@@ -19,6 +19,15 @@ The pages and URLs are today's ccs-front's, so links keep working: `/`, `/ideas/
 `/funding-required/`, `/work-in-progress/`, `/completed-proposals/`, `/proposals/<name>.html`,
 `/donate/`, `/what-is-ccs/`, `/how-to-ccs/`, plus `/explore/` (every stage on one page).
 
+## The reproducible zip
+
+`container/build.sh` builds the site into `dist/ccs-front-hugo.zip` with StageX's Hugo, busybox and
+zip (pinned by digest in `container/images`, each signed by two or more StageX maintainers, checked
+every build), with no network. The same commit gives the same zip, byte for byte, on any machine:
+CI builds it on two at once and compares, and a tag `v*` attaches the zip and its sha256 to a
+GitHub release only when both match. That zip, sha256 checked, is what goes to the ccs-front-bash
+machine as the original (`unzip` it into `/opt/ccs-front-hugo/public`).
+
 ## What ccs-front-bash fills in
 
 **Markers** around everything that changes, in the built pages:
