@@ -1,7 +1,6 @@
 ---
 url: /explore/
-title: All proposals
-layout: stage
+title: Explore
+layout: explore
 page: explore
-show: [fr, wip, idea, cp]
 ---
