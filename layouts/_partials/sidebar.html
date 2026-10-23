@@ -1,11 +1,17 @@
 {{- $stages := partial "stages.html" . -}}
 <aside class="side">
   <a class="back" href="/">{{ partial "icon.html" "back" }}Home</a>
-  <nav aria-label="Stages">
+  <nav class="stage-menu" aria-label="Stages">
     {{- range slice "idea" "fr" "wip" "cp" }}{{ $st := index $stages . }}
     <a class="{{ . }} tab-{{ if eq . "idea" }}ideas{{ else }}{{ . }}{{ end }}" href="{{ $st.page }}">{{ partial "icon.html" $st.icon }}{{ $st.label }}</a>
     {{- end }}
   </nav>
+  {{- /* Explore and the tag pages: the tag filters (ccs-front-bash fills them) */}}
+  {{- if eq .Params.page "explore" }}
+  {{ partial "marker.html" "filters" }}
+  {{ partial "filters.html" (dict "active" (.Params.tag | default "")) }}
+  {{ partial "marker.html" "/filters" }}
+  {{- end }}
   {{- /* only on the Ideas page */}}
   {{- if eq (delimit .Params.show ",") "idea" }}
   <hr>

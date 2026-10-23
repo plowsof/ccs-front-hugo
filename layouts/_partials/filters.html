@@ -1,8 +1,14 @@
-{{- /* The tag filters on Explore: All, then each tag with its count; .active is the shown one. */ -}}
+{{- /* The tag filters in Explore's sidebar: All, then each tag with its count; .active is the
+   shown one. As a part ({{filters}}) ccs-front-bash fills it, or leaves it out if no tags. */ -}}
 {{- $active := .active -}}
-<nav class="filters" aria-label="Filter by tag">
-  {{- partial "filter.html" (dict "tag" "All" "href" "/explore/" "count" "" "active" (cond (eq $active "") " active" "")) }}
+<div class="tags-block">
+  <hr>
+  <p class="tags-title">Tags</p>
+  <nav class="filters" aria-label="Filter by tag">
+  {{- if .part }}{{ "{{filters}}" }}{{ else }}
+  {{- partial "filter.html" (dict "tag" "All" "href" "/explore/" "count" "" "color" "tag-all" "active" (cond (eq $active "") " active" "")) }}
   {{- range partial "tags.html" . }}
-  {{- partial "filter.html" (dict "tag" .tag "href" "/explore/tag/example/" "count" .count "active" (cond (eq $active .tag) " active" "")) }}
-  {{- end }}
-</nav>
+  {{- partial "filter.html" (dict "tag" .tag "href" "/explore/tag/example/" "count" .count "color" .color "active" (cond (eq $active .tag) " active" "")) }}
+  {{- end }}{{ end }}
+  </nav>
+</div>
