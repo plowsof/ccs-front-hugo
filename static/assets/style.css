@@ -165,8 +165,8 @@ main { flex: 1; }
 .side a.back { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); text-decoration: none; margin: 8px 0 14px; }
 .side a.back .icon { width: 28px; height: 28px; padding: 6px; border-radius: 50%; background: var(--card); }
 .side a.back:hover { color: var(--orange); }
-.side nav { display: grid; gap: 8px; }
-.side nav a {
+.side .stage-menu { display: grid; gap: 8px; }
+.side .stage-menu a {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -177,8 +177,8 @@ main { flex: 1; }
   color: var(--text);
   text-decoration: none;
 }
-.side nav a .icon { color: var(--stage); }
-.side nav a:hover { border-color: var(--line); }
+.side .stage-menu a .icon { color: var(--stage); }
+.side .stage-menu a:hover { border-color: var(--line); }
 .side hr { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 
 /* the selected stage: each page's body says which one it is */
@@ -287,7 +287,7 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
   .hero .art { max-width: 240px; grid-row: 1; }
   .explorer, .columns { grid-template-columns: 1fr; }
   /* the stage list takes the whole screen: the menu's Explore has every stage */
-  .side nav, .side hr { display: none; }
+  .side .stage-menu, .side hr { display: none; }
   .site-header { padding-block: 10px; }
   .nav-button { margin-left: auto; display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; color: var(--heading); }
   .nav-button .icon { width: 24px; height: 24px; }
@@ -367,14 +367,31 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 body:not(.page-explore) .list .card .tag { display: none; }
 body:not(.page-explore) .list .card h3 { margin-right: 0; }
 
-/* tags: labels on cards, links on a proposal page, filters on Explore */
+/* tags: coloured pills (as on bounties.monero.social), labels on cards, links on a proposal
+   page, filters in Explore's sidebar. 8 colours, picked from the tag's name (classes, not
+   style=: the CSP allows no inline styles); each passes contrast with its text. */
+.tag-0 { --tag-bg: #ff8c00; --tag-fg: #1d1200; }
+.tag-1 { --tag-bg: #c9215c; --tag-fg: #fff; }
+.tag-2 { --tag-bg: #96dcfa; --tag-fg: #06202c; }
+.tag-3 { --tag-bg: #e3d333; --tag-fg: #222000; }
+.tag-4 { --tag-bg: #1f7a45; --tag-fg: #fff; }
+.tag-5 { --tag-bg: #6a4be8; --tag-fg: #fff; }
+.tag-6 { --tag-bg: #fdabcb; --tag-fg: #3a0c1e; }
+.tag-7 { --tag-bg: #2f6fb5; --tag-fg: #fff; }
+.tag-all { --tag-bg: var(--card); --tag-fg: var(--text); }
 .labels { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
 .labels:empty { display: none; }
-.label { font-size: 0.8rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); text-decoration: none; }
-a.label:hover { border-color: var(--orange); color: var(--orange); }
-.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
-.filter { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--text); text-decoration: none; font-size: 0.9rem; }
-.filter .count { color: var(--muted); font-size: 0.8rem; }
+.label, .filter {
+  display: inline-flex; align-items: center; gap: 6px;
+  border-radius: 6px; font-weight: 700; text-decoration: none; line-height: 1.5;
+  background: var(--tag-bg); color: var(--tag-fg);
+}
+.label { font-size: 0.75rem; padding: 1px 8px; }
+a.label:hover, .filter:hover { color: var(--tag-fg); outline: 2px solid var(--tag-bg); outline-offset: 2px; }
+.side .tags-title { margin: 0 0 10px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; }
+.filter { font-size: 0.82rem; padding: 4px 10px; }
+.filter.tag-all { border: 1px solid var(--line); }
+.filter .count { font-weight: 600; opacity: 0.8; }
 .filter .count:empty { display: none; }
-.filter:hover, .filter.active { border-color: var(--orange); color: var(--orange); }
-.verify { margin: 10px 0 0; font-size: 0.9rem; }
+.filter.active { outline: 2px solid var(--orange); outline-offset: 2px; }

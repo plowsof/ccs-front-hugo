@@ -7,5 +7,5 @@
   {{- $n = merge $n (dict . (add (index $n . | default 0) 1)) -}}
 {{- end }}{{ end }}{{ end -}}
 {{- $out := slice -}}
-{{- range $order }}{{ $out = $out | append (dict "tag" . "count" (index $n .)) }}{{ end -}}
+{{- range $i, $t := $order }}{{ $out = $out | append (dict "tag" $t "count" (index $n $t) "color" (printf "tag-%d" (mod $i 8))) }}{{ end -}}
 {{- return sort $out "count" "desc" -}}

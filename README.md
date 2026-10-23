@@ -30,7 +30,7 @@ The pages and URLs are today's ccs-front's, so links keep working: `/`, `/ideas/
 | `<!-- ccs:funded -->…<!-- /ccs:funded -->` | other proposal pages | `parts/funded.html` |
 | `<!-- ccs:milestones -->…<!-- /ccs:milestones -->` | proposal pages, Milestones tab | `parts/milestone-done.html` / `milestone-todo.html` per milestone |
 | `<!-- ccs:payouts -->…<!-- /ccs:payouts -->` | proposal pages, Payouts tab | `parts/payout.html` per payout |
-| `<!-- ccs:filters -->…<!-- /ccs:filters -->` | `explore.html`, the tag pages | `parts/filters.html` holding `parts/filter.html` per tag (All first), or nothing if no proposal has tags |
+| `<!-- ccs:filters -->…<!-- /ccs:filters -->` | `explore.html`, the tag pages (sidebar) | `parts/filters.html` holding `parts/filter.html` per tag (All first), or nothing if no proposal has tags |
 | `<!-- ccs:title -->…<!-- /ccs:title -->` | the tag page | the tag's name |
 
 **Parts** (`public/parts/`) are fragments with `{{slot}}`s: `{{name}}`, `{{author}}`, `{{date}}`,
@@ -46,7 +46,9 @@ as a PNG data URI (`data:image/png;base64,…`, ccs-bash's `donate-qr-code`). Th
 **Tags** (the front matter's `tags:`, in ccs-bash's JSON as `tags`): `{{tags}}` on a card is a
 `parts/label.html` per tag (plain labels: the card is one link), `{{tag_links}}` on a proposal
 page a `parts/label-link.html` per tag (`{{tag}}`, `{{href}}`). `filter.html` has `{{tag}}`,
-`{{href}}`, `{{count}}` (empty for All) and `{{active}}` (" active" or empty).
+`{{href}}`, `{{count}}` (empty for All) and `{{active}}` (" active" or empty). All three have
+`{{color}}`: `tag-0` to `tag-7` (the tag's colour, from its name) or `tag-all`. The filters
+(`parts/filters.html`, around `{{filters}}`) sit in the sidebar of Explore and the tag pages.
 `explore/tag/example/index.html` is the tag page: copied to `explore/tag/<tag>/` for each tag
 (the same depth, so its links work), with its lists, filters and title filled; it is not
 published itself. In the preview every tag links to it (it shows "Abandoned").
