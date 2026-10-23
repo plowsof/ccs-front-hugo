@@ -1,0 +1,13 @@
+{{- $s := .s -}}{{- $st := index (partial "stages.html" .) $s -}}{{- $v := .v -}}
+<a class="card {{ $s }}" {{ printf "href=%q" $v.url | safeHTMLAttr }}>
+  <span class="tag">{{ partial "icon.html" $st.icon }}{{ $st.tag }}</span>
+  <h3>{{ $v.name }}</h3>
+  {{ partial "meta.html" . }}
+  {{- if eq $s "fr" }}
+  <p class="progress-label">Raised {{ $v.raised }} of {{ $v.amount }} XMR</p>
+  <progress max="100" value="{{ $v.percentage }}">{{ $v.percentage }}%</progress>
+  {{- else if eq $s "wip" }}
+  <p class="progress-label">Completed {{ $v.done }} of {{ $v.milestones }} milestones</p>
+  <div class="segments">{{ partial "segments.html" $v }}</div>
+  {{- end }}
+</a>

@@ -1,0 +1,23 @@
+{{ define "main" }}
+{{- $d := hugo.Data.example -}}
+{{- $lists := dict
+  "idea" (index $d.proposals 0).proposals
+  "fr" (index $d.proposals 1).proposals
+  "wip" (index $d.proposals 2).proposals
+  "cp" (index (index $d "completed-proposals") 0).proposals -}}
+<div class="explorer">
+  {{ partial "sidebar.html" . }}
+  <section class="list" aria-label="{{ .Title }}">
+    <h1 class="list-title">{{ .Title }}</h1>
+    {{- range .Params.show }}{{ $s := . }}
+    {{ partial "marker.html" (printf "list %s" $s) }}
+    {{- range index $lists $s }}
+    {{ partial "card.html" (dict "s" $s "v" (partial "values.html" .)) }}
+    {{- else }}
+    <p class="empty">Nothing here right now.</p>
+    {{- end }}
+    {{ partial "marker.html" (printf "/list %s" $s) }}
+    {{- end }}
+  </section>
+</div>
+{{ end }}
