@@ -4,3 +4,9 @@ busybox    stagex/core-busybox@sha256:a094d1b5ad06943713e75849248d7f89546d15a3e7
 musl       stagex/core-musl@sha256:94f77e4b1841987a42efce52aac54dbf230c152cb55c62da1967189a2705df89
 hugo       stagex/user-hugo@sha256:dfd71df268546323bb9f3b5ef356a21a513c339a3c867c9e56bbf593bb7f22fb
 zip        stagex/user-zip@sha256:a98c00e96355936909624facc8bf5f2456503d3628588c26d41317725378e660
+# the builder (builder.Dockerfile): StageX's BuildKit, runc and its library, a filesystem and certificates (to fetch the pins)
+filesystem stagex/core-filesystem@sha256:da28831927652291b0fa573092fd41c8c96ca181ea224df7bff40e1833c3db13
+ca-certificates stagex/core-ca-certificates@sha256:fe24a3809eba30972b64ddd8b611a6494bebea7631f805d795cec4241f5a11c6
+buildkit   stagex/user-buildkit@sha256:91bff9810facddaa795fe3173d190b25b1919bd4eb21dc8e81ce4d632161faa7
+runc       stagex/user-runc@sha256:8bbf5810f80422827c085f653aecbdf3c4f0b673f0c27129e634379177443857
+libseccomp stagex/user-libseccomp@sha256:9982f7c17f9e2fc2ce8730428d5dad091efcffcfaeaecaeec406df68a7d8b881
