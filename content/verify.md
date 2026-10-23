@@ -15,7 +15,7 @@ You can check it yourself, with nothing from this site but the files below:
 1. Download [the list](/subaddresses.txt), [its signature](/subaddresses.txt.asc) and
    [the public key](/subaddresses.txt.key.asc).
 2. Check the key's fingerprint against the one the CCS maintainers publish elsewhere (in the
-   [front end's repository]({{< param frontendRepo >}}) and in its README), then:
+   [design repository]({{< param designRepo >}}), in its README), then:
 
    ```
    gpg --import subaddresses.txt.key.asc
