@@ -18,6 +18,10 @@
    browser keeps showing an old one; beside fonts/, so its url()s still work */}}
 {{- $css := resources.Get "assets/style.css" | resources.ExecuteAsTemplate "assets/style.css" . | fingerprint "sha256" }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- /* The theme, kept in the address without cookies or JavaScript: the web server serves the
+   same files under /dark/ and /light/, but there this one file is theme-dark.css or
+   theme-light.css (ccs-bash's docs/two-machines.md, "The theme"). Not hashed, so it can differ. */}}
+<link rel="stylesheet" href="/assets/theme.css">
 <link rel="icon" href="{{ partial "icons-url.html" "favicon-32" }}" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="{{ partial "icons-url.html" "favicon-180" }}">
 </head>
@@ -29,9 +33,19 @@
      with its name in words: a bare ☰ is easy to miss */}}
   <label for="nav-toggle" class="nav-button">{{ partial "icon.html" "menu" }}<span>Menu</span></label>
   <a class="brand" href="/" aria-label="Community Crowdfunding System, home"><img src="{{ partial "icons-url.html" "logo-1x" }}" srcset="{{ partial "icons-url.html" "logo-2x" }} 2x, {{ partial "icons-url.html" "logo-3x" }} 3x" width="28" height="28" alt=""><span class="brand-long">Community Crowdfunding System</span><span class="brand-short" aria-hidden="true">CCS</span></a>
+  <div class="header-end">
   <nav class="site-nav" aria-label="Site">
     {{- partial "site-links.html" . }}
   </nav>
+  {{- /* The theme button, top right: System → Light → Dark → System. Its icon shows the theme now;
+     all three links are here and the theme's own theme.css shows the one that leads on. A link
+     ?theme=… makes the web server send this page under /light/, /dark/ or the plain address. */}}
+  <nav class="theme-toggle" aria-label="Theme">
+    <a class="to-light" href="?theme=light" title="Theme: system. Switch to light">{{ partial "icon.html" "contrast" }}<span class="visually-hidden">Theme: system. Switch to light</span></a>
+    <a class="to-dark" href="?theme=dark" title="Theme: light. Switch to dark">{{ partial "icon.html" "sun" }}<span class="visually-hidden">Theme: light. Switch to dark</span></a>
+    <a class="to-system" href="?theme=system" title="Theme: dark. Switch to the system's">{{ partial "icon.html" "moon" }}<span class="visually-hidden">Theme: dark. Switch to the system's</span></a>
+  </nav>
+  </div>
 </header>
 <div class="layout{{ if eq .Layout "stage" }} with-side{{ end }}">
   {{ partial "sidebar.html" . }}

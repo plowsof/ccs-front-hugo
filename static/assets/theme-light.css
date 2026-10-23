@@ -1,0 +1,4 @@
+/* The theme: Light, whatever the browser's setting (served as theme.css under /light/) */
+:root { color-scheme: light; }
+.theme-toggle .to-light { display: none; }
+.theme-toggle .to-dark { display: inline-flex; }
