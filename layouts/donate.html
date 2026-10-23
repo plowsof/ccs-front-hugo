@@ -1,0 +1,22 @@
+{{ define "main" }}
+<article class="proposal">
+  <div class="columns">
+    <div class="body">
+      <h1>{{ .Title }}</h1>
+      <p>By donating to the following Monero address (the General Fund), you are supporting the
+      Monero Project. To donate to a specific proposal, see <a href="/funding-required/">Funding Required</a>.</p>
+    </div>
+    <section class="box donate">
+      <h2>Contribute</h2>
+      <ol>
+        <li>Choose how much XMR to contribute.</li>
+        <li>Scan the QR code, or tap it to open your Monero wallet:
+          <a class="qr" {{ printf "href=%q" (printf "monero:%s" .Params.address) | safeHTMLAttr }}><img src="/assets/general-fund-qr.svg" alt="QR code of the address below"></a></li>
+        <li>or copy the address:
+          <div class="address">{{ .Params.address }}</div></li>
+        <li>Send. Thank you!</li>
+      </ol>
+    </section>
+  </div>
+</article>
+{{ end }}

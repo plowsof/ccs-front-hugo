@@ -12,8 +12,12 @@ No framework runs on a live machine.
 hugo build --cleanDestinationDir   # Hugo 0.167.0 → public/
 ```
 
-Preview with any static server, e.g. `python3 -m http.server -d public`. The pages show
-example data in ccs-bash's JSON format (`data/example/`).
+Preview with `hugo server`, or any static server on `public/`. The pages show example data
+in ccs-bash's JSON format (`data/example/`).
+
+The pages and URLs are today's ccs-front's, so links keep working: `/`, `/ideas/`,
+`/funding-required/`, `/work-in-progress/`, `/completed-proposals/`, `/proposals/<name>.html`,
+`/donate/`, `/what-is-ccs/`, `/how-to-ccs/`, plus `/explore/` (every stage on one page).
 
 ## What ccs-front-bash fills in
 
@@ -53,4 +57,5 @@ The parts are rendered from the same templates as the example pages, so they can
 - Layout after the concept screenshots in redsh4de's CCS proposal
   ("CCS Frontend Astro Rewrite"); icons and illustration drawn for this repo.
 - Colours, sizes and font from the new getmonero.org (beta.getmonero.org).
+- "What is the CCS" and "How to submit" text and screenshots from ccs-front (BSD-3, monero-project).
 - DM Sans: SIL Open Font License, `static/assets/fonts/OFL.txt`.

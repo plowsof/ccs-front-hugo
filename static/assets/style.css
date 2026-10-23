@@ -287,3 +287,5 @@ progress::-moz-progress-bar { background: var(--stage, var(--orange)); }
   .stage-grid, .side nav { grid-template-columns: 1fr; }
   .card h3, .proposal .head h1 { margin-right: 0; margin-top: 18px; }
 }
+
+.box + .box { margin-top: 16px; }
