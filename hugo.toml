@@ -22,5 +22,6 @@ disableKinds = ["taxonomy", "term", "section", "rss", "sitemap", "robotstxt"]
 # with its public key as static/assets/subaddresses-key.asc. Set, ccs-front-bash refuses any
 # donation address not in that list and publishes the list; empty, there is no check.
 [params.subaddresses]
-  sha256 = ""
-  key = ""
+  # the testnet CCS's list (100,000 subaddresses of account 0), signed 2026-10-23
+  sha256 = "d30ea3afd88d8ff0f3f5e43d74b612c71a1311b7b19c41a8f4ae7bead486d8f2"
+  key = "3CB930B311B490808775A4C9290C5085B75F4D61"
