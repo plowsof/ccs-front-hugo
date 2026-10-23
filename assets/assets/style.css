@@ -302,6 +302,7 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 /* footer */
 .site-footer { background: var(--footer); padding: 40px 16px 30px; text-align: center; }
 .general-fund { max-width: 640px; margin: 0 auto 28px; }
+.site-footer > .footer-links:first-child { border-top: 0; padding-top: 0; }   /* Donate: no General Fund above */
 .general-fund h2 { margin: 0 0 10px; font-size: 1.25rem; color: var(--heading); }
 .general-fund p { color: var(--muted); }
 .general-fund .qr { width: 150px; margin: 16px auto; }
