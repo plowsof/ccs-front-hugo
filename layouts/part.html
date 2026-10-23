@@ -8,4 +8,6 @@
 {{- else if eq $p "payout" }}{{ partial "payout.html" (dict "amount" "{{amount}}" "date" "{{date}}") }}
 {{- else if eq $p "segment" }}<span{{ if .Params.done }} class="done"{{ end }}></span>
 {{- else if eq $p "empty" }}<p class="empty">Nothing here right now.</p>
+{{- else if eq $p "no-milestones" }}<p class="empty">No milestones.</p>
+{{- else if eq $p "no-payouts" }}<p class="empty">No payouts yet.</p>
 {{- end }}
