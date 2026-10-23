@@ -37,10 +37,9 @@ The pages and URLs are today's ccs-front's, so links keep working: `/`, `/ideas/
 `{{pending_note}}` (" · 1.5 XMR pending", or empty), `{{funding_note}}` (" · funding since …", or
 empty), `{{gitlab_url}}`, `{{funds}}` (a milestone's), `{{date}}` (a milestone's
 completion or a payout's). Each is replaced with its value HTML-escaped once
-(ccs-bash's JSON is already escaped). The exceptions are `{{qr}}`, an SVG from `qrencode -t SVG`,
-and `{{body}}`, the proposal's Markdown rendered with everything escaped first. qrencode's
-SVG uses `style=` attributes, which the CSP below blocks: they become `stroke=`/`fill=`
-attributes first (as in `static/assets/example-qr.svg`).
+(ccs-bash's JSON is already escaped). `{{qr}}` is the QR code
+as a PNG data URI (`data:image/png;base64,…`, ccs-bash's `donate-qr-code`). The exception is
+`{{body}}`, the proposal's Markdown rendered with everything escaped first.
 
 **Proposal pages** are `parts/proposal-fr.html`, `proposal-wip.html` and `proposal-cp.html` with
 their slots filled, `{{milestones_list}}` and `{{payouts_list}}` being the milestone and
