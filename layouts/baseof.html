@@ -13,7 +13,7 @@
 </head>
 <body class="page-{{ .Params.page | default "other" }}">
 <header class="site-header">
-  <a class="brand" href="/"><svg aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>Community Crowdfunding System</a>
+  <a class="brand" href="/"><svg aria-hidden="true"><use href="{{ partial "icons-url.html" }}#logo"></use></svg>Community Crowdfunding System</a>
   {{- /* narrow screens: the links open from a menu button; a checkbox and CSS, no JavaScript */}}
   <input type="checkbox" id="nav-toggle" class="nav-toggle">
   <label for="nav-toggle" class="nav-button" aria-label="Menu">{{ partial "icon.html" "menu" }}</label>
