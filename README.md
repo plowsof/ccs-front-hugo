@@ -43,6 +43,9 @@ completion or a payout's). Each is replaced with its value HTML-escaped once
 as a PNG data URI (`data:image/png;base64,…`, ccs-bash's `donate-qr-code`). The exception is
 `{{body}}`, the proposal's Markdown rendered with everything escaped first.
 
+**Votes:** `parts/card-idea.html` has `{{upvotes}}` and `{{downvotes}}`, the idea's 👍/👎 on its
+merge request (ccs-bash's `upvotes`/`downvotes`, from GitLab or Forgejo).
+
 **Tags** (the front matter's `tags:`, in ccs-bash's JSON as `tags`): `{{tags}}` on a card is a
 `parts/label.html` per tag (plain labels: the card is one link), `{{tag_links}}` on a proposal
 page a `parts/label-link.html` per tag (`{{tag}}`, `{{href}}`). `filter.html` has `{{tag}}`,

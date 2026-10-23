@@ -4,6 +4,10 @@
   <h3>{{ $v.name }}</h3>
   {{ partial "meta.html" . }}
   <p class="labels">{{ $v.tags | safeHTML }}</p>
+  {{- if eq $s "idea" }}
+  {{- /* the idea's 👍/👎 on its merge request ("–" if they couldn't be read) */}}
+  <p class="votes"><span title="Upvotes">{{ partial "icon.html" "thumbs-up" }}{{ $v.upvotes }}</span><span title="Downvotes">{{ partial "icon.html" "thumbs-down" }}{{ $v.downvotes }}</span></p>
+  {{- end }}
   {{- if eq $s "fr" }}
   <p class="progress-label">Raised {{ $v.raised }} of {{ $v.amount }} XMR{{ $v.pending_note }}</p>
   <progress max="100" value="{{ $v.percentage }}">{{ $v.percentage }}%</progress>

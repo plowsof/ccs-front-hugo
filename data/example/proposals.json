@@ -6,19 +6,25 @@
                 "name": "39C3 Support",
                 "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/1",
                 "author": "rehrar",
-                "date": "November 5, 2025"
+                "date": "November 5, 2025",
+                "upvotes": 12,
+                "downvotes": 1
             },
             {
                 "name": "Example: Monero meetups in three cities",
                 "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/11",
                 "author": "example",
-                "date": "October 30, 2025"
+                "date": "October 30, 2025",
+                "upvotes": 4,
+                "downvotes": 3
             },
             {
                 "name": "Example: translating the GUI wallet",
                 "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/12",
                 "author": "example",
-                "date": "October 12, 2025"
+                "date": "October 12, 2025",
+                "upvotes": 0,
+                "downvotes": 0
             }
         ]
     },
