@@ -1,3 +1,4 @@
 /* The theme: Dark, whatever the browser's setting (served as theme.css under /dark/) */
 :root { color-scheme: dark; }
-.site-footer .theme a[href="?theme=dark"] { color: var(--text); font-weight: 700; }
+.theme-toggle .to-light { display: none; }
+.theme-toggle .to-system { display: inline-flex; }
