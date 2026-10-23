@@ -1,0 +1,10 @@
+{{ define "main" }}
+<article class="proposal"><div class="body">
+  <h1>{{ .Title }}</h1>
+  {{- if site.Params.subaddresses.sha256 }}
+  {{ .Content }}
+  {{- else }}
+  <p>This CCS has no signed list of its donation addresses yet.</p>
+  {{- end }}
+</div></article>
+{{ end }}

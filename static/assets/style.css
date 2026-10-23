@@ -377,3 +377,4 @@ a.label:hover { border-color: var(--orange); color: var(--orange); }
 .filter .count { color: var(--muted); font-size: 0.8rem; }
 .filter .count:empty { display: none; }
 .filter:hover, .filter.active { border-color: var(--orange); color: var(--orange); }
+.verify { margin: 10px 0 0; font-size: 0.9rem; }

@@ -11,6 +11,7 @@
 {{- else if eq $p "label-link" }}{{ partial "label.html" (dict "tag" "{{tag}}" "link" true "href" "{{href}}") }}
 {{- else if eq $p "filters" }}<nav class="filters" aria-label="Filter by tag">{{ "{{filters}}" }}</nav>
 {{- else if eq $p "filter" }}{{ partial "filter.html" (dict "tag" "{{tag}}" "href" "{{href}}" "count" "{{count}}" "active" "{{active}}") }}
+{{- else if eq $p "subaddresses" }}{{ site.Params.subaddresses.sha256 }}
 {{- else if eq $p "empty" }}<p class="empty">Nothing here right now.</p>
 {{- else if eq $p "no-milestones" }}<p class="empty">No milestones.</p>
 {{- else if eq $p "no-payouts" }}<p class="empty">No payouts yet.</p>
