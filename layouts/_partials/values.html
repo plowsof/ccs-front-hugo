@@ -21,4 +21,5 @@
   "milestones" $p.milestones "done" (index $p "milestones-completed")
   "address" (index $p "donate-address")
   "tags" $labels "tag_links" $links
+  "upvotes" ($p.upvotes | default 0) "downvotes" ($p.downvotes | default 0)
 -}}
