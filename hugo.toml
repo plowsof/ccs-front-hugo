@@ -1,10 +1,10 @@
 # ccs-front-html: the CCS site's design, built offline by Hugo into public/, the "original"
 # that ccs-front-bash copies and fills in on the backend. No JavaScript anywhere.
 baseURL = "https://ccs.getmonero.org/"
-languageCode = "en"
+locale = "en"
 title = "Monero CCS"
 relativeURLs = true
-uglyURLs = true
+uglyURLs = false
 disableKinds = ["taxonomy", "term", "section", "rss", "sitemap", "robotstxt", "404"]
 
 [markup.goldmark.renderer]

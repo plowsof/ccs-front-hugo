@@ -1,11 +1,11 @@
 {{- $stages := partial "stages.html" . -}}
 <aside class="side">
-  <a class="back" href="/index.html">{{ partial "icon.html" "back" }}Home</a>
+  <a class="back" href="/">{{ partial "icon.html" "back" }}Home</a>
   <nav aria-label="Stages">
     {{- range slice "idea" "fr" "wip" "cp" }}{{ $st := index $stages . }}
     <a class="{{ . }} tab-{{ if eq . "idea" }}ideas{{ else }}{{ . }}{{ end }}" href="{{ $st.page }}">{{ partial "icon.html" $st.icon }}{{ $st.label }}</a>
     {{- end }}
   </nav>
   <hr>
-  <a class="button primary block" href="{{ site.Params.submitIdea }}">Submit Idea</a>
+  <a class="button primary block" href="/how-to-ccs/">Submit Idea</a>
 </aside>

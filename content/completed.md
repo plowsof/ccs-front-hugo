@@ -1,4 +1,5 @@
 ---
+url: /completed-proposals/
 title: Completed
 layout: stage
 page: cp

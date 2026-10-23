@@ -7,6 +7,18 @@
                 "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/1",
                 "author": "rehrar",
                 "date": "November 5, 2025"
+            },
+            {
+                "name": "Example: Monero meetups in three cities",
+                "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/11",
+                "author": "example",
+                "date": "October 30, 2025"
+            },
+            {
+                "name": "Example: translating the GUI wallet",
+                "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/12",
+                "author": "example",
+                "date": "October 12, 2025"
             }
         ]
     },
@@ -16,7 +28,7 @@
             {
                 "name": "Example part-time work on a wallet, 2026Q1",
                 "donate-address": "80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007",
-                "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/2",
+                "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/7",
                 "local-url": "/proposals/example.html",
                 "contributions": 25,
                 "milestones": 3,
@@ -24,9 +36,39 @@
                 "percentage": 80,
                 "amount": "75.0000",
                 "amount-funded": "60.0000",
-                "amount-pending": 1.5,
+                "amount-pending": 0,
                 "author": "example",
                 "date": "December 25, 2025"
+            },
+            {
+                "name": "Example: a full-time auditor for six months",
+                "donate-address": "80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000008",
+                "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/8",
+                "local-url": "/proposals/example.html",
+                "contributions": 9,
+                "milestones": 3,
+                "milestones-completed": 0,
+                "percentage": 15,
+                "amount": "300.0000",
+                "amount-funded": "45.0000",
+                "amount-pending": 0,
+                "author": "example",
+                "date": "December 2, 2025"
+            },
+            {
+                "name": "Example: conference travel",
+                "donate-address": "80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000009",
+                "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/9",
+                "local-url": "/proposals/example.html",
+                "contributions": 31,
+                "milestones": 3,
+                "milestones-completed": 0,
+                "percentage": 95,
+                "amount": "20.0000",
+                "amount-funded": "19.0000",
+                "amount-pending": 0,
+                "author": "example",
+                "date": "November 20, 2025"
             }
         ]
     },
@@ -35,7 +77,7 @@
         "proposals": [
             {
                 "name": "Example research, 2025Q4",
-                "local-url": "/proposals/example.html",
+                "local-url": "/proposals/example-wip.html",
                 "contributions": 15,
                 "milestones": 5,
                 "milestones-completed": 3,
@@ -45,6 +87,19 @@
                 "amount-pending": 0,
                 "author": "example",
                 "date": "December 14, 2025"
+            },
+            {
+                "name": "Example: node software maintenance",
+                "local-url": "/proposals/example-wip.html",
+                "contributions": 22,
+                "milestones": 4,
+                "milestones-completed": 1,
+                "percentage": 100,
+                "amount": "120.0000",
+                "amount-funded": "120.0000",
+                "amount-pending": 0,
+                "author": "example",
+                "date": "November 1, 2025"
             }
         ]
     }

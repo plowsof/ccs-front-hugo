@@ -4,7 +4,7 @@
         "proposals": [
             {
                 "name": "Example mobile app",
-                "local-url": "/proposals/example.html",
+                "local-url": "/proposals/example-cp.html",
                 "contributions": 50,
                 "milestones": 4,
                 "milestones-completed": 4,
@@ -14,6 +14,19 @@
                 "amount-pending": 0,
                 "author": "example",
                 "date": "January 19, 2026"
+            },
+            {
+                "name": "Example: payment server integration",
+                "local-url": "/proposals/example-cp.html",
+                "contributions": 18,
+                "milestones": 3,
+                "milestones-completed": 3,
+                "percentage": 100,
+                "amount": "90.0000",
+                "amount-funded": "90.0000",
+                "amount-pending": 0,
+                "author": "example",
+                "date": "August 3, 2025"
             }
         ]
     }

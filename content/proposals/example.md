@@ -1,4 +1,5 @@
 ---
+url: /proposals/example.html
 title: "Example part-time work on a wallet, 2026Q1"
 layout: proposal
 s: fr

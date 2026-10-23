@@ -1,0 +1,6 @@
+---
+title: Donate to the Monero Project
+layout: donate
+url: /donate/
+address: "888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H"
+---
