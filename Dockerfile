@@ -12,7 +12,6 @@ COPY --from=musl / /
 COPY --from=hugo / /
 # Coolify's, for the commit line at the bottom of every page (layouts/_partials/preview.html)
 ARG SOURCE_COMMIT
-ARG COOLIFY_PREVIEW
 ARG COOLIFY_BRANCH
 COPY . /src
 RUN cd /src && hugo build --quiet --noBuildLock --cacheDir /tmp/hugo-cache --destination /site
