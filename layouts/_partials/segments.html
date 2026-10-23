@@ -1,0 +1,4 @@
+{{- with .segments }}{{ . }}{{ else -}}
+{{- $done := .done | default 0 -}}
+{{- range $i, $_ := seq (.milestones | default 0) }}<span{{ if lt $i $done }} class="done"{{ end }}></span>{{ end -}}
+{{- end -}}

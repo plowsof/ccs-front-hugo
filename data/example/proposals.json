@@ -1,0 +1,51 @@
+[
+    {
+        "stage": "Ideas",
+        "proposals": [
+            {
+                "name": "39C3 Support",
+                "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/1",
+                "author": "rehrar",
+                "date": "November 5, 2025"
+            }
+        ]
+    },
+    {
+        "stage": "Funding Required",
+        "proposals": [
+            {
+                "name": "Example part-time work on a wallet, 2026Q1",
+                "donate-address": "80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007",
+                "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/2",
+                "local-url": "/proposals/example.html",
+                "contributions": 25,
+                "milestones": 3,
+                "milestones-completed": 0,
+                "percentage": 80,
+                "amount": "75.0000",
+                "amount-funded": "60.0000",
+                "amount-pending": 1.5,
+                "author": "example",
+                "date": "December 25, 2025"
+            }
+        ]
+    },
+    {
+        "stage": "Work in Progress",
+        "proposals": [
+            {
+                "name": "Example research, 2025Q4",
+                "local-url": "/proposals/example.html",
+                "contributions": 15,
+                "milestones": 5,
+                "milestones-completed": 3,
+                "percentage": 100,
+                "amount": "200.0000",
+                "amount-funded": "200.0000",
+                "amount-pending": 0,
+                "author": "example",
+                "date": "December 14, 2025"
+            }
+        ]
+    }
+]

@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>{{ if .IsHome }}Monero Community Crowdfunding System{{ else }}{{ .Title }} · Monero CCS{{ end }}</title>
+<link rel="stylesheet" href="/assets/style.css">
+<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+</head>
+<body class="page-{{ .Params.page | default "other" }}">
+<header class="site-header">
+  <a class="brand" href="/index.html"><svg aria-hidden="true"><use href="/assets/icons.svg#logo"></use></svg>Community Crowdfunding System</a>
+  <nav class="site-nav" aria-label="Site">
+    <a href="/explore.html">Explore</a>
+    <a href="/about.html">About</a>
+    <a href="https://www.getmonero.org/">getmonero.org</a>
+  </nav>
+</header>
+<main>
+{{ block "main" . }}{{ end }}
+</main>
+<footer class="site-footer">
+  <a href="{{ site.Params.frontendRepo }}">Frontend Repo {{ partial "icon.html" "external" }}</a>
+  <a href="{{ site.Params.backendRepo }}">Backend Repo {{ partial "icon.html" "external" }}</a>
+  <a href="{{ site.Params.proposalsRepo }}">Proposals Repo {{ partial "icon.html" "external" }}</a>
+</footer>
+</body>
+</html>

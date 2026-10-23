@@ -1,0 +1,13 @@
+{{- /* A proposal from ccs-bash's JSON -> the values a card or a page shows. */ -}}
+{{- $p := . -}}
+{{- return dict
+  "url" (or (index $p "local-url") (index $p "gitlab-url"))
+  "gitlab_url" (index $p "gitlab-url")
+  "name" $p.name "author" $p.author "date" $p.date
+  "contributors" (index $p "contributions")
+  "amount" (partial "xmr.html" $p.amount)
+  "raised" (partial "xmr.html" (index $p "amount-funded"))
+  "percentage" $p.percentage
+  "milestones" $p.milestones "done" (index $p "milestones-completed")
+  "address" (index $p "donate-address")
+-}}

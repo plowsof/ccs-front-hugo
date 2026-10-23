@@ -1,0 +1,20 @@
+[
+    {
+        "stage": "Completed Proposals",
+        "proposals": [
+            {
+                "name": "Example mobile app",
+                "local-url": "/proposals/example.html",
+                "contributions": 50,
+                "milestones": 4,
+                "milestones-completed": 4,
+                "percentage": 100,
+                "amount": "200.0000",
+                "amount-funded": "200.0000",
+                "amount-pending": 0,
+                "author": "example",
+                "date": "January 19, 2026"
+            }
+        ]
+    }
+]

@@ -1,0 +1,14 @@
+<section class="box donate">
+  <h2>Contribute</h2>
+  <p class="raised">Raised <strong>{{ .raised }}</strong> of {{ .amount }} XMR</p>
+  <progress max="100" value="{{ .percentage }}">{{ .percentage }}%</progress>
+  <p class="pending">{{ .contributors }} contributors{{ .pending_note }}</p>
+  <ol>
+    <li>Choose how much XMR to contribute.</li>
+    <li>Scan the QR code, or tap it to open your Monero wallet:
+      <a class="qr" {{ printf "href=%q" (printf "monero:%s" .address) | safeHTMLAttr }}>{{ .qr }}</a></li>
+    <li>or copy the address:
+      <div class="address">{{ .address }}</div></li>
+    <li>Send. Thank you!</li>
+  </ol>
+</section>

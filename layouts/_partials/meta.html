@@ -1,0 +1,8 @@
+<ul class="meta">
+  <li>{{ partial "icon.html" "user" }}{{ .v.author }}</li>
+  <li>{{ partial "icon.html" "calendar" }}{{ .v.date }}</li>
+  {{- if ne .s "idea" }}
+  <li>{{ partial "icon.html" "users" }}{{ .v.contributors }} contributors</li>
+  <li>{{ partial "icon.html" "coins" }}{{ .v.amount }} XMR</li>
+  {{- end }}
+</ul>

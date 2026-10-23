@@ -1,0 +1,56 @@
+# ccs-front-hugo
+
+The design of the Monero CCS site as static HTML, built with [Hugo](https://gohugo.io).
+No JavaScript, nothing loaded from other sites, and light or dark following the OS setting.
+
+Hugo only runs **offline**, once per design change. Its output, `public/`, is the
+"original" that [ccs-front-bash](https://github.com/plowsof/ccs-front-bash) copies and fills
+in on the backend every run (see [the design](https://github.com/plowsof/ccs-bash/blob/master/docs/design.md)).
+No framework runs on a live machine.
+
+```
+hugo build --cleanDestinationDir   # Hugo 0.167.0 → public/
+```
+
+Preview with any static server, e.g. `python3 -m http.server -d public`. The pages show
+example data in ccs-bash's JSON format (`data/example/`).
+
+## What ccs-front-bash fills in
+
+**Markers** around everything that changes, in the built pages:
+
+| Marker | Where | Filled with |
+|---|---|---|
+| `<!-- ccs:list fr -->…<!-- /ccs:list fr -->` (`idea`, `fr`, `wip`, `cp`) | `explore.html`, the stage pages | one `parts/card-<stage>.html` per proposal, or `parts/empty.html` |
+| `<!-- ccs:donate -->…<!-- /ccs:donate -->` | funding-required proposal pages | `parts/donate.html` |
+| `<!-- ccs:funded -->…<!-- /ccs:funded -->` | other proposal pages | `parts/funded.html` |
+| `<!-- ccs:milestones -->…<!-- /ccs:milestones -->` | proposal pages | `parts/milestone-done.html` / `milestone-todo.html` in an `<ol class="milestones">` |
+
+**Parts** (`public/parts/`) are fragments with `{{slot}}`s: `{{name}}`, `{{author}}`, `{{date}}`,
+`{{url}}`, `{{amount}}`, `{{raised}}`, `{{percentage}}`, `{{contributors}}`, `{{milestones}}`,
+`{{done}}`, `{{segments}}` (made of `segment-done.html` / `segment-todo.html`), `{{address}}`,
+`{{pending_note}}`, `{{gitlab_url}}`. Each is replaced with its value HTML-escaped once
+(ccs-bash's JSON is already escaped). The exceptions are `{{qr}}`, an SVG from `qrencode -t SVG`,
+and `{{body}}`, the proposal's Markdown rendered with everything escaped first. qrencode's
+SVG uses `style=` attributes, which the CSP below blocks: they become `stroke=`/`fill=`
+attributes first (as in `static/assets/example-qr.svg`).
+
+**Proposal pages** are `parts/proposal-fr.html`, `proposal-wip.html` and `proposal-cp.html` with
+their slots filled. Like the proposal pages they become, they sit one folder down, so their
+links work unchanged. `parts/` is not pushed to the web server.
+
+The parts are rendered from the same templates as the example pages, so they can't drift apart.
+
+## Rules
+
+- No `<script>`, no inline event handlers, no `style=` attributes: the site works under
+  `Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self' data:; font-src 'self'`.
+- Nothing from other sites: fonts and icons are in `static/assets/`.
+- Raw HTML in Markdown is dropped (`markup.goldmark.renderer.unsafe = false`).
+
+## Credits
+
+- Layout after the concept screenshots in redsh4de's CCS proposal
+  ("CCS Frontend Astro Rewrite"); icons and illustration drawn for this repo.
+- Colours, sizes and font from the new getmonero.org (beta.getmonero.org).
+- DM Sans: SIL Open Font License, `static/assets/fonts/OFL.txt`.
