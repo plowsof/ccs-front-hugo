@@ -330,7 +330,8 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 .box + .box { margin-top: 16px; }
 
 /* proposal page: the Contribute dropdown (a <details>, no JavaScript) */
-.head .progress-label { text-align: left; }
+/* a proposal page: the amount at the right end of the bar, bold, as on the current CCS */
+.head .progress-label { text-align: right; font-size: 1.05rem; font-weight: 700; color: var(--heading); margin-top: 18px; }
 .contribute { margin-top: 22px; text-align: center; }
 .contribute summary { list-style: none; cursor: pointer; display: inline-block; }
 .contribute summary::-webkit-details-marker { display: none; }
