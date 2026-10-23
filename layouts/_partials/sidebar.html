@@ -6,4 +6,9 @@
     <a class="{{ . }} tab-{{ if eq . "idea" }}ideas{{ else }}{{ . }}{{ end }}" href="{{ $st.page }}">{{ partial "icon.html" $st.icon }}{{ $st.label }}</a>
     {{- end }}
   </nav>
+  {{- /* only on the Ideas page */}}
+  {{- if eq (delimit .Params.show ",") "idea" }}
+  <hr>
+  <a class="button primary block" href="/how-to-ccs/">Submit Idea</a>
+  {{- end }}
 </aside>
