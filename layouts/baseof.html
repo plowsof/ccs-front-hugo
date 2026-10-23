@@ -41,6 +41,8 @@
 </div>
 <label for="nav-toggle" class="backdrop" aria-hidden="true"></label>
 <footer class="site-footer">
+  {{- /* the General Fund, on every page but Donate, which is about it already */}}
+  {{- if ne .Layout "donate" }}
   <section class="general-fund">
     <h2>Donate to the Monero Project</h2>
     <p>By donating to the following Monero address (the General Fund), you are supporting the Monero
@@ -48,6 +50,7 @@
     <a class="qr" {{ printf "href=%q" (printf "monero:%s" site.Params.generalFund) | safeHTMLAttr }}><img src="/assets/general-fund-qr.png" alt="QR code of the General Fund address"></a>
     <p class="address">{{ site.Params.generalFund }}</p>
   </section>
+  {{- end }}
   <nav class="footer-links" aria-label="Repositories">
   <a href="{{ site.Params.designRepo }}">Design (ccs-front-hugo) {{ partial "icon.html" "external" }}</a>
   <a href="{{ site.Params.builderRepo }}">Site builder (ccs-front-bash) {{ partial "icon.html" "external" }}</a>
