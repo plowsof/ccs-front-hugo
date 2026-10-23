@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
+{{- /* Funding Required reloads itself every 30 s, no JavaScript: new donations show without a click
+   (the backend updates every 2 min, or on a new tx). Only this list: on a proposal page a reload
+   would close the donation box while someone copies the address. */}}
+{{- if eq .Params.page "fr" }}
+<meta http-equiv="refresh" content="30">
+{{- end }}
 {{- /* the 404 page is served at any address (/a/b/c): its links are relative to the site's root */}}
 {{- /* &#47; is "/" to a browser, and relativeURLs (which would make it "./") leaves it alone */}}
 {{- if eq .Kind "404" }}{{ `<base href="&#47;">` | safeHTML }}{{ end }}
