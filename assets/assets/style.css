@@ -431,3 +431,5 @@ a.label:hover, .filter:hover { color: var(--tag-fg); outline: 2px solid var(--ta
 .stage-card .count { margin-left: 8px; vertical-align: 2px; }
 
 @media (prefers-reduced-motion: reduce) { .drawer { transition: none; } }
+.not-found .actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0; }
+.not-found .clam { display: block; margin: 8px 0 12px; }
