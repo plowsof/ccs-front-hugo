@@ -456,3 +456,11 @@ a.label:hover, .filter:hover { color: var(--tag-fg); outline: 2px solid var(--ta
 @media (prefers-reduced-motion: reduce) { .drawer { transition: none; } }
 .not-found .actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0; }
 .not-found .clam { display: block; margin: 8px 0 12px; }
+
+/* a Coolify preview's commit line (layouts/_partials/preview.html) */
+.preview-banner {
+  position: fixed; bottom: 8px; left: 0; right: 0; z-index: 40; width: fit-content; margin: 0 auto;
+  padding: 4px 14px; border-radius: 8px; background: #000; color: #fff; font-size: 0.85rem;
+}
+.preview-banner a { color: #fff; }
+body:has(.preview-banner) { padding-bottom: 44px; }   /* so it covers no footer link */

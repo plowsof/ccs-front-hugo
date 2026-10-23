@@ -1,0 +1,8 @@
+{{- /* A Coolify preview only (Dockerfile): the commit it was built from, at the bottom of every
+   page. Empty in a release build, which has no such variables. */ -}}
+{{- $commit := os.Getenv "SOURCE_COMMIT" -}}
+{{- if and (os.Getenv "COOLIFY_PREVIEW") (findRE `^[0-9a-f]{7,64}$` $commit) -}}
+{{- $pr := index (findRESubmatch `^pull/([0-9]+)/` (os.Getenv "COOLIFY_BRANCH")) 0 -}}
+{{- $link := cond (gt (len $pr) 1) (printf "%s/pull/%s/changes/%s" site.Params.designRepo (index $pr 1) $commit) (printf "%s/commit/%s" site.Params.designRepo $commit) }}
+<div class="preview-banner"><a href="{{ $link }}">{{ substr $commit 0 7 }}</a> Preview powered by <a href="https://coolify.io/">Coolify</a></div>
+{{- end -}}

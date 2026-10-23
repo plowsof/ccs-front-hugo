@@ -7,6 +7,10 @@ relativeURLs = true
 uglyURLs = false
 disableKinds = ["taxonomy", "term", "section", "rss", "sitemap", "robotstxt"]
 
+# a preview's commit line (layouts/_partials/preview.html) reads Coolify's variables
+[security.funcs]
+  getenv = ['^HUGO_', '^CI$', '^SOURCE_COMMIT$', '^COOLIFY_PREVIEW$', '^COOLIFY_BRANCH$']
+
 [markup.goldmark.renderer]
   unsafe = false   # raw HTML in Markdown is dropped, never passed through
 
