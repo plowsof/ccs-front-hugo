@@ -1,0 +1,3 @@
+/* The theme: System, the browser's setting (style.css). Under /dark/ and /light/ the web server
+   serves theme-dark.css or theme-light.css here instead. */
+.site-footer .theme a[href="?theme=system"] { color: var(--text); font-weight: 700; }

@@ -309,6 +309,9 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 .site-footer a { color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .site-footer a:hover { color: var(--orange); }
+.theme { margin-top: 18px; color: var(--muted); font-size: 0.9rem; }
+.site-footer .theme a { display: inline; color: var(--muted); }
+.site-footer .theme a:hover { color: var(--orange); }
 
 /* small screens */
 @media (max-width: 860px) {
