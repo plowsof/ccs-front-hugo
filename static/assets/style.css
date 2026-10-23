@@ -31,7 +31,8 @@
   --footer: light-dark(#f0ecf4, #211f26);
   --secondary: light-dark(#f0ecf4, #36343b);
   --idea: #e2bd3f;
-  --fr: #ee7d79;
+  --fr: #f28080;        /* as today's ccs.getmonero.org: the card strip */
+  --fr-bar: #d54949;    /* and its funding bar */
   --wip: #3a72ad;
   --cp: #5fa863;
   --radius: 12px;
@@ -146,7 +147,7 @@ main { flex: 1; }
 
 /* stage colours */
 .idea { --stage: var(--idea); }
-.fr { --stage: var(--fr); }
+.fr { --stage: var(--fr); --bar: var(--fr-bar); }
 .wip { --stage: var(--wip); }
 .cp { --stage: var(--cp); }
 .badge-round { background: var(--stage); }
@@ -235,8 +236,8 @@ progress {
   overflow: hidden;
 }
 progress::-webkit-progress-bar { background: var(--line); }
-progress::-webkit-progress-value { background: var(--stage, var(--orange)); }
-progress::-moz-progress-bar { background: var(--stage, var(--orange)); }
+progress::-webkit-progress-value { background: var(--bar, var(--stage, var(--orange))); }
+progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))); }
 
 .segments { display: flex; gap: 4px; }
 .segments span { flex: 1; height: 7px; border-radius: 4px; background: var(--line); }
