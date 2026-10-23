@@ -36,6 +36,14 @@
   <nav class="site-nav" aria-label="Site">
     {{- partial "site-links.html" . }}
   </nav>
+  {{- /* The theme button, top right: System → Light → Dark → System. Its icon shows the theme now;
+     all three links are here and the theme's own theme.css shows the one that leads on. A link
+     ?theme=… makes the web server send this page under /light/, /dark/ or the plain address. */}}
+  <nav class="theme-toggle" aria-label="Theme">
+    <a class="to-light" href="?theme=light" title="Theme: system. Switch to light">{{ partial "icon.html" "contrast" }}<span class="visually-hidden">Theme: system. Switch to light</span></a>
+    <a class="to-dark" href="?theme=dark" title="Theme: light. Switch to dark">{{ partial "icon.html" "sun" }}<span class="visually-hidden">Theme: light. Switch to dark</span></a>
+    <a class="to-system" href="?theme=system" title="Theme: dark. Switch to the system's">{{ partial "icon.html" "moon" }}<span class="visually-hidden">Theme: dark. Switch to the system's</span></a>
+  </nav>
 </header>
 <div class="layout{{ if eq .Layout "stage" }} with-side{{ end }}">
   {{ partial "sidebar.html" . }}
@@ -57,10 +65,6 @@
   <a href="{{ site.Params.builderRepo }}">Site builder (ccs-front-bash) {{ partial "icon.html" "external" }}</a>
   <a href="{{ site.Params.backendRepo }}">Backend (ccs-bash) {{ partial "icon.html" "external" }}</a>
   <a href="{{ site.Params.proposalsRepo }}">Proposals (ccs-proposals) {{ partial "icon.html" "external" }}</a>
-  </nav>
-  {{- /* ?theme=…: the web server sends this same page under /light/, /dark/ or the plain address */}}
-  <nav class="theme" aria-label="Theme">Theme:
-    <a href="?theme=light">Light</a> · <a href="?theme=dark">Dark</a> · <a href="?theme=system">System</a>
   </nav>
 </footer>
 {{ partial "preview.html" . }}

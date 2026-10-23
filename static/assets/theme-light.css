@@ -1,3 +1,4 @@
 /* The theme: Light, whatever the browser's setting (served as theme.css under /light/) */
 :root { color-scheme: light; }
-.site-footer .theme a[href="?theme=light"] { color: var(--text); font-weight: 700; }
+.theme-toggle .to-light { display: none; }
+.theme-toggle .to-dark { display: inline-flex; }
