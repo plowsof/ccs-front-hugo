@@ -1,6 +1,6 @@
 {{- /* The slots ccs-front-bash fills in a part: {{name}} and so on, replaced with HTML-escaped values. */ -}}
 {{- $d := dict -}}
-{{- range slice "url" "name" "author" "date" "contributors" "amount" "raised" "percentage" "milestones" "done" "segments" "address" "qr" "pending_note" "body" "gitlab_url" "funds" "funding_note" "tags" "tag_links" -}}
+{{- range slice "url" "name" "author" "date" "contributors" "amount" "raised" "percentage" "milestones" "done" "segments" "address" "qr" "pending_note" "body" "gitlab_url" "funds" "funding_note" "tags" "tag_links" "upvotes" "downvotes" -}}
   {{- $d = merge $d (dict . (printf "{{%s}}" .)) -}}
 {{- end -}}
 {{- return $d -}}
