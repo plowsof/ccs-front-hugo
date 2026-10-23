@@ -84,6 +84,7 @@ main { flex: 1; }
   font-weight: 700;
 }
 .brand svg { width: 28px; height: 28px; }
+.brand-short { display: none; }
 .site-nav { display: flex; gap: 28px; flex-wrap: wrap; }
 .nav-toggle { position: absolute; opacity: 0; pointer-events: none; }
 .nav-button { display: none; }
@@ -294,8 +295,13 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
   .columns { grid-template-columns: 1fr; }
   .layout.with-side { display: block; margin-top: 16px; }
   .site-header { padding-block: 10px; }
-  .nav-button { margin-left: auto; display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; color: var(--heading); }
-  .nav-button .icon { width: 24px; height: 24px; }
+  .nav-button {
+    display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 12px 0 8px;
+    border: 1px solid var(--line); border-radius: 8px; cursor: pointer; color: var(--heading); font-weight: 600;
+  }
+  .nav-button .icon { width: 22px; height: 22px; }
+  .nav-toggle:checked ~ .site-header .nav-button { border-color: var(--orange); color: var(--orange); }
+  .site-header { justify-content: flex-start; gap: 12px; }
   /* the menu button opens the sidebar as a drawer from the left, on every page */
   .site-nav { display: none; }
   .drawer {
@@ -313,6 +319,9 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 @media (max-width: 520px) {
   .site-header { gap: 8px; padding-inline: 12px; }
   .brand { font-size: 0.9rem; gap: 8px; }
+  /* a narrow phone: the menu button and the logo with "CCS" fit on one line */
+  .brand-long { display: none; }
+  .brand-short { display: inline; }
   .brand svg { width: 24px; height: 24px; }
   .stage-grid { grid-template-columns: 1fr; }
   .card h3, .proposal .head h1 { margin-right: 0; margin-top: 18px; }
