@@ -7,10 +7,10 @@
 {{- else if eq $p "milestone" }}{{ partial "milestone.html" (dict "name" "{{name}}" "funds" "{{funds}}" "done" (cond (.Params.done | default false) "{{date}}" "")) }}
 {{- else if eq $p "payout" }}{{ partial "payout.html" (dict "amount" "{{amount}}" "date" "{{date}}") }}
 {{- else if eq $p "segment" }}<span{{ if .Params.done }} class="done"{{ end }}></span>
-{{- else if eq $p "label" }}{{ partial "label.html" (dict "tag" "{{tag}}") }}
-{{- else if eq $p "label-link" }}{{ partial "label.html" (dict "tag" "{{tag}}" "link" true "href" "{{href}}") }}
-{{- else if eq $p "filters" }}<nav class="filters" aria-label="Filter by tag">{{ "{{filters}}" }}</nav>
-{{- else if eq $p "filter" }}{{ partial "filter.html" (dict "tag" "{{tag}}" "href" "{{href}}" "count" "{{count}}" "active" "{{active}}") }}
+{{- else if eq $p "label" }}{{ partial "label.html" (dict "tag" "{{tag}}" "color" "{{color}}") }}
+{{- else if eq $p "label-link" }}{{ partial "label.html" (dict "tag" "{{tag}}" "color" "{{color}}" "link" true "href" "{{href}}") }}
+{{- else if eq $p "filters" }}{{ partial "filters.html" (dict "part" true) }}
+{{- else if eq $p "filter" }}{{ partial "filter.html" (dict "tag" "{{tag}}" "href" "{{href}}" "count" "{{count}}" "color" "{{color}}" "active" "{{active}}") }}
 {{- else if eq $p "subaddresses" }}{{ site.Params.subaddresses.sha256 }}
 {{- else if eq $p "empty" }}<p class="empty">Nothing here right now.</p>
 {{- else if eq $p "no-milestones" }}<p class="empty">No milestones.</p>

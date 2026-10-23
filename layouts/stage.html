@@ -16,11 +16,6 @@
     {{- else }}
     <h1 class="list-title">{{ .Title }}</h1>
     {{- end }}
-    {{- if eq .Params.page "explore" }}
-    {{ partial "marker.html" "filters" }}
-    {{ partial "filters.html" (dict "active" $tag) }}
-    {{ partial "marker.html" "/filters" }}
-    {{- end }}
     {{- range .Params.show }}{{ $s := . }}
     {{ partial "marker.html" (printf "list %s" $s) }}
     {{- range index $lists $s }}
