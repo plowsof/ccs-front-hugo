@@ -152,8 +152,8 @@ main { flex: 1; }
 .cp { --stage: var(--cp); }
 .badge-round { background: var(--stage); }
 
-/* explorer */
-.explorer {
+/* the stage and tag pages: the sidebar (stages, tags) and the list */
+.layout.with-side {
   display: grid;
   grid-template-columns: 300px 1fr;
   gap: 32px;
@@ -161,6 +161,12 @@ main { flex: 1; }
   margin: 24px auto 56px;
   padding: 0 max(16px, 4vw);
   align-items: start;
+}
+.layout { flex: 1; }
+/* wide screens: the sidebar only beside a stage's list; its site links are the header's */
+@media (min-width: 861px) {
+  .layout:not(.with-side) > .drawer { display: none; }
+  .drawer .drawer-links, .backdrop { display: none; }
 }
 .side a.back { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); text-decoration: none; margin: 8px 0 14px; }
 .side a.back .icon { width: 28px; height: 28px; padding: 6px; border-radius: 50%; background: var(--card); }
@@ -182,11 +188,11 @@ main { flex: 1; }
 .side hr { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 
 /* the selected stage: each page's body says which one it is */
-.page-explore .tab-explore,
-.page-ideas .tab-ideas,
-.page-fr .tab-fr,
-.page-wip .tab-wip,
-.page-cp .tab-cp { border-color: var(--orange); color: var(--orange); }
+/* the stage you're on (as specific as the stage menu's own rule, so it wins) */
+.page-ideas .stage-menu .tab-ideas,
+.page-fr .stage-menu .tab-fr,
+.page-wip .stage-menu .tab-wip,
+.page-cp .stage-menu .tab-cp { border-color: var(--orange); color: var(--orange); }
 
 .list { display: grid; gap: 20px; }
 .list-title { margin: 6px 0 0; font-size: 1.3rem; }
@@ -285,15 +291,24 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 @media (max-width: 860px) {
   .hero { grid-template-columns: 1fr; margin-top: 16px; }
   .hero .art { max-width: 240px; grid-row: 1; }
-  .explorer, .columns { grid-template-columns: 1fr; }
-  /* the stage list takes the whole screen: the menu's Explore has every stage */
-  .side .stage-menu, .side hr { display: none; }
+  .columns { grid-template-columns: 1fr; }
+  .layout.with-side { display: block; margin-top: 16px; }
   .site-header { padding-block: 10px; }
   .nav-button { margin-left: auto; display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; color: var(--heading); }
   .nav-button .icon { width: 24px; height: 24px; }
-  .site-nav { display: none; width: 100%; flex-direction: column; gap: 0; padding: 4px 0 8px; }
-  .site-nav a { padding: 10px 2px; border-top: 1px solid var(--line); }
-  .nav-toggle:checked ~ .site-nav { display: flex; }
+  /* the menu button opens the sidebar as a drawer from the left, on every page */
+  .site-nav { display: none; }
+  .drawer {
+    position: fixed; top: 0; bottom: 0; left: 0; z-index: 30;
+    width: min(320px, 86vw); overflow-y: auto; padding: 20px 16px 32px;
+    background: var(--bg); box-shadow: var(--shadow);
+    transform: translateX(-105%); transition: transform 0.2s ease;
+  }
+  .nav-toggle:checked ~ .layout > .drawer { transform: none; }
+  .backdrop { display: none; position: fixed; inset: 0; z-index: 20; background: rgb(0 0 0 / 0.45); cursor: pointer; }
+  .nav-toggle:checked ~ .backdrop { display: block; }
+  .drawer-links { display: grid; margin-top: 20px; border-top: 1px solid var(--line); }
+  .drawer-links a { padding: 11px 4px; border-bottom: 1px solid var(--line); color: var(--heading); text-decoration: none; font-weight: 500; }
 }
 @media (max-width: 520px) {
   .site-header { gap: 8px; padding-inline: 12px; }
@@ -363,12 +378,12 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 .tabs::after { content: ""; flex: 1; align-self: flex-end; border-bottom: 3px solid var(--line); }
 .site-footer .general-fund p a { display: inline; color: var(--orange); text-decoration: underline; }
 
-/* the stage label on a card only where stages are mixed (Explore); on a stage's own page it repeats the page */
+/* the stage label on a card only where stages are mixed (a tag page); on a stage's own page it repeats the page */
 body:not(.page-explore) .list .card .tag { display: none; }
 body:not(.page-explore) .list .card h3 { margin-right: 0; }
 
 /* tags: coloured pills (as on bounties.monero.social), labels on cards, links on a proposal
-   page, filters in Explore's sidebar. 8 colours, picked from the tag's name (classes, not
+   page, filters in the sidebar. 8 colours, picked from the tag's name (classes, not
    style=: the CSP allows no inline styles); each passes contrast with its text. */
 .tag-0 { --tag-bg: #ff8c00; --tag-fg: #1d1200; }
 .tag-1 { --tag-bg: #c9215c; --tag-fg: #fff; }
@@ -378,7 +393,6 @@ body:not(.page-explore) .list .card h3 { margin-right: 0; }
 .tag-5 { --tag-bg: #6a4be8; --tag-fg: #fff; }
 .tag-6 { --tag-bg: #fdabcb; --tag-fg: #3a0c1e; }
 .tag-7 { --tag-bg: #2f6fb5; --tag-fg: #fff; }
-.tag-all { --tag-bg: var(--card); --tag-fg: var(--text); }
 .labels { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
 .labels:empty { display: none; }
 .label, .filter {
@@ -391,7 +405,6 @@ a.label:hover, .filter:hover { color: var(--tag-fg); outline: 2px solid var(--ta
 .side .tags-title { margin: 0 0 10px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; }
 .filter { font-size: 0.82rem; padding: 4px 10px; }
-.filter.tag-all { border: 1px solid var(--line); }
 .filter .count { font-weight: 600; opacity: 0.8; }
 .filter .count:empty { display: none; }
 .filter.active { outline: 2px solid var(--orange); outline-offset: 2px; }
@@ -401,28 +414,11 @@ a.label:hover, .filter:hover { color: var(--tag-fg); outline: 2px solid var(--ta
 .votes span { display: inline-flex; align-items: center; gap: 6px; }
 .votes .icon { color: var(--orange); }
 
-/* how many proposals a stage has: in the sidebar's stage menu and on Explore's stage cards */
+/* how many proposals a stage has: in the sidebar's stage menu and on the home page's stage cards */
 .side .stage-menu a .count, .stage-card .count {
   margin-left: auto; min-width: 1.6em; padding: 0 7px; border-radius: 999px; text-align: center;
   font-size: 0.78rem; font-weight: 700; line-height: 1.6; background: var(--line); color: var(--muted);
 }
 .stage-card .count { margin-left: 8px; vertical-align: 2px; }
 
-/* Explore: the stages and the tags, no list */
-.hub { max-width: 760px; margin: 32px auto 72px; padding: 0 16px; }
-.hub h1 { font-size: 1.5rem; margin: 0 0 20px; }
-.hub .tags-block { margin-top: 32px; }
-.hub .tags-block hr { display: none; }
-@media (max-width: 860px) {
-  /* the logo already goes home: no "< Home" above a stage's list on a phone */
-  .explorer .side a.back { display: none; }
-}
-@media (max-width: 520px) {
-  /* Explore on a phone: the four stages in a 2×2 grid without their descriptions, tags in view */
-  .hub .stage-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
-  .hub .stage-card { padding: 14px 10px; display: grid; justify-items: center; text-align: center; }
-  .hub .stage-card p { display: none; }
-  .hub .stage-card h3 { font-size: 0.95rem; }
-  .hub .stage-card .count { display: block; width: fit-content; margin: 6px auto 0; }
-  .hub .stage-card h3 { margin-bottom: 0; }
-}
+@media (prefers-reduced-motion: reduce) { .drawer { transition: none; } }

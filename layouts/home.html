@@ -4,20 +4,20 @@
     <h1>Community Crowdfunding System</h1>
     <p>Monero is a decentralized, community-driven project. The CCS is a way for the community to fund development and other initiatives that benefit the Monero ecosystem.</p>
     <div class="actions">
-      <a class="button primary" href="/explore/">Explore</a>
+      <a class="button primary" href="/funding-required/">Proposals</a>
       <a class="button" href="/what-is-ccs/">About</a>
     </div>
   </div>
   <img class="art" src="/assets/piggy.png" width="760" height="760" alt="">
 </section>
-<section class="stages">
+<section class="stages" id="proposals">
   <h2>View Proposals</h2>
   <div class="stage-grid">
     {{- $stages := partial "stages.html" . }}
     {{- range slice "idea" "fr" "wip" "cp" }}{{ $st := index $stages . }}
     <a class="stage-card {{ . }}" href="{{ $st.page }}">
       <span class="badge-round">{{ partial "icon.html" $st.icon }}</span>
-      <h3>{{ $st.label }}</h3>
+      <h3>{{ $st.label }}{{ partial "count.html" (dict "s" . "name" "number") }}</h3>
       <p>{{ $st.text }}</p>
     </a>
     {{- end }}

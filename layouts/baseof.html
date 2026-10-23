@@ -12,22 +12,23 @@
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 </head>
 <body class="page-{{ .Params.page | default "other" }}">
+{{- /* the menu button's state: before everything it opens (the drawer, the backdrop) */}}
+<input type="checkbox" id="nav-toggle" class="nav-toggle">
 <header class="site-header">
   <a class="brand" href="/"><svg aria-hidden="true"><use href="{{ partial "icons-url.html" }}#logo"></use></svg>Community Crowdfunding System</a>
-  {{- /* narrow screens: the links open from a menu button; a checkbox and CSS, no JavaScript */}}
-  <input type="checkbox" id="nav-toggle" class="nav-toggle">
+  {{- /* narrow screens: the menu button opens the drawer (sidebar.html) */}}
   <label for="nav-toggle" class="nav-button" aria-label="Menu">{{ partial "icon.html" "menu" }}</label>
   <nav class="site-nav" aria-label="Site">
-    <a href="/explore/">Explore</a>
-    <a href="/what-is-ccs/">What is the CCS</a>
-    <a href="/how-to-ccs/">Submit a proposal</a>
-    <a href="/donate/">Donate</a>
-    <a href="https://beta.getmonero.org/">getmonero.org</a>
+    {{- partial "site-links.html" . }}
   </nav>
 </header>
-<main>
+<div class="layout{{ if eq .Layout "stage" }} with-side{{ end }}">
+  {{ partial "sidebar.html" . }}
+  <main>
 {{ block "main" . }}{{ end }}
-</main>
+  </main>
+</div>
+<label for="nav-toggle" class="backdrop" aria-hidden="true"></label>
 <footer class="site-footer">
   <section class="general-fund">
     <h2>Donate to the Monero Project</h2>
