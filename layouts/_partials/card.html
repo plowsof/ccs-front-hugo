@@ -4,7 +4,7 @@
   <h3>{{ $v.name }}</h3>
   {{ partial "meta.html" . }}
   {{- if eq $s "fr" }}
-  <p class="progress-label">Raised {{ $v.raised }} of {{ $v.amount }} XMR</p>
+  <p class="progress-label">Raised {{ $v.raised }} of {{ $v.amount }} XMR{{ $v.pending_note }}</p>
   <progress max="100" value="{{ $v.percentage }}">{{ $v.percentage }}%</progress>
   {{- else if eq $s "wip" }}
   <p class="progress-label">Completed {{ $v.done }} of {{ $v.milestones }} milestones</p>

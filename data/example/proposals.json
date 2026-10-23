@@ -36,9 +36,10 @@
                 "percentage": 80,
                 "amount": "75.0000",
                 "amount-funded": "60.0000",
-                "amount-pending": 0,
+                "amount-pending": 1.5,
                 "author": "example",
-                "date": "December 25, 2025"
+                "date": "December 25, 2025",
+                "funding-required-date": "January 2, 2026"
             },
             {
                 "name": "Example: a full-time auditor for six months",
@@ -50,10 +51,11 @@
                 "milestones-completed": 0,
                 "percentage": 15,
                 "amount": "300.0000",
-                "amount-funded": "45.0000",
+                "amount-funded": "45.1234",
                 "amount-pending": 0,
                 "author": "example",
-                "date": "December 2, 2025"
+                "date": "December 2, 2025",
+                "funding-required-date": "December 9, 2025"
             },
             {
                 "name": "Example: conference travel",
@@ -66,9 +68,10 @@
                 "percentage": 95,
                 "amount": "20.0000",
                 "amount-funded": "19.0000",
-                "amount-pending": 0,
+                "amount-pending": 0.25,
                 "author": "example",
-                "date": "November 20, 2025"
+                "date": "November 20, 2025",
+                "funding-required-date": null
             }
         ]
     },

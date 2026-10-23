@@ -1,5 +1,8 @@
-{{- /* A proposal from ccs-bash's JSON -> the values a card or a page shows. */ -}}
+{{- /* A proposal from ccs-bash's JSON -> the values a card or a page shows. Amounts are ccs-bash's
+   (exact to 4 decimals, cut off, never rounded up), shown without trailing zeros: 60, 60.5, 0.1234. */ -}}
 {{- $p := . -}}
+{{- $pending := index $p "amount-pending" | default 0 -}}
+{{- $since := index $p "funding-required-date" -}}
 {{- return dict
   "url" (or (index $p "local-url") (index $p "gitlab-url"))
   "gitlab_url" (index $p "gitlab-url")
@@ -7,6 +10,8 @@
   "contributors" (index $p "contributions")
   "amount" (partial "xmr.html" $p.amount)
   "raised" (partial "xmr.html" (index $p "amount-funded"))
+  "pending_note" (cond (gt (float $pending) 0) (printf " · %v XMR pending" $pending) "")
+  "funding_note" (cond (ne $since nil) (printf " · funding since %s" $since) "")
   "percentage" $p.percentage
   "milestones" $p.milestones "done" (index $p "milestones-completed")
   "address" (index $p "donate-address")

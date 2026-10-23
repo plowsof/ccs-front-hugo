@@ -114,7 +114,7 @@ main { flex: 1; }
 .hero h1 { color: var(--orange); font-size: clamp(2rem, 4.2vw, 3rem); line-height: 1.15; margin: 0 0 20px; }
 .hero p { color: var(--muted); max-width: 34em; font-size: 1.05rem; }
 .hero .actions { display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
-.hero .art { width: 100%; max-width: 380px; justify-self: center; }
+.hero .art { width: 100%; height: auto; max-width: 380px; justify-self: center; }
 
 .stages { max-width: 720px; margin: 64px auto 72px; padding: 0 16px; text-align: center; }
 .stages h2 { font-size: 1.4rem; margin: 0 0 22px; }
