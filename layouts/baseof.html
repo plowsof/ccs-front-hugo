@@ -5,7 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light dark">
 <title>{{ if .IsHome }}Monero Community Crowdfunding System{{ else }}{{ .Title }} · Monero CCS{{ end }}</title>
-<link rel="stylesheet" href="/assets/style.css">
+{{- /* named by its hash (assets/style.<sha256>.css): a changed stylesheet is a new file, so no
+   browser keeps showing an old one; beside fonts/, so its url()s still work */}}
+{{- $css := resources.Get "assets/style.css" | fingerprint "sha256" }}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
 </head>
 <body class="page-{{ .Params.page | default "other" }}">
