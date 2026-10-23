@@ -13,12 +13,12 @@ that is not in it is never shown.
 You can check it yourself, with nothing from this site but the files below:
 
 1. Download [the list](/subaddresses.txt), [its signature](/subaddresses.txt.asc) and
-   [the public key](/assets/subaddresses-key.asc).
+   [the public key](/subaddresses.txt.key.asc).
 2. Check the key's fingerprint against the one the CCS maintainers publish elsewhere (in the
    [front end's repository]({{< param frontendRepo >}}) and in its README), then:
 
    ```
-   gpg --import subaddresses-key.asc
+   gpg --import subaddresses.txt.key.asc
    gpg --verify subaddresses.txt.asc subaddresses.txt
    ```
 
@@ -30,4 +30,4 @@ You can check it yourself, with nothing from this site but the files below:
 
    `1` means it is the wallet's. `0` means do not send: tell the CCS maintainers.
 
-The key's fingerprint: `{{< param "subaddresses.key" >}}`
+The key's fingerprint: `{{fingerprint}}`
