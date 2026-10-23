@@ -33,6 +33,7 @@
      with its name in words: a bare ☰ is easy to miss */}}
   <label for="nav-toggle" class="nav-button">{{ partial "icon.html" "menu" }}<span>Menu</span></label>
   <a class="brand" href="/" aria-label="Community Crowdfunding System, home"><img src="{{ partial "icons-url.html" "logo-1x" }}" srcset="{{ partial "icons-url.html" "logo-2x" }} 2x, {{ partial "icons-url.html" "logo-3x" }} 3x" width="28" height="28" alt=""><span class="brand-long">Community Crowdfunding System</span><span class="brand-short" aria-hidden="true">CCS</span></a>
+  <div class="header-end">
   <nav class="site-nav" aria-label="Site">
     {{- partial "site-links.html" . }}
   </nav>
@@ -44,6 +45,7 @@
     <a class="to-dark" href="?theme=dark" title="Theme: light. Switch to dark">{{ partial "icon.html" "sun" }}<span class="visually-hidden">Theme: light. Switch to dark</span></a>
     <a class="to-system" href="?theme=system" title="Theme: dark. Switch to the system's">{{ partial "icon.html" "moon" }}<span class="visually-hidden">Theme: dark. Switch to the system's</span></a>
   </nav>
+  </div>
 </header>
 <div class="layout{{ if eq .Layout "stage" }} with-side{{ end }}">
   {{ partial "sidebar.html" . }}
