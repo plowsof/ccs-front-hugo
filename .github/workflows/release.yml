@@ -1,0 +1,61 @@
+name: release
+# On a pushed tag v*: the site's zip, built on two machines (the same as check.yml); only if both
+# give the same sha256, a GitHub release with the zip and its sha256 attached. That zip is what
+# goes to the ccs-front-bash machine (ccs-front-bash's docs/setup.md, step 1).
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: write   # the GitHub release
+jobs:
+  zip:
+    runs-on: ubuntu-24.04
+    outputs:
+      sha256: ${{ steps.build.outputs.sha256 }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, pinned by commit
+      - id: build
+        run: |
+          container/build.sh dist | tee /tmp/sum
+          echo "sha256=$(cut -d' ' -f1 /tmp/sum)" >> "$GITHUB_OUTPUT"
+      - uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4.6.2, pinned by commit
+        with:
+          name: ccs-front-hugo-zip
+          path: dist/ccs-front-hugo.zip
+  zip-again:
+    runs-on: ubuntu-24.04
+    outputs:
+      sha256: ${{ steps.build.outputs.sha256 }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, pinned by commit
+      - id: build
+        run: |
+          (umask 077 && git clone -q "$PWD" "$RUNNER_TEMP/clone")
+          "$RUNNER_TEMP/clone/container/build.sh" "$RUNNER_TEMP/out" | tee /tmp/sum
+          echo "sha256=$(cut -d' ' -f1 /tmp/sum)" >> "$GITHUB_OUTPUT"
+  release:
+    needs: [zip, zip-again]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4.3.0, pinned by commit
+        with:
+          name: ccs-front-hugo-zip
+      - name: the same zip on both machines, then the release
+        env:
+          A: ${{ needs.zip.outputs.sha256 }}
+          B: ${{ needs.zip-again.outputs.sha256 }}
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          [[ ${#A} == 64 && $A == "$B" ]] || { echo "error: the two zips differ ($A, $B)" >&2; exit 1; }
+          [[ $(sha256sum < ccs-front-hugo.zip | cut -d' ' -f1) == "$A" ]] || { echo "error: the artifact isn't the zip built" >&2; exit 1; }
+          zip=ccs-front-hugo-$TAG.zip
+          mv ccs-front-hugo.zip "$zip"
+          sha256sum "$zip" > "$zip.sha256"
+          notes=$(printf 'The site, built reproducibly: two machines gave the same zip.\n\n```\nsha256 %s  %s\n```\n\nBuild it yourself from this tag with `container/build.sh` (StageX images, signatures checked, no network): the same sha256 means the same files.' "$A" "$zip")
+          if gh release view "$TAG" -R "$GITHUB_REPOSITORY" > /dev/null 2>&1; then
+              gh release upload "$TAG" "$zip" "$zip.sha256" --clobber -R "$GITHUB_REPOSITORY"
+              gh release edit "$TAG" --notes "$(gh release view "$TAG" -R "$GITHUB_REPOSITORY" --json body -q .body)"$'\n\n'"$notes" -R "$GITHUB_REPOSITORY"
+          else
+              gh release create "$TAG" "$zip" "$zip.sha256" --verify-tag --title "$TAG" --notes "$notes" -R "$GITHUB_REPOSITORY"
+          fi
