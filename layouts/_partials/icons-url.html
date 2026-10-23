@@ -1,0 +1,3 @@
+{{- /* The icon sprite, named by its hash (assets/icons.<sha256>.svg) like the stylesheet: a new
+   icon is a new file, so no browser keeps drawing from an old sprite. */ -}}
+{{- return (resources.Get "assets/icons.svg" | fingerprint "sha256").RelPermalink -}}
