@@ -91,3 +91,16 @@ The parts are rendered from the same templates as the example pages, so they can
 
 The Contribute dropdown is a `<details>`, the Proposal / Milestones / Payouts tabs are radio
 buttons shown by CSS: like today's ccs-front, and with no JavaScript.
+
+## The signed subaddress list
+
+Every donation address on the site is checked against a list of the wallet's subaddresses, signed
+with a key made only for that and destroyed right after (ccs-front-bash's docs/setup.md, step 5).
+Nothing about it is built in here: ccs-front-bash fills the Verify page (`parts/verify.html`, with
+`{{fingerprint}}`, or `parts/no-list.html`) and each donation box's link (`{{verify_link}}`,
+`parts/verify-link.html`). The key's fingerprint, published here too so it doesn't come only from
+the site it vouches for:
+
+| | |
+|---|---|
+| testnet CCS (ccs.monerodevs.org) | `3CB9 30B3 11B4 9080 8775  A4C9 290C 5085 B75F 4D61` |

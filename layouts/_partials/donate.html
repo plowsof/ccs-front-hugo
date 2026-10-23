@@ -10,7 +10,6 @@
       <div class="address">{{ .address }}</div></li>
     <li>Send. Thank you!</li>
   </ol>
-  {{- if site.Params.subaddresses.sha256 }}
-  <p class="verify"><a href="/verify/">Check that this address is the CCS wallet's</a></p>
-  {{- end }}
+  {{- /* the link to /verify/: ccs-front-bash fills it in when a signed list is installed */}}
+  {{- with .verify_link }}{{ . | safeHTML }}{{ end }}
 </details>
