@@ -36,7 +36,7 @@ SVG uses `style=` attributes, which the CSP below blocks: they become `stroke=`/
 attributes first (as in `static/assets/example-qr.svg`).
 
 **Proposal pages** are `parts/proposal-fr.html`, `proposal-wip.html` and `proposal-cp.html` with
-their slots filled. Like the proposal pages they become, they sit one folder down, so their
+their slots filled, `{{milestones_list}}` being the milestone parts. Like the proposal pages they become, they sit one folder down, so their
 links work unchanged. `parts/` is not pushed to the web server.
 
 The parts are rendered from the same templates as the example pages, so they can't drift apart.
