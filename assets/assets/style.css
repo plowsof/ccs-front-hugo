@@ -41,7 +41,8 @@
 
 * { box-sizing: border-box; }
 
-html { -webkit-text-size-adjust: 100%; }
+/* room for the scrollbar on every page: a short page without one would sit 15px wider */
+html { -webkit-text-size-adjust: 100%; scrollbar-gutter: stable; }
 
 body {
   margin: 0;
@@ -156,7 +157,11 @@ main { flex: 1; }
 /* the stage and tag pages: the sidebar (stages, tags) and the list */
 .layout.with-side {
   display: grid;
-  grid-template-columns: 300px 1fr;
+  /* the full width (up to max-width) whatever the cards hold: in the body's flex column, auto
+     margins would shrink it to its content, and the page would change width from stage to stage */
+  width: 100%;
+  box-sizing: border-box;
+  grid-template-columns: 300px minmax(0, 1fr);
   gap: 32px;
   max-width: 1200px;
   margin: 24px auto 56px;
