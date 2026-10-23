@@ -18,6 +18,10 @@
    browser keeps showing an old one; beside fonts/, so its url()s still work */}}
 {{- $css := resources.Get "assets/style.css" | resources.ExecuteAsTemplate "assets/style.css" . | fingerprint "sha256" }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+{{- /* The theme, kept in the address without cookies or JavaScript: the web server serves the
+   same files under /dark/ and /light/, but there this one file is theme-dark.css or
+   theme-light.css (ccs-bash's docs/two-machines.md, "The theme"). Not hashed, so it can differ. */}}
+<link rel="stylesheet" href="/assets/theme.css">
 <link rel="icon" href="{{ partial "icons-url.html" "favicon-32" }}" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="{{ partial "icons-url.html" "favicon-180" }}">
 </head>
@@ -53,6 +57,10 @@
   <a href="{{ site.Params.builderRepo }}">Site builder (ccs-front-bash) {{ partial "icon.html" "external" }}</a>
   <a href="{{ site.Params.backendRepo }}">Backend (ccs-bash) {{ partial "icon.html" "external" }}</a>
   <a href="{{ site.Params.proposalsRepo }}">Proposals (ccs-proposals) {{ partial "icon.html" "external" }}</a>
+  </nav>
+  {{- /* ?theme=…: the web server sends this same page under /light/, /dark/ or the plain address */}}
+  <nav class="theme" aria-label="Theme">Theme:
+    <a href="?theme=light">Light</a> · <a href="?theme=dark">Dark</a> · <a href="?theme=system">System</a>
   </nav>
 </footer>
 {{ partial "preview.html" . }}
