@@ -1,0 +1,24 @@
+name: preview
+# On a new pull request: comment the link to its Coolify preview, the site with its example data
+# built from the PR (Dockerfile) at https://ccs-<PR>.beta.monerodevs.org. Checks out nothing and
+# runs none of the PR's code, so pull_request_target (which may comment on PRs from forks) is safe.
+on:
+  pull_request_target:
+    types: [opened]
+permissions:
+  pull-requests: write
+defaults:
+  run:
+    shell: bash
+jobs:
+  comment:
+    runs-on: ubuntu-24.04
+    steps:
+      - env:
+          GH_TOKEN: ${{ github.token }}
+          PR: ${{ github.event.pull_request.number }}
+        run: |
+          gh pr comment "$PR" -R "$GITHUB_REPOSITORY" --body "|What|Link|
+          |:---:|---|
+          |🕵️‍♂️ Review|[Files changed](https://github.com/$GITHUB_REPOSITORY/pull/$PR/files)|
+          |🌐 Deploy|[Preview #$PR](https://ccs-$PR.beta.monerodevs.org)|"
