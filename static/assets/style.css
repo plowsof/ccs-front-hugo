@@ -267,14 +267,13 @@ progress::-moz-progress-bar { background: var(--stage, var(--orange)); }
 .milestones .done .mark { background: var(--wip); }
 
 /* footer */
-.site-footer {
-  background: var(--footer);
-  padding: 34px 16px;
-  display: flex;
-  justify-content: center;
-  gap: 24px;
-  flex-wrap: wrap;
-}
+.site-footer { background: var(--footer); padding: 40px 16px 30px; text-align: center; }
+.general-fund { max-width: 640px; margin: 0 auto 28px; }
+.general-fund h2 { margin: 0 0 10px; font-size: 1.25rem; color: var(--heading); }
+.general-fund p { color: var(--muted); }
+.general-fund .qr { width: 150px; margin: 16px auto; }
+.general-fund .address { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.8rem; overflow-wrap: anywhere; color: var(--text); }
+.footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 .site-footer a { color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .site-footer a:hover { color: var(--orange); }
 
@@ -340,3 +339,4 @@ progress::-moz-progress-bar { background: var(--stage, var(--orange)); }
 }
 .milestone.done .mark { background: var(--wip); }
 .tabs::after { content: ""; flex: 1; align-self: flex-end; border-bottom: 3px solid var(--line); }
+.site-footer .general-fund p a { display: inline; color: var(--orange); text-decoration: underline; }

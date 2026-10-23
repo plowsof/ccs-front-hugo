@@ -14,4 +14,5 @@ disableKinds = ["taxonomy", "term", "section", "rss", "sitemap", "robotstxt", "4
   frontendRepo = "https://repo.getmonero.org/monero-project/ccs-front"
   backendRepo = "https://github.com/plowsof/ccs-bash"
   proposalsRepo = "https://repo.getmonero.org/monero-project/ccs-proposals"
+  generalFund = "888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H"
   submitIdea = "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/new"
