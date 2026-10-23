@@ -34,7 +34,8 @@ The pages and URLs are today's ccs-front's, so links keep working: `/`, `/ideas/
 **Parts** (`public/parts/`) are fragments with `{{slot}}`s: `{{name}}`, `{{author}}`, `{{date}}`,
 `{{url}}`, `{{amount}}`, `{{raised}}`, `{{percentage}}`, `{{contributors}}`, `{{milestones}}`,
 `{{done}}`, `{{segments}}` (made of `segment-done.html` / `segment-todo.html`), `{{address}}`,
-`{{pending_note}}`, `{{gitlab_url}}`, `{{funds}}` (a milestone's), `{{date}}` (a milestone's
+`{{pending_note}}` (" · 1.5 XMR pending", or empty), `{{funding_note}}` (" · funding since …", or
+empty), `{{gitlab_url}}`, `{{funds}}` (a milestone's), `{{date}}` (a milestone's
 completion or a payout's). Each is replaced with its value HTML-escaped once
 (ccs-bash's JSON is already escaped). The exceptions are `{{qr}}`, an SVG from `qrencode -t SVG`,
 and `{{body}}`, the proposal's Markdown rendered with everything escaped first. qrencode's
@@ -58,7 +59,9 @@ The parts are rendered from the same templates as the example pages, so they can
 ## Credits
 
 - Layout after the concept screenshots in redsh4de's CCS proposal
-  ("CCS Frontend Astro Rewrite"); illustration drawn for this repo.
+  ("CCS Frontend Astro Rewrite").
+- The piggy bank: from redsh4de/monero-ccs-site (`src/assets/funding-required.png`, branch
+  `feat/landing-draft`), BSD-3, Copyright (c) 2026, SyntheticBird, `static/assets/piggy-LICENSE`.
 - The Monero symbol: monero-project/monero-site `img/favicons.svg` (BSD-3).
 - Icons: [Lucide](https://lucide.dev) (lucide-static 1.47.0), ISC, `static/assets/icons-LICENSE`.
 - Colours, sizes and font from the new getmonero.org (beta.getmonero.org).
