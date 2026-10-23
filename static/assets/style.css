@@ -84,6 +84,9 @@ main { flex: 1; }
 }
 .brand svg { width: 28px; height: 28px; }
 .site-nav { display: flex; gap: 28px; flex-wrap: wrap; }
+.nav-toggle { position: absolute; opacity: 0; pointer-events: none; }
+.nav-button { display: none; }
+.nav-toggle:focus-visible + .nav-button { outline: 2px solid var(--orange); }
 .site-nav a { color: var(--heading); text-decoration: none; font-weight: 500; }
 .site-nav a:hover { color: var(--orange); }
 
@@ -283,9 +286,17 @@ progress::-moz-progress-bar { background: var(--stage, var(--orange)); }
   .hero .art { max-width: 240px; grid-row: 1; }
   .explorer, .columns { grid-template-columns: 1fr; }
   .side nav { grid-template-columns: 1fr 1fr; }
-  .site-nav { gap: 18px; }
+  .site-header { padding-block: 10px; }
+  .nav-button { margin-left: auto; display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; color: var(--heading); }
+  .nav-button .icon { width: 24px; height: 24px; }
+  .site-nav { display: none; width: 100%; flex-direction: column; gap: 0; padding: 4px 0 8px; }
+  .site-nav a { padding: 10px 2px; border-top: 1px solid var(--line); }
+  .nav-toggle:checked ~ .site-nav { display: flex; }
 }
 @media (max-width: 520px) {
+  .site-header { gap: 8px; padding-inline: 12px; }
+  .brand { font-size: 0.9rem; gap: 8px; }
+  .brand svg { width: 24px; height: 24px; }
   .stage-grid, .side nav { grid-template-columns: 1fr; }
   .card h3, .proposal .head h1 { margin-right: 0; margin-top: 18px; }
 }
