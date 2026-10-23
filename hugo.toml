@@ -11,7 +11,8 @@ disableKinds = ["taxonomy", "term", "section", "rss", "sitemap", "robotstxt"]
   unsafe = false   # raw HTML in Markdown is dropped, never passed through
 
 [params]
-  frontendRepo = "https://repo.getmonero.org/monero-project/ccs-front"
+  designRepo = "https://github.com/plowsof/ccs-front-hugo"      # this site's design (Hugo, built offline)
+  builderRepo = "https://github.com/plowsof/ccs-front-bash"     # fills it on the backend
   backendRepo = "https://github.com/plowsof/ccs-bash"
   proposalsRepo = "https://repo.getmonero.org/monero-project/ccs-proposals"
   generalFund = "888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H"
