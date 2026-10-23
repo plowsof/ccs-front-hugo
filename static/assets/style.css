@@ -286,7 +286,8 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
   .hero { grid-template-columns: 1fr; margin-top: 16px; }
   .hero .art { max-width: 240px; grid-row: 1; }
   .explorer, .columns { grid-template-columns: 1fr; }
-  .side nav { grid-template-columns: 1fr 1fr; }
+  /* the stage list takes the whole screen: the menu's Explore has every stage */
+  .side nav, .side hr { display: none; }
   .site-header { padding-block: 10px; }
   .nav-button { margin-left: auto; display: inline-grid; place-items: center; width: 40px; height: 40px; border-radius: 8px; cursor: pointer; color: var(--heading); }
   .nav-button .icon { width: 24px; height: 24px; }
@@ -298,7 +299,7 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
   .site-header { gap: 8px; padding-inline: 12px; }
   .brand { font-size: 0.9rem; gap: 8px; }
   .brand svg { width: 24px; height: 24px; }
-  .stage-grid, .side nav { grid-template-columns: 1fr; }
+  .stage-grid { grid-template-columns: 1fr; }
   .card h3, .proposal .head h1 { margin-right: 0; margin-top: 18px; }
 }
 
