@@ -3,11 +3,11 @@
   <a class="back" href="/">{{ partial "icon.html" "back" }}Home</a>
   <nav class="stage-menu" aria-label="Stages">
     {{- range slice "idea" "fr" "wip" "cp" }}{{ $st := index $stages . }}
-    <a class="{{ . }} tab-{{ if eq . "idea" }}ideas{{ else }}{{ . }}{{ end }}" href="{{ $st.page }}">{{ partial "icon.html" $st.icon }}{{ $st.label }}</a>
+    <a class="{{ . }} tab-{{ if eq . "idea" }}ideas{{ else }}{{ . }}{{ end }}" href="{{ $st.page }}">{{ partial "icon.html" $st.icon }}{{ $st.label }}{{ partial "count.html" . }}</a>
     {{- end }}
   </nav>
-  {{- /* Explore and the tag pages: the tag filters (ccs-front-bash fills them) */}}
-  {{- if eq .Params.page "explore" }}
+  {{- /* the tag pages: the tag filters (ccs-front-bash fills them; Explore has them in the page) */}}
+  {{- if .Params.tag }}
   {{ partial "marker.html" "filters" }}
   {{ partial "filters.html" (dict "active" (.Params.tag | default "")) }}
   {{ partial "marker.html" "/filters" }}

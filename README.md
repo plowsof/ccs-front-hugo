@@ -25,13 +25,14 @@ The pages and URLs are today's ccs-front's, so links keep working: `/`, `/ideas/
 
 | Marker | Where | Filled with |
 |---|---|---|
-| `<!-- ccs:list fr -->…<!-- /ccs:list fr -->` (`idea`, `fr`, `wip`, `cp`) | `explore.html`, the stage pages | one `parts/card-<stage>.html` per proposal, or `parts/empty.html` |
+| `<!-- ccs:list fr -->…<!-- /ccs:list fr -->` (`idea`, `fr`, `wip`, `cp`) | the stage pages, the tag page | one `parts/card-<stage>.html` per proposal, or `parts/empty.html` |
 | `<!-- ccs:donate -->…<!-- /ccs:donate -->` | funding-required proposal pages | `parts/donate.html`: raised, progress, and the Contribute dropdown |
 | `<!-- ccs:funded -->…<!-- /ccs:funded -->` | other proposal pages | `parts/funded.html` |
 | `<!-- ccs:milestones -->…<!-- /ccs:milestones -->` | proposal pages, Milestones tab | `parts/milestone-done.html` / `milestone-todo.html` per milestone |
 | `<!-- ccs:payouts -->…<!-- /ccs:payouts -->` | proposal pages, Payouts tab | `parts/payout.html` per payout |
-| `<!-- ccs:filters -->…<!-- /ccs:filters -->` | `explore.html`, the tag pages (sidebar) | `parts/filters.html` holding `parts/filter.html` per tag (All first), or nothing if no proposal has tags |
+| `<!-- ccs:filters -->…<!-- /ccs:filters -->` | Explore, the tag page (sidebar) | `parts/filters.html` holding `parts/filter.html` per tag (All first), or nothing if no proposal has tags |
 | `<!-- ccs:title -->…<!-- /ccs:title -->` | the tag page | the tag's name |
+| `<!-- ccs:count fr -->…<!-- /ccs:count fr -->` (`idea`, `fr`, `wip`, `cp`) | the stage menu (stage and tag pages), Explore's stage cards | how many proposals the stage has |
 
 **Parts** (`public/parts/`) are fragments with `{{slot}}`s: `{{name}}`, `{{author}}`, `{{date}}`,
 `{{url}}`, `{{amount}}`, `{{raised}}`, `{{percentage}}`, `{{contributors}}`, `{{milestones}}`,

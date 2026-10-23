@@ -1,0 +1,6 @@
+{{- /* A stage's number of proposals, between markers ccs-front-bash fills ("count fr"...);
+   here the example data's. */ -}}
+{{- $d := hugo.Data.example -}}
+{{- $n := len (index (dict "idea" (index $d.proposals 0).proposals "fr" (index $d.proposals 1).proposals "wip" (index $d.proposals 2).proposals "cp" (index (index $d "completed-proposals") 0).proposals) .) -}}
+<span class="count">{{ partial "marker.html" (printf "count %s" .) }}{{ $n }}{{ partial "marker.html" (printf "/count %s" .) }}</span>
+{{- /**/ -}}
