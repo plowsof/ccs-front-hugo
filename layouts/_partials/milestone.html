@@ -1,1 +1,6 @@
-<li{{ if .done }} class="done"{{ end }}><span class="mark"></span><span>{{ .name }}</span></li>
+<div class="milestone{{ if .done }} done{{ end }}">
+  <span class="mark" aria-hidden="true"></span>
+  <h3>{{ .name }}</h3>
+  <p><span class="label">To be paid:</span> {{ .funds }}</p>
+  <p><span class="label">Completion date:</span> {{ .done | default "not yet" }}</p>
+</div>

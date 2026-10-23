@@ -292,3 +292,51 @@ progress::-moz-progress-bar { background: var(--stage, var(--orange)); }
 }
 
 .box + .box { margin-top: 16px; }
+
+/* proposal page: the Contribute dropdown (a <details>, no JavaScript) */
+.head .progress-label { text-align: left; }
+.contribute { margin-top: 18px; }
+.contribute summary { list-style: none; cursor: pointer; display: inline-block; }
+.contribute summary::-webkit-details-marker { display: none; }
+.contribute summary::after { content: " ▾"; }
+.contribute[open] summary::after { content: " ▴"; }
+.contribute ol { margin: 18px 0 0; padding-left: 1.2em; max-width: 34rem; }
+.contribute li { margin: 0 0 10px; }
+.contribute .qr { margin: 10px 0; }
+
+/* tabs: radio buttons, the checked one's panel is shown (no JavaScript) */
+.tabs { display: flex; flex-wrap: wrap; margin-top: 28px; }
+.tabs > input { position: absolute; opacity: 0; pointer-events: none; }
+.tabs > label {
+  padding: 10px 20px;
+  font-weight: 600;
+  color: var(--muted);
+  border-bottom: 3px solid var(--line);
+  cursor: pointer;
+}
+.tabs > label:hover { color: var(--heading); }
+.tabs > input:checked + label { color: var(--orange); border-bottom-color: var(--orange); }
+.tabs > input:focus-visible + label { outline: 2px solid var(--orange); outline-offset: 2px; }
+.tabs .panel { display: none; order: 1; width: 100%; padding-top: 24px; }
+#tab-proposal:checked ~ .panel-proposal,
+#tab-milestones:checked ~ .panel-milestones,
+#tab-payouts:checked ~ .panel-payouts { display: block; }
+
+.milestone, .payout {
+  position: relative;
+  background: var(--card);
+  border-radius: var(--radius);
+  padding: 16px 20px 14px 52px;
+  margin-bottom: 12px;
+}
+.payout { padding-left: 20px; }
+.milestone h3 { margin: 0 0 6px; font-size: 1.02rem; color: var(--heading); }
+.milestone p, .payout p { margin: 2px 0; color: var(--muted); }
+.milestone .label, .payout .label { font-weight: 600; color: var(--text); }
+.milestone .mark {
+  position: absolute; left: 20px; top: 19px;
+  width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid var(--wip);
+}
+.milestone.done .mark { background: var(--wip); }
+.tabs::after { content: ""; flex: 1; align-self: flex-end; border-bottom: 3px solid var(--line); }

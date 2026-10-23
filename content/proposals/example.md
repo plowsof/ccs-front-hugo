@@ -10,15 +10,19 @@ v:
   contributors: 25
   amount: "75"
   raised: "60"
+  milestones: 3
+  done: 0
   percentage: 80
   pending_note: " · 1.5 XMR pending"
   address: "80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007"
   gitlab_url: "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/2"
 milestone_list:
   - name: "Milestone 1: the first release"
-    done: true
+    funds: "33% (25 XMR)"
   - name: "Milestone 2: testing and fixes"
+    funds: "33% (25 XMR)"
   - name: "Milestone 3: documentation"
+    funds: "33% (25 XMR)"
 ---
 
 ## What

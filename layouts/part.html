@@ -4,7 +4,8 @@
 {{- if eq $p "card" }}{{ partial "card.html" (dict "s" .Params.s "v" $v) }}
 {{- else if eq $p "donate" }}{{ partial "donate.html" $v }}
 {{- else if eq $p "funded" }}{{ partial "funded.html" $v }}
-{{- else if eq $p "milestone" }}{{ partial "milestone.html" (dict "name" "{{name}}" "done" .Params.done) }}
+{{- else if eq $p "milestone" }}{{ partial "milestone.html" (dict "name" "{{name}}" "funds" "{{funds}}" "done" (cond (.Params.done | default false) "{{date}}" "")) }}
+{{- else if eq $p "payout" }}{{ partial "payout.html" (dict "amount" "{{amount}}" "date" "{{date}}") }}
 {{- else if eq $p "segment" }}<span{{ if .Params.done }} class="done"{{ end }}></span>
 {{- else if eq $p "empty" }}<p class="empty">Nothing here right now.</p>
 {{- end }}

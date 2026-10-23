@@ -26,21 +26,24 @@ The pages and URLs are today's ccs-front's, so links keep working: `/`, `/ideas/
 | Marker | Where | Filled with |
 |---|---|---|
 | `<!-- ccs:list fr -->…<!-- /ccs:list fr -->` (`idea`, `fr`, `wip`, `cp`) | `explore.html`, the stage pages | one `parts/card-<stage>.html` per proposal, or `parts/empty.html` |
-| `<!-- ccs:donate -->…<!-- /ccs:donate -->` | funding-required proposal pages | `parts/donate.html` |
+| `<!-- ccs:donate -->…<!-- /ccs:donate -->` | funding-required proposal pages | `parts/donate.html`: raised, progress, and the Contribute dropdown |
 | `<!-- ccs:funded -->…<!-- /ccs:funded -->` | other proposal pages | `parts/funded.html` |
-| `<!-- ccs:milestones -->…<!-- /ccs:milestones -->` | proposal pages | `parts/milestone-done.html` / `milestone-todo.html` in an `<ol class="milestones">` |
+| `<!-- ccs:milestones -->…<!-- /ccs:milestones -->` | proposal pages, Milestones tab | `parts/milestone-done.html` / `milestone-todo.html` per milestone |
+| `<!-- ccs:payouts -->…<!-- /ccs:payouts -->` | proposal pages, Payouts tab | `parts/payout.html` per payout |
 
 **Parts** (`public/parts/`) are fragments with `{{slot}}`s: `{{name}}`, `{{author}}`, `{{date}}`,
 `{{url}}`, `{{amount}}`, `{{raised}}`, `{{percentage}}`, `{{contributors}}`, `{{milestones}}`,
 `{{done}}`, `{{segments}}` (made of `segment-done.html` / `segment-todo.html`), `{{address}}`,
-`{{pending_note}}`, `{{gitlab_url}}`. Each is replaced with its value HTML-escaped once
+`{{pending_note}}`, `{{gitlab_url}}`, `{{funds}}` (a milestone's), `{{date}}` (a milestone's
+completion or a payout's). Each is replaced with its value HTML-escaped once
 (ccs-bash's JSON is already escaped). The exceptions are `{{qr}}`, an SVG from `qrencode -t SVG`,
 and `{{body}}`, the proposal's Markdown rendered with everything escaped first. qrencode's
 SVG uses `style=` attributes, which the CSP below blocks: they become `stroke=`/`fill=`
 attributes first (as in `static/assets/example-qr.svg`).
 
 **Proposal pages** are `parts/proposal-fr.html`, `proposal-wip.html` and `proposal-cp.html` with
-their slots filled, `{{milestones_list}}` being the milestone parts. Like the proposal pages they become, they sit one folder down, so their
+their slots filled, `{{milestones_list}}` and `{{payouts_list}}` being the milestone and
+payout parts. Like the proposal pages they become, they sit one folder down, so their
 links work unchanged. `parts/` is not pushed to the web server.
 
 The parts are rendered from the same templates as the example pages, so they can't drift apart.
@@ -60,3 +63,6 @@ The parts are rendered from the same templates as the example pages, so they can
 - Colours, sizes and font from the new getmonero.org (beta.getmonero.org).
 - "What is the CCS" and "How to submit" text and screenshots from ccs-front (BSD-3, monero-project).
 - DM Sans: SIL Open Font License, `static/assets/fonts/OFL.txt`.
+
+The Contribute dropdown is a `<details>`, the Proposal / Milestones / Payouts tabs are radio
+buttons shown by CSS: like today's ccs-front, and with no JavaScript.
