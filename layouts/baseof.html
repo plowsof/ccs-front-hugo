@@ -15,9 +15,10 @@
 {{- /* the menu button's state: before everything it opens (the drawer, the backdrop) */}}
 <input type="checkbox" id="nav-toggle" class="nav-toggle">
 <header class="site-header">
-  <a class="brand" href="/"><svg aria-hidden="true"><use href="{{ partial "icons-url.html" }}#logo"></use></svg>Community Crowdfunding System</a>
-  {{- /* narrow screens: the menu button opens the drawer (sidebar.html) */}}
-  <label for="nav-toggle" class="nav-button" aria-label="Menu">{{ partial "icon.html" "menu" }}</label>
+  {{- /* narrow screens: the menu button, on the left like the drawer it opens (sidebar.html),
+     with its name in words: a bare ☰ is easy to miss */}}
+  <label for="nav-toggle" class="nav-button">{{ partial "icon.html" "menu" }}<span>Menu</span></label>
+  <a class="brand" href="/" aria-label="Community Crowdfunding System, home"><svg aria-hidden="true"><use href="{{ partial "icons-url.html" }}#logo"></use></svg><span class="brand-long">Community Crowdfunding System</span><span class="brand-short" aria-hidden="true">CCS</span></a>
   <nav class="site-nav" aria-label="Site">
     {{- partial "site-links.html" . }}
   </nav>
