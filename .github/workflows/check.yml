@@ -10,6 +10,9 @@ concurrency:
   cancel-in-progress: true
 permissions:
   contents: read
+defaults:
+  run:
+    shell: bash   # -eo pipefail: a failed build piped into tee fails the step
 jobs:
   zip:
     runs-on: ubuntu-24.04
