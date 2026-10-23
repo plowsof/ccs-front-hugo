@@ -7,6 +7,9 @@ on:
     tags: ['v*']
 permissions:
   contents: write   # the GitHub release
+defaults:
+  run:
+    shell: bash   # -eo pipefail: a failed build piped into tee fails the step
 jobs:
   zip:
     runs-on: ubuntu-24.04
