@@ -366,3 +366,14 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 /* the stage label on a card only where stages are mixed (Explore); on a stage's own page it repeats the page */
 body:not(.page-explore) .list .card .tag { display: none; }
 body:not(.page-explore) .list .card h3 { margin-right: 0; }
+
+/* tags: labels on cards, links on a proposal page, filters on Explore */
+.labels { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; }
+.labels:empty { display: none; }
+.label { font-size: 0.8rem; padding: 2px 10px; border-radius: 999px; border: 1px solid var(--line); color: var(--muted); text-decoration: none; }
+a.label:hover { border-color: var(--orange); color: var(--orange); }
+.filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 14px 0 4px; }
+.filter { display: inline-flex; align-items: center; gap: 6px; padding: 5px 12px; border-radius: 999px; border: 1px solid var(--line); background: var(--card); color: var(--text); text-decoration: none; font-size: 0.9rem; }
+.filter .count { color: var(--muted); font-size: 0.8rem; }
+.filter .count:empty { display: none; }
+.filter:hover, .filter.active { border-color: var(--orange); color: var(--orange); }

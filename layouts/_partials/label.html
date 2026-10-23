@@ -1,0 +1,4 @@
+{{- /* One tag of a proposal. On a card (the whole card is a link) a label; on a proposal page
+   a link to the tag's page. In the preview every tag page is the one example page. */ -}}
+{{- if .link }}<a class="label" {{ printf "href=%q" .href | safeHTMLAttr }}>{{ .tag }}</a>
+{{- else }}<span class="label">{{ .tag }}</span>{{ end -}}

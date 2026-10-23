@@ -1,0 +1,11 @@
+{{- /* The example proposals' tags (fr, wip, cp: ideas have none) -> [{tag, count}], most used
+   first. Only for the preview: on the server ccs-front-bash counts them. */ -}}
+{{- $d := hugo.Data.example -}}
+{{- $n := dict -}}{{- $order := slice -}}
+{{- range slice (index $d.proposals 1).proposals (index $d.proposals 2).proposals (index (index $d "completed-proposals") 0).proposals }}{{ range . }}{{ range .tags }}
+  {{- if not (index $n .) }}{{ $order = $order | append . }}{{ end -}}
+  {{- $n = merge $n (dict . (add (index $n . | default 0) 1)) -}}
+{{- end }}{{ end }}{{ end -}}
+{{- $out := slice -}}
+{{- range $order }}{{ $out = $out | append (dict "tag" . "count" (index $n .)) }}{{ end -}}
+{{- return sort $out "count" "desc" -}}

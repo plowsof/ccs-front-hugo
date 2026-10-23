@@ -16,6 +16,7 @@ v:
   pending_note: " · 1.5 XMR pending"
   address: "80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007"
   gitlab_url: "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/2"
+tags: [Abandoned, Available to pick up]
 milestone_list:
   - name: "Milestone 1: the first release"
     funds: "33% (25 XMR)"
