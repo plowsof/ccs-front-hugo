@@ -1,2 +1,4 @@
-{{- /* An HTML comment ccs-front-bash finds; html/template would drop a literal one. */ -}}
-{{- printf "<!-- ccs:%s -->" . | safeHTML -}}
+{{- /* An HTML comment ccs-front-bash finds: "list fr" -> <!-- ccs:list fr -->, "/list fr" -> <!-- /ccs:list fr -->.
+   (html/template would drop a literal one.) */ -}}
+{{- if strings.HasPrefix . "/" }}{{ printf "<!-- /ccs:%s -->" (strings.TrimPrefix "/" .) | safeHTML }}
+{{- else }}{{ printf "<!-- ccs:%s -->" . | safeHTML }}{{ end -}}
