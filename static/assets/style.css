@@ -361,3 +361,7 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 .milestone.done .mark { background: var(--wip); }
 .tabs::after { content: ""; flex: 1; align-self: flex-end; border-bottom: 3px solid var(--line); }
 .site-footer .general-fund p a { display: inline; color: var(--orange); text-decoration: underline; }
+
+/* the stage label on a card only where stages are mixed (Explore); on a stage's own page it repeats the page */
+body:not(.page-explore) .list .card .tag { display: none; }
+body:not(.page-explore) .list .card h3 { margin-right: 0; }
