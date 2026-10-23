@@ -30,9 +30,10 @@ The pages and URLs are today's ccs-front's, so links keep working: `/`, `/ideas/
 | `<!-- ccs:funded -->…<!-- /ccs:funded -->` | other proposal pages | `parts/funded.html` |
 | `<!-- ccs:milestones -->…<!-- /ccs:milestones -->` | proposal pages, Milestones tab | `parts/milestone-done.html` / `milestone-todo.html` per milestone |
 | `<!-- ccs:payouts -->…<!-- /ccs:payouts -->` | proposal pages, Payouts tab | `parts/payout.html` per payout |
-| `<!-- ccs:filters -->…<!-- /ccs:filters -->` | Explore, the tag page (sidebar) | `parts/filters.html` holding `parts/filter.html` per tag (All first), or nothing if no proposal has tags |
+| `<!-- ccs:filters -->…<!-- /ccs:filters -->` | every page's sidebar (proposal pages too) | `parts/filters.html` holding `parts/filter.html` per tag (All first), or nothing if no proposal has tags |
 | `<!-- ccs:title -->…<!-- /ccs:title -->` | the tag page | the tag's name |
-| `<!-- ccs:count fr -->…<!-- /ccs:count fr -->` (`idea`, `fr`, `wip`, `cp`) | the stage menu (stage and tag pages), Explore's stage cards | how many proposals the stage has |
+| `<!-- ccs:count fr -->…<!-- /ccs:count fr -->` (`idea`, `fr`, `wip`, `cp`) | every page's sidebar (proposal pages too) | how many proposals the stage has |
+| `<!-- ccs:number fr -->…<!-- /ccs:number fr -->` (`idea`, `fr`, `wip`, `cp`) | the home page's stage cards | the same number (a marker is used once a page) |
 
 **Parts** (`public/parts/`) are fragments with `{{slot}}`s: `{{name}}`, `{{author}}`, `{{date}}`,
 `{{url}}`, `{{amount}}`, `{{raised}}`, `{{percentage}}`, `{{contributors}}`, `{{milestones}}`,
@@ -50,9 +51,14 @@ merge request (ccs-bash's `upvotes`/`downvotes`, from GitLab or Forgejo).
 **Tags** (the front matter's `tags:`, in ccs-bash's JSON as `tags`): `{{tags}}` on a card is a
 `parts/label.html` per tag (plain labels: the card is one link), `{{tag_links}}` on a proposal
 page a `parts/label-link.html` per tag (`{{tag}}`, `{{href}}`). `filter.html` has `{{tag}}`,
-`{{href}}`, `{{count}}` (empty for All) and `{{active}}` (" active" or empty). All three have
-`{{color}}`: `tag-0` to `tag-7` (the tag's colour, from its name) or `tag-all`. The filters
-(`parts/filters.html`, around `{{filters}}`) sit in the sidebar of Explore and the tag pages.
+`{{href}}`, `{{count}}` and `{{active}}` (" active" or empty). All three have `{{color}}`:
+`tag-0` to `tag-7` (the tag's colour, from its name). The filters (`parts/filters.html`,
+around `{{filters}}`) sit in the sidebar.
+
+**The sidebar** (stages with counts, tags) is on every page, once: the left column of the stage
+and tag pages on a wide screen, and on a phone the drawer the menu button opens from the left
+(a checkbox and CSS, no JavaScript), with the site's links. There is no Explore page: the
+header's "Proposals" goes to Funding Required.
 `explore/tag/example/index.html` is the tag page: copied to `explore/tag/<tag>/` for each tag
 (the same depth, so its links work), with its lists, filters and title filled; it is not
 published itself. In the preview every tag links to it (it shows "Abandoned").
