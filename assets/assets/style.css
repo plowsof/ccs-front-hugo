@@ -59,7 +59,23 @@ a { color: var(--orange); }
 a:hover { color: var(--orange-dark); }
 main { flex: 1; }
 
-.icon { width: 1.1em; height: 1.1em; vertical-align: -0.17em; flex: none; }
+/* Icons: PNG masks (tools/icons-png.sh), filled with the text's colour; 1x, 2x or 3x, whichever
+   the screen needs. No SVG anywhere: Tor Browser at "Safest" doesn't draw it. */
+.icon { display: inline-block; position: relative; width: 1.1em; height: 1.1em; vertical-align: -0.17em; flex: none; }
+.icon::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: currentColor;
+  mask: no-repeat center / contain;
+}
+@media (forced-colors: active) { .icon::before { forced-color-adjust: none; background: CanvasText; } }
+{{- range $name := slice "back" "box" "bulb" "calendar" "coins" "external" "gear" "hand-coins" "menu" "thumbs-down" "thumbs-up" "user" "users" }}
+.icon-{{ $name }}::before {
+  mask-image: url({{ partial "icons-url.html" (print $name "-1x") | strings.TrimPrefix "/assets/" }});
+  mask-image: image-set({{ range $i, $x := slice "1x" "2x" "3x" }}{{ if $i }}, {{ end }}url({{ partial "icons-url.html" (print $name "-" $x) | strings.TrimPrefix "/assets/" }}) {{ $x }}{{ end }});
+}
+{{- end }}
 
 /* header */
 .site-header {
@@ -84,7 +100,7 @@ main { flex: 1; }
   text-decoration: none;
   font-weight: 700;
 }
-.brand svg { width: 28px; height: 28px; }
+.brand img { width: 28px; height: 28px; }
 .brand-short { display: none; }
 .site-nav { display: flex; gap: 28px; flex-wrap: wrap; }
 .nav-toggle { position: absolute; opacity: 0; pointer-events: none; }
@@ -176,6 +192,7 @@ main { flex: 1; }
 }
 .side a.back { display: inline-flex; align-items: center; gap: 10px; color: var(--muted); text-decoration: none; margin: 8px 0 14px; }
 .side a.back .icon { width: 28px; height: 28px; padding: 6px; border-radius: 50%; background: var(--card); }
+.side a.back .icon::before { inset: 6px; }
 .side a.back:hover { color: var(--orange); }
 .side .stage-menu { display: grid; gap: 8px; }
 .side .stage-menu a {
@@ -327,7 +344,7 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
   /* a narrow phone: the menu button and the logo with "CCS" fit on one line */
   .brand-long { display: none; }
   .brand-short { display: inline; }
-  .brand svg { width: 24px; height: 24px; }
+  .brand img { width: 24px; height: 24px; }
   .stage-grid { grid-template-columns: 1fr; }
   .card h3, .proposal .head h1 { margin-right: 0; margin-top: 18px; }
 }

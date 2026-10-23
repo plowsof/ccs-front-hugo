@@ -10,9 +10,10 @@
 <title>{{ if .IsHome }}Monero Community Crowdfunding System{{ else if eq .Kind "404" }}Page not found · Monero CCS{{ else }}{{ .Title }} · Monero CCS{{ end }}</title>
 {{- /* named by its hash (assets/style.<sha256>.css): a changed stylesheet is a new file, so no
    browser keeps showing an old one; beside fonts/, so its url()s still work */}}
-{{- $css := resources.Get "assets/style.css" | fingerprint "sha256" }}
+{{- $css := resources.Get "assets/style.css" | resources.ExecuteAsTemplate "assets/style.css" . | fingerprint "sha256" }}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-<link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="{{ partial "icons-url.html" "favicon-32" }}" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="{{ partial "icons-url.html" "favicon-180" }}">
 </head>
 <body class="page-{{ .Params.page | default "other" }}">
 {{- /* the menu button's state: before everything it opens (the drawer, the backdrop) */}}
@@ -21,7 +22,7 @@
   {{- /* narrow screens: the menu button, on the left like the drawer it opens (sidebar.html),
      with its name in words: a bare ☰ is easy to miss */}}
   <label for="nav-toggle" class="nav-button">{{ partial "icon.html" "menu" }}<span>Menu</span></label>
-  <a class="brand" href="/" aria-label="Community Crowdfunding System, home"><svg aria-hidden="true"><use href="{{ partial "icons-url.html" }}#logo"></use></svg><span class="brand-long">Community Crowdfunding System</span><span class="brand-short" aria-hidden="true">CCS</span></a>
+  <a class="brand" href="/" aria-label="Community Crowdfunding System, home"><img src="{{ partial "icons-url.html" "logo-1x" }}" srcset="{{ partial "icons-url.html" "logo-2x" }} 2x, {{ partial "icons-url.html" "logo-3x" }} 3x" width="28" height="28" alt=""><span class="brand-long">Community Crowdfunding System</span><span class="brand-short" aria-hidden="true">CCS</span></a>
   <nav class="site-nav" aria-label="Site">
     {{- partial "site-links.html" . }}
   </nav>
