@@ -103,6 +103,7 @@ main { flex: 1; }
 }
 .button.primary { background: var(--orange); color: #fff; }
 .button.primary:hover { background: var(--orange-dark); color: #fff; }
+.button.block { display: block; text-align: center; }
 
 /* home */
 .hero {
@@ -178,6 +179,7 @@ main { flex: 1; }
 }
 .side nav a .icon { color: var(--stage); }
 .side nav a:hover { border-color: var(--line); }
+.side hr { border: 0; border-top: 1px solid var(--line); margin: 16px 0; }
 
 /* the selected stage: each page's body says which one it is */
 .page-explore .tab-explore,
