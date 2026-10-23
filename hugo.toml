@@ -17,10 +17,3 @@ disableKinds = ["taxonomy", "term", "section", "rss", "sitemap", "robotstxt"]
   generalFund = "888tNkZrPN6JsEgekjMnABU4TBzc2Dt29EPAvkRxbANsAnjyPbb3iQ1YBRk1UXcdRsiKc9dhwMVgN5S9cQUiyoogDavup3H"
   submitIdea = "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/new"
 
-# The signed list of the wallet's donation subaddresses (ccs-front-bash's tools/): the list's
-# sha256 and the fingerprint of the throwaway key that signed it, from sign-subaddresses.sh,
-# with its public key as static/assets/subaddresses-key.asc. Set, ccs-front-bash refuses any
-# donation address not in that list and publishes the list; empty, there is no check.
-[params.subaddresses]
-  sha256 = ""
-  key = ""
