@@ -34,8 +34,8 @@ The key's fingerprint: `{{fingerprint}}`
 
 ## Or ask the wallet itself
 
-The CCS publishes its wallet's address and view key, so you can also ask a copy of the wallet
-whether an address is one of its own, without the list. A view key can't spend; it only shows
+The wallet's address and view key are public ({{wallet_source}}), so you can also ask a copy of
+the wallet whether an address is one of its own, without the list. A view key can't spend; it only shows
 what the wallet received.
 
 The wallet's address: `{{address}}`

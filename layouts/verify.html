@@ -7,7 +7,8 @@
   {{ partial "marker.html" "verify" }}
   {{ replace .Content "{{fingerprint}}" "0123 4567 89AB CDEF 0123  4567 89AB CDEF 0123 4567"
      | replaceRE `\{\{address\}\}` "9xExampleWalletAddress" | replaceRE `\{\{viewkey\}\}` "0123456789abcdef"
-     | replaceRE `\{\{network\}\}` " --testnet" | safeHTML }}
+     | replaceRE `\{\{network\}\}` " --testnet" | replaceRE `\{\{wallet_source\}\}` `<a href="#">where they were published</a>`
+     | safeHTML }}
   {{ partial "marker.html" "/verify" }}
 </div></article>
 {{ end }}
