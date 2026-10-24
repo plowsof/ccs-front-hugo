@@ -94,6 +94,8 @@ The parts are rendered from the same templates as the example pages, so they can
 - The piggy bank: from redsh4de/monero-ccs-site (`src/assets/funding-required.png`, branch
   `feat/landing-draft`), BSD-3, Copyright (c) 2026, SyntheticBird, `static/assets/piggy-LICENSE`.
 - The Monero symbol: monero-project/monero-site `img/favicons.svg` (BSD-3).
+- The General Fund's QR code (`static/assets/general-fund-qr.png`): monero-project/monero-site
+  `public/contributing/donate-monero.png` (BSD-3); it reads as `monero:` and the General Fund address.
 - Icons: [Lucide](https://lucide.dev) (lucide-static 1.47.0), ISC, `static/assets/icons-LICENSE`.
 - Colours, sizes and font from the new getmonero.org (beta.getmonero.org).
 - "What is the CCS" and "How to submit" text and screenshots from ccs-front (BSD-3, monero-project).
