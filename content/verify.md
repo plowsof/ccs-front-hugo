@@ -31,3 +31,33 @@ You can check it yourself, with nothing from this site but the files below:
    `1` means it is the wallet's. `0` means do not send: tell the CCS maintainers.
 
 The key's fingerprint: `{{fingerprint}}`
+
+## Or ask the wallet itself
+
+The CCS publishes its wallet's address and view key, so you can also ask a copy of the wallet
+whether an address is one of its own, without the list. A view key can't spend; it only shows
+what the wallet received.
+
+The wallet's address: `{{address}}`
+
+Its view key: `{{viewkey}}`
+
+With `monero-wallet-rpc` from the Monero CLI ([getmonero.org](https://www.getmonero.org/downloads/),
+check its hashes as the site explains), offline, in one terminal:
+
+```
+monero-wallet-rpc{{network}} --offline --wallet-dir ccs-check --rpc-bind-port 18088 --disable-rpc-login
+```
+
+and in another:
+
+```
+rpc() { curl -s http://127.0.0.1:18088/json_rpc -d "{\"jsonrpc\":\"2.0\",\"id\":0,\"method\":\"$1\",\"params\":$2}"; }
+rpc generate_from_keys '{"filename":"ccs","address":"{{address}}","viewkey":"{{viewkey}}","password":""}'
+rpc set_subaddress_lookahead '{"password":"","major_idx":1,"minor_idx":20000}'
+rpc get_address_index '{"address":"THE_ADDRESS"}'
+```
+
+`"index":{"major":0,"minor":…}` means it is the wallet's. `Address doesn't belong to the wallet`
+means do not send: tell the CCS maintainers. (The lookahead makes the copy look at its first
+20,000 subaddresses; a fresh one only looks at 200.) Delete the `ccs-check` folder when done.
