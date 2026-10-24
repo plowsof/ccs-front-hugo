@@ -19,13 +19,15 @@ src=$(mktemp -d)
 trap 'rm -rf "$src"' EXIT
 git -C "$repo" archive HEAD | tar -x -C "$src"
 
-# Only copies, so the host's BuildKit makes it; named by its ID, so new pins get a new builder.
+# Only copies, so the host's BuildKit makes it; named by its ID, so new pins get a new builder
+# and the same pins share one, across ccs-bash, ccs-front-bash and ccs-front-hugo (one copy of
+# the downloads and the cache, not three).
 docker buildx build -q --builder default --network none --pull=false "${contexts[@]}" \
-    --build-arg SOURCE_DATE_EPOCH=0 --output type=docker,name=ccs-front-hugo-builder,rewrite-timestamp=true \
+    --build-arg SOURCE_DATE_EPOCH=0 --output type=docker,name=stagex-buildkit,rewrite-timestamp=true \
     -f "$here/builder.Dockerfile" "$here" > /dev/null
-builder_id=$(docker image inspect ccs-front-hugo-builder --format '{{.Id}}')
-builder=ccs-front-hugo-builder-${builder_id:7:12}
-docker tag ccs-front-hugo-builder "$builder"
+builder_id=$(docker image inspect stagex-buildkit --format '{{.Id}}')
+builder=stagex-buildkit-${builder_id:7:12}
+docker tag stagex-buildkit "$builder"
 docker buildx inspect "$builder" > /dev/null 2>&1 \
     || docker buildx create --name "$builder" --driver docker-container --driver-opt image="$builder" > /dev/null
 
