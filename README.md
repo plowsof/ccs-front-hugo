@@ -53,7 +53,7 @@ says a file is the one locked in, not that it was good when it was; the 14 days 
 each of the 700 packages has its own publishers to trust. Here there are three programs, each
 rebuilt from source and signed by more than one person.
 
-Two things hold either way. Hugo isn't small inside: it compiles in about a hundred Go modules,
+Two things hold either way. Hugo isn't small inside: it compiles in 180 Go modules (its `go.mod` at v0.167.0),
 fixed by Hugo's `go.sum` and built by StageX, but trusted all the same. And the donation addresses
 don't depend on the build: the gate checks each one against the signed list, whatever made the
 page. What a bad build tool could still do is anything else, such as add a script or change links.
