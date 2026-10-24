@@ -239,8 +239,11 @@ main { flex: 1; }
   box-shadow: var(--shadow);
   color: var(--text);
   text-decoration: none;
+  transition: box-shadow 0.15s ease;
 }
-.card:hover { color: var(--text); outline: 1px solid var(--line); }
+/* as ccs.getmonero.org's proposal cards: a soft glow on hover (theirs 0 0 40px rgba(50,50,93,.4)) */
+.card:hover, .card:focus-visible { color: var(--text); box-shadow: 0 0 20px light-dark(rgb(50 50 93 / 0.35), rgb(255 255 255 / 0.14)); }
+@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
 .card h3 { color: var(--heading); margin: 0 110px 10px 0; font-size: 1.12rem; }
 .tag {
   position: absolute;

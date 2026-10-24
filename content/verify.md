@@ -5,10 +5,8 @@ layout: verify
 ---
 
 Every donation address on this site is one of the CCS wallet's subaddresses, taken from a
-list made once, offline, from a view-only copy of the wallet, and signed with a key made
-only for that. The secret key was destroyed right after signing, so no other list can ever
-carry that signature. The site is checked against the list each time it is made: an address
-that is not in it is never shown.
+list made once, offline, from a view-only copy of the wallet, and signed. The site is checked
+against the list each time it is made: an address that is not in it is never shown.
 
 You can check it yourself, with nothing from this site but the files below:
 
