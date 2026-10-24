@@ -43,7 +43,6 @@ Compared with the Astro build of the [getmonero.org beta](https://github.com/mon
 | Who made the build tools | StageX, from source; each image signed by two or more maintainers and pinned by digest | each package's authors on npm; some ship ready-made binaries (`sharp`, `canvaskit-wasm`) |
 | Network during the build | none (`--network none`) | `pnpm install` downloads from npm |
 | The same commit gives | the same zip, byte for byte, checked on two machines in CI and attested in [ccs-sigs](https://github.com/plowsof/ccs-sigs) | a site, not compared between builds |
-| JavaScript sent to visitors | none | some |
 
 The beta does have hardening: a lockfile with a hash for every package, `pnpm install
 --frozen-lockfile` in CI so only those exact versions install, and pnpm 10 blocking install
