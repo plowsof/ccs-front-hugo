@@ -40,8 +40,8 @@ difference is what the build has to trust:
 
 | | ccs-front-hugo | the Astro beta |
 |---|---|---|
-| The build tools | Hugo, busybox and zip: three programs | Node and pnpm, then 812 npm packages in the lockfile, about 700 of them installed on a Linux machine (about 300 for the site, the rest lint and format tools) |
-| Who built the programs that run | StageX, from source, reproducibly | each package's own project; some ship ready-made binaries: `esbuild`, `sharp`/libvips, `lightningcss`, `rolldown`, Astro's compiler |
+| The build tools | Hugo, busybox and zip: three programs; Hugo compiles in 180 Go modules (its `go.mod` at v0.167.0) | Node and pnpm, then 812 npm packages in the lockfile, about 700 of them installed on a Linux machine (about 300 for the site, the rest lint and format tools) |
+| Who built the programs that run | StageX, from source, reproducibly, the 180 Go modules included | each package's own project; some ship ready-made binaries: `esbuild`, `sharp`/libvips, `lightningcss`, `rolldown`, Astro's compiler |
 | How a download is checked | pinned by digest, and signed by two or more StageX maintainers who each rebuilt it | a hash per package in the lockfile: the same file as when the lockfile was last updated |
 | The same commit gives the same output | checked in CI, and attested by independent builders in [ccs-sigs](https://github.com/plowsof/ccs-sigs) | checked in CI (two runs, hashes compared) |
 
@@ -50,11 +50,11 @@ version newer than 14 days (`minimumReleaseAge`), no downgrades of a package's t
 (`trustPolicy: no-downgrade`), no dependencies from git or URLs (`blockExoticSubdeps`), and install
 scripts off except `lefthook`'s. They limit when and how a package can change. A hash still only
 says a file is the one locked in, not that it was good when it was; the 14 days narrow that, and
-each of the 700 packages has its own publishers to trust. Here there are three programs, each
-rebuilt from source and signed by more than one person.
+each of the 700 packages has its own publishers to trust. Here there are three programs and
+Hugo's 180 Go modules, all built from source, and each program signed by more than one person.
 
-Two things hold either way. Hugo isn't small inside: it compiles in 180 Go modules (its `go.mod` at v0.167.0),
-fixed by Hugo's `go.sum` and built by StageX, but trusted all the same. And the donation addresses
+Two things hold either way. Those 180 Go modules are fewer than 700 packages, but still code to
+trust. And the donation addresses
 don't depend on the build: the gate checks each one against the signed list, whatever made the
 page. What a bad build tool could still do is anything else, such as add a script or change links.
 
