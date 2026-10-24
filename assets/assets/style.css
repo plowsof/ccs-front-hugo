@@ -296,9 +296,13 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 .donate .raised strong { font-size: 1.3rem; }
 .donate ol { padding-left: 1.2em; margin: 16px 0 0; }
 .donate li { margin: 0 0 10px; }
+/* Donate: the intro and the box in one centred column */
+.donate-page { max-width: 560px; margin-inline: auto; }
+.donate-page .body { text-align: center; }
+.donate-page .box { margin-top: 24px; }
 .qr { display: block; width: 190px; margin: 8px auto; background: #fff; padding: 8px; border-radius: 8px; }
 .qr svg, .qr img { display: block; width: 100%; height: auto; }
-.address { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.78rem; overflow-wrap: anywhere; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+.address { user-select: all; cursor: text; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.78rem; overflow-wrap: anywhere; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
 .pending { color: var(--muted); font-size: 0.9rem; }
 
 .milestones { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
@@ -313,7 +317,7 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 .general-fund h2 { margin: 0 0 10px; font-size: 1.25rem; color: var(--heading); }
 .general-fund p { color: var(--muted); }
 .general-fund .qr { width: 150px; margin: 16px auto; }
-.general-fund .address { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.8rem; overflow-wrap: anywhere; color: var(--text); }
+.general-fund .address { user-select: all; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.8rem; overflow-wrap: anywhere; color: var(--text); }
 .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 .site-footer a { color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .site-footer a:hover { color: var(--orange); }
