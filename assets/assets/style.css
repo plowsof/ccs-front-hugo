@@ -303,6 +303,10 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 .donate-page .box { margin-top: 24px; padding: 28px 32px; }
 .donate-page .qr { width: 200px; margin: 12px 0; }
 .donate-page .address { font-size: 1rem; font-weight: 600; padding: 16px 18px; margin-top: 8px; }
+@media (max-width: 520px) {
+  .donate-page .box { padding: 20px 14px; }
+  .donate-page .address { font-size: 0.85rem; padding: 12px; }
+}
 .qr { display: block; width: 190px; margin: 8px auto; background: #fff; padding: 8px; border-radius: 8px; }
 .qr svg, .qr img { display: block; width: 100%; height: auto; }
 .address { user-select: all; cursor: text; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.78rem; overflow-wrap: anywhere; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
