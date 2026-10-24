@@ -296,9 +296,20 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 .donate .raised strong { font-size: 1.3rem; }
 .donate ol { padding-left: 1.2em; margin: 16px 0 0; }
 .donate li { margin: 0 0 10px; }
+/* Donate: the page is only this, so it takes the width, as the original ccs.getmonero.org's:
+   the title centred, then one wide box with the QR code and a large address */
+.donate-page { max-width: 900px; margin-inline: auto; }
+.donate-page h1 { text-align: center; }
+.donate-page .box { margin-top: 24px; padding: 28px 32px; }
+.donate-page .qr { width: 200px; margin: 12px 0; }
+.donate-page .address { font-size: 1rem; font-weight: 600; padding: 16px 18px; margin-top: 8px; }
+@media (max-width: 520px) {
+  .donate-page .box { padding: 20px 14px; }
+  .donate-page .address { font-size: 0.85rem; padding: 12px; }
+}
 .qr { display: block; width: 190px; margin: 8px auto; background: #fff; padding: 8px; border-radius: 8px; }
 .qr svg, .qr img { display: block; width: 100%; height: auto; }
-.address { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.78rem; overflow-wrap: anywhere; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+.address { user-select: all; cursor: text; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.78rem; overflow-wrap: anywhere; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
 .pending { color: var(--muted); font-size: 0.9rem; }
 
 .milestones { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
@@ -309,10 +320,11 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 /* footer */
 .site-footer { background: var(--footer); padding: 40px 16px 30px; text-align: center; }
 .general-fund { max-width: 640px; margin: 0 auto 28px; }
+.site-footer > .footer-links:first-child { border-top: 0; padding-top: 0; }   /* Donate: no General Fund above */
 .general-fund h2 { margin: 0 0 10px; font-size: 1.25rem; color: var(--heading); }
 .general-fund p { color: var(--muted); }
 .general-fund .qr { width: 150px; margin: 16px auto; }
-.general-fund .address { font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.8rem; overflow-wrap: anywhere; color: var(--text); }
+.general-fund .address { user-select: all; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.8rem; overflow-wrap: anywhere; color: var(--text); }
 .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 .site-footer a { color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .site-footer a:hover { color: var(--orange); }
