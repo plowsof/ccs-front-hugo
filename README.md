@@ -34,23 +34,29 @@ machine as the original (`unzip` it into `/opt/ccs-front-hugo/public`).
 ## Why Hugo
 
 Both this design and the Astro build of the [getmonero.org beta](https://github.com/monero-project/monero-site/tree/beta)
-(its `beta` branch at `a21c9a2`, October 2026) make plain static files, build offline, and
-check in CI that two builds give the same archive. The difference is what the build has to trust:
+(its `beta` branch at `a21c9a2`, October 2026) make plain static files, download what they need
+first and then build offline, and check in CI that two builds give the same archive. The
+difference is what the build has to trust:
 
 | | ccs-front-hugo | the Astro beta |
 |---|---|---|
 | The build tools | Hugo, busybox and zip: three programs | Node and pnpm, then 812 npm packages in the lockfile, about 700 of them installed on a Linux machine (about 300 for the site, the rest lint and format tools) |
-| Where they come from | StageX builds each from source; every image is pinned by digest and signed by two or more StageX maintainers, checked each build | npm, each package published by its own authors; Node from `setup-node`. Some ship ready-made binaries: `esbuild`, `sharp`/libvips, `lightningcss`, `rolldown`, Astro's compiler |
-| Network | none for the whole build (`--network none`) | `pnpm install` downloads; `astro build` then runs offline |
+| Who built the programs that run | StageX, from source, reproducibly | each package's own project; some ship ready-made binaries: `esbuild`, `sharp`/libvips, `lightningcss`, `rolldown`, Astro's compiler |
+| How a download is checked | pinned by digest, and signed by two or more StageX maintainers who each rebuilt it | a hash per package in the lockfile: the same file as when the lockfile was last updated |
 | The same commit gives the same output | checked in CI, and attested by independent builders in [ccs-sigs](https://github.com/plowsof/ccs-sigs) | checked in CI (two runs, hashes compared) |
 
-The beta's pnpm settings are good hardening against a bad npm release: a hash for every package
-in the lockfile, `--frozen-lockfile`, no version newer than 14 days (`minimumReleaseAge`), no
-downgrades of a package's trust level (`trustPolicy: no-downgrade`), no dependencies from git or
-URLs (`blockExoticSubdeps`), and install scripts off except `lefthook`'s. They limit when and how
-a package can change. They can't make the 700 packages, or the people who can publish them,
-trustworthy, and those are what a supply-chain attack goes after. Here there are three programs
-to trust, built from source and signed.
+The beta's pnpm settings are good hardening against a bad npm release: `--frozen-lockfile`, no
+version newer than 14 days (`minimumReleaseAge`), no downgrades of a package's trust level
+(`trustPolicy: no-downgrade`), no dependencies from git or URLs (`blockExoticSubdeps`), and install
+scripts off except `lefthook`'s. They limit when and how a package can change. A hash still only
+says a file is the one locked in, not that it was good when it was; the 14 days narrow that, and
+each of the 700 packages has its own publishers to trust. Here there are three programs, each
+rebuilt from source and signed by more than one person.
+
+Two things hold either way. Hugo isn't small inside: it compiles in about a hundred Go modules,
+fixed by Hugo's `go.sum` and built by StageX, but trusted all the same. And the donation addresses
+don't depend on the build: the gate checks each one against the signed list, whatever made the
+page. What a bad build tool could still do is anything else, such as add a script or change links.
 
 Astro is a fair choice for getmonero.org, which needs translations and generated images. The CCS
 pages are a few templates filled with data, which Hugo does without anything else.
