@@ -1,5 +1,7 @@
 # ccs-front-hugo
 
+[![check](https://github.com/plowsof/ccs-front-hugo/actions/workflows/check.yml/badge.svg)](https://github.com/plowsof/ccs-front-hugo/actions/workflows/check.yml) [![release](https://github.com/plowsof/ccs-front-hugo/actions/workflows/release.yml/badge.svg)](https://github.com/plowsof/ccs-front-hugo/actions/workflows/release.yml)
+
 The design of the Monero CCS site as static HTML, built with [Hugo](https://gohugo.io).
 No JavaScript, nothing loaded from other sites, and light or dark following the OS setting.
 
