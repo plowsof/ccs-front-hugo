@@ -12,6 +12,7 @@ The CCS utilizes git, and Monero's Gitlab instance for proposal tracking. A quic
 - [Quickstart Guide](#quickstart-guide)
 - [Step-by-step Instructions](#step-by-step-instructions)
 - [Example Proposal](#example-proposal-front-matter)
+- [Adding images](#adding-images-optional)
 - [Editing or Amending a Proposal](#editing-or-amending-a-proposal)
 
 ## Quickstart Guide
@@ -45,6 +46,7 @@ payouts:
 ```
 
 5. Underneath the front matter, write the rest of your proposal. Be sure to include what the proposal is about, who will be completing it, why it is important for the community, the milestones and projected timeline, and an expiration date for your proposal.
+   Images: upload them to `images/<your file's name>/` in the same branch and show them with `![…](images/<name>/<file>)` ([details](#adding-images-optional)).
 6. Save, commit, and make a Merge Request to the repo. Your MR title must be descriptive and relevant to your proposal. The MR description should be copy/pasted from the proposal contents for easy viewing (front matter excluded).
 7. You're done. Go start letting people know about your proposal.
 
@@ -150,6 +152,16 @@ NOW you can put your proposal beneath the front matter (underneath the last thre
 It is recommended that after your proposal is written, you copy and paste it (minus the front matter from step 4) and paste it into a notepad. This will be used in step 6.
 
 After all of this is done, click the green Commit Changes button at the bottom.
+
+### Adding images (optional)
+
+Images go in your merge request as files, next to your proposal:
+
+1. In the same branch, upload each image to `images/<your file's name without .md>/`, e.g. `images/my-proposal/chart.png` for `my-proposal.md`. PNG, JPEG or GIF, up to 2 MB each, 10 at most.
+2. Show it in your proposal where it belongs: `![The milestones as a chart](images/my-proposal/chart.png)`. Every image you upload must be shown, and every image you show must be uploaded.
+3. Put the same line in the merge request's description. It shows there only after the merge; to see it before, link the file on your branch instead: `![The milestones as a chart](https://…/raw/branch/<your-branch>/images/my-proposal/chart.png)`.
+
+Images from other websites are shown as links, not pictures.
 
 ### 6. Make a Merge Request
 
