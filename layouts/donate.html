@@ -1,6 +1,6 @@
 {{ define "main" }}
-<article class="proposal">
-  <div class="columns">
+{{- /* one centred column: the page is only this, so no side box */}}
+<article class="proposal donate-page">
     <div class="body">
       <h1>{{ .Title }}</h1>
       <p>By donating to the following Monero address (the General Fund), you are supporting the
@@ -17,6 +17,5 @@
         <li>Send. Thank you!</li>
       </ol>
     </section>
-  </div>
 </article>
 {{ end }}
