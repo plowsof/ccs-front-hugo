@@ -70,7 +70,7 @@ main { flex: 1; }
   mask: no-repeat center / contain;
 }
 @media (forced-colors: active) { .icon::before { forced-color-adjust: none; background: CanvasText; } }
-{{- range $name := slice "back" "box" "bulb" "calendar" "coins" "external" "gear" "hand-coins" "menu" "thumbs-down" "thumbs-up" "user" "users" }}
+{{- range $name := slice "back" "box" "bulb" "calendar" "coins" "contrast" "external" "gear" "hand-coins" "menu" "moon" "sun" "thumbs-down" "thumbs-up" "user" "users" }}
 .icon-{{ $name }}::before {
   mask-image: url({{ partial "icons-url.html" (print $name "-1x") | strings.TrimPrefix "/assets/" }});
   mask-image: image-set({{ range $i, $x := slice "1x" "2x" "3x" }}{{ if $i }}, {{ end }}url({{ partial "icons-url.html" (print $name "-" $x) | strings.TrimPrefix "/assets/" }}) {{ $x }}{{ end }});
@@ -102,12 +102,19 @@ main { flex: 1; }
 }
 .brand img { width: 28px; height: 28px; }
 .brand-short { display: none; }
-.site-nav { display: flex; gap: 28px; flex-wrap: wrap; }
+.header-end { display: flex; align-items: center; gap: clamp(12px, 2vw, 24px); }
+.site-nav { display: flex; gap: clamp(16px, 2vw, 28px); flex-wrap: wrap; }
 .nav-toggle { position: absolute; opacity: 0; pointer-events: none; }
 .nav-button { display: none; }
 .nav-toggle:focus-visible + .nav-button { outline: 2px solid var(--orange); }
 .site-nav a { color: var(--heading); text-decoration: none; font-weight: 500; }
 .site-nav a:hover { color: var(--orange); }
+/* the theme button: only the link for the next theme shows (theme.css); System's by default */
+.theme-toggle a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 8px; color: var(--heading); }
+.theme-toggle a:hover { color: var(--orange); background: var(--secondary); }
+.theme-toggle .icon { width: 22px; height: 22px; }
+.theme-toggle .to-dark, .theme-toggle .to-system { display: none; }
+.visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 
 /* buttons */
 .button {
@@ -325,6 +332,7 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
   .nav-button .icon { width: 22px; height: 22px; }
   .nav-toggle:checked ~ .site-header .nav-button { border-color: var(--orange); color: var(--orange); }
   .site-header { justify-content: flex-start; gap: 12px; }
+  .header-end { margin-left: auto; }
   /* the menu button opens the sidebar as a drawer from the left, on every page */
   .site-nav { display: none; }
   .drawer {
