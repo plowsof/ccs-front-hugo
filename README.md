@@ -115,4 +115,5 @@ the site it vouches for:
 
 | | |
 |---|---|
-| testnet CCS (ccs.monerodevs.org) | `3CB9 30B3 11B4 9080 8775  A4C9 290C 5085 B75F 4D61` |
+| testnet CCS (ccs.monerodevs.org), 15,000 subaddresses, since 2026-10-24 | `1997 07EE FAE5 4975 D00F  D471 FDA3 BB89 E3EF EFF8` |
+| (the testnet's first list, 100,000, until 2026-10-24; its first 15,000 lines are the list above) | `3CB9 30B3 11B4 9080 8775  A4C9 290C 5085 B75F 4D61` |
