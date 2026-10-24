@@ -296,10 +296,13 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 .donate .raised strong { font-size: 1.3rem; }
 .donate ol { padding-left: 1.2em; margin: 16px 0 0; }
 .donate li { margin: 0 0 10px; }
-/* Donate: the intro and the box in one centred column */
-.donate-page { max-width: 560px; margin-inline: auto; }
-.donate-page .body { text-align: center; }
-.donate-page .box { margin-top: 24px; }
+/* Donate: the page is only this, so it takes the width, as the original ccs.getmonero.org's:
+   the title centred, then one wide box with the QR code and a large address */
+.donate-page { max-width: 900px; margin-inline: auto; }
+.donate-page h1 { text-align: center; }
+.donate-page .box { margin-top: 24px; padding: 28px 32px; }
+.donate-page .qr { width: 200px; margin: 12px 0; }
+.donate-page .address { font-size: 1rem; font-weight: 600; padding: 16px 18px; margin-top: 8px; }
 .qr { display: block; width: 190px; margin: 8px auto; background: #fff; padding: 8px; border-radius: 8px; }
 .qr svg, .qr img { display: block; width: 100%; height: auto; }
 .address { user-select: all; cursor: text; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.78rem; overflow-wrap: anywhere; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
