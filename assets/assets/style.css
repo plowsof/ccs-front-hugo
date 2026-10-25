@@ -270,19 +270,33 @@ a.card:hover, a.card:focus-visible { color: var(--text); box-shadow: 0 0 20px li
 .meta .icon { color: var(--orange); }
 .progress-label { text-align: right; font-size: 0.9rem; margin: 14px 0 6px; }
 
+/* A funding bar: an outlined pill with the bar inside it, a little glossy, as the original
+   ccs.getmonero.org's; taller on a proposal page than on the lists' cards */
 progress {
   display: block;
+  box-sizing: border-box;
   width: 100%;
-  height: 7px;
-  border: 0;
-  border-radius: 4px;
-  background: var(--line);
+  height: 14px;
+  padding: 2px;
+  border: 1.5px solid light-dark(#d0d4dd, #45434a);
+  border-radius: 20px;
+  background: transparent;
   appearance: none;
   overflow: hidden;
 }
-progress::-webkit-progress-bar { background: var(--line); }
-progress::-webkit-progress-value { background: var(--bar, var(--stage, var(--orange))); }
-progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))); }
+progress::-webkit-progress-bar { background: transparent; border-radius: 20px; }
+/* separate rules: a browser drops a whole rule with a pseudo-element it doesn't know */
+progress::-webkit-progress-value {
+  background: var(--bar, var(--stage, var(--orange)));
+  border-radius: 20px;
+  box-shadow: inset 0 2px 9px rgb(255 255 255 / 0.3), inset 0 -2px 6px rgb(0 0 0 / 0.07);
+}
+progress::-moz-progress-bar {
+  background: var(--bar, var(--stage, var(--orange)));
+  border-radius: 20px;
+  box-shadow: inset 0 2px 9px rgb(255 255 255 / 0.3), inset 0 -2px 6px rgb(0 0 0 / 0.07);
+}
+.head progress { height: 24px; padding: 4px; }
 
 .segments { display: flex; gap: 4px; }
 .segments span { flex: 1; height: 7px; border-radius: 4px; background: var(--line); }
