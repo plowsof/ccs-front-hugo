@@ -1,6 +1,7 @@
 name: check
 # The site's zip is reproducible: built at once on two machines (the second from a clone made under
-# umask 077), the two must be the same, byte for byte. Once per change: PRs and pushes to master.
+# umask 077), the two must be the same, byte for byte; and the classes the stylesheets hide text
+# with listed as they are (tools/hidden-classes.py). Once per change: PRs and pushes to master.
 on:
   push:
     branches: [master]
@@ -20,6 +21,8 @@ jobs:
       sha256: ${{ steps.build.outputs.sha256 }}
     steps:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4, pinned by commit
+      - name: static/assets/hidden-classes.txt up to date with the stylesheets
+        run: python3 tools/hidden-classes.py --check
       - id: build
         name: build (StageX images, signatures checked, no network)
         run: |
