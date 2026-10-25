@@ -31,7 +31,7 @@
 <header class="site-header">
   {{- /* narrow screens: the menu button, on the left like the drawer it opens (sidebar.html),
      with its name in words: a bare ☰ is easy to miss */}}
-  <label for="nav-toggle" class="nav-button">{{ partial "icon.html" "menu" }}<span>Menu</span></label>
+  <label for="nav-toggle" class="nav-button">{{ partial "icon.html" "menu" }}<span class="when-closed">Menu</span><span class="when-open">Close</span></label>
   <a class="brand" href="/" aria-label="Community Crowdfunding System, home"><img src="{{ partial "icons-url.html" "logo-1x" }}" srcset="{{ partial "icons-url.html" "logo-2x" }} 2x, {{ partial "icons-url.html" "logo-3x" }} 3x" width="28" height="28" alt=""><span class="brand-long">Community Crowdfunding System</span><span class="brand-short" aria-hidden="true">CCS</span></a>
   <div class="header-end">
   <nav class="site-nav" aria-label="Site">
