@@ -1,4 +1,6 @@
 name: preview
+# The previews and this comment: a task plowsof worked on for months, picked up and finished by
+# ofrnxmr. Thank you.
 # On a new pull request: comment the link to its Coolify preview, the site with its example data
 # built from the PR (Dockerfile) at https://ccs-<PR>.beta.monerodevs.org. Checks out nothing and
 # runs none of the PR's code, so pull_request_target (which may comment on PRs from forks) is safe.
