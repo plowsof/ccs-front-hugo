@@ -1,4 +1,5 @@
-# Previews only: Coolify builds this for each pull request and serves it at
+# Previews only: Coolify builds this for each pull request from a branch of this repository (one
+# from a fork only once a maintainer has read it and deploys it by hand) and serves it at
 # https://ccs-<PR>.beta.monerodevs.org (its link is commented on the PR, .github/workflows/preview.yml).
 # The site with its example data (data/example/), built by the same pinned StageX Hugo as the
 # releases and served by nginx with the web server's settings (preview/nginx.conf). Releases are made by container/build.sh, never this.
