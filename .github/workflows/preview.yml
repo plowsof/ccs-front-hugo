@@ -5,7 +5,8 @@ name: preview
 # built from the PR (Dockerfile) at https://ccs-<PR>.beta.monerodevs.org, then wait for it: once
 # the preview serves this push's commit (the banner at the bottom of every page links it), the
 # comment says it is live; after 15 minutes without, that it isn't. One comment per PR, edited on
-# every push; a newer push cancels the wait for the older one. Checks out nothing and runs none of
+# every push; a newer push cancels the wait for the older one. Merged or closed, Coolify takes the
+# preview down: the comment says it is offline. Checks out nothing and runs none of
 # the PR's code (it only fetches the preview), so pull_request_target (which may comment on PRs
 # from forks) is safe.
 # Coolify builds a preview by itself only for a branch of this repository (pushed by someone with
@@ -14,7 +15,7 @@ name: preview
 # runs this workflow with the number to post the link and wait for it.
 on:
   pull_request_target:
-    types: [opened, reopened, synchronize]
+    types: [opened, reopened, synchronize, closed]
   workflow_dispatch:   # after deploying a fork's preview by hand: Actions, preview, Run workflow
     inputs:
       pr:
@@ -38,11 +39,12 @@ jobs:
           PR: ${{ github.event.pull_request.number || inputs.pr }}
           ACTION: ${{ github.event.action }}
           SHA: ${{ github.event.pull_request.head.sha }}
+          MERGED: ${{ github.event.pull_request.merged }}
           # a fork: the head repository isn't this one (a run by hand: a maintainer deployed it)
           FORK: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.repo.full_name != github.repository }}
         run: |
           [[ $PR =~ ^[0-9]+$ ]] || { echo "error: not a PR number: $PR" >&2; exit 1; }
-          if [[ $FORK == true ]]; then
+          if [[ $FORK == true && $ACTION != closed ]]; then
               [[ $ACTION == opened ]] && gh pr comment "$PR" -R "$GITHUB_REPOSITORY" --body "Thank you! A preview of this pull request is built once a maintainer has read it: it is code from a fork, and previews run on the CCS's own machines. The link will follow here."
               exit 0
           fi
@@ -52,13 +54,22 @@ jobs:
           api=repos/$GITHUB_REPOSITORY/issues
           # the comment: found again by its first line, which GitHub doesn't show; or this workflow's
           # earlier ones, before it had that line, and the note on a fork's PR: only this bot's
+          # body STATUS [offline]: offline, the preview without its link
           body() {
-              printf '<!-- ccs-preview -->\n|What|Link|\n|:---:|---|\n|🕵️‍♂️ Review|[Files changed](https://github.com/%s/pull/%s/files)|\n|🌐 Deploy|[Preview #%s](%s) %s|\n' \
-                  "$GITHUB_REPOSITORY" "$PR" "$PR" "$url" "$1"
+              local preview="[Preview #$PR]($url)"
+              [[ ${2:-} ]] && preview="Preview #$PR"
+              printf '<!-- ccs-preview -->\n|What|Link|\n|:---:|---|\n|🕵️‍♂️ Review|[Files changed](https://github.com/%s/pull/%s/files)|\n|🌐 Deploy|%s %s|\n' \
+                  "$GITHUB_REPOSITORY" "$PR" "$preview" "$1"
           }
           say() { gh api -X PATCH "$api/comments/$id" -f body="$(body "$1")" > /dev/null; }
           id=$(gh api --paginate "$api/$PR/comments" --jq '.[] | select(.user.login == "github-actions[bot]")
               | select(.body | startswith("<!-- ccs-preview -->") or startswith("|What|Link|") or startswith("Thank you! A preview of this pull request")) | .id' | tail -n 1)
+          # merged or closed: the preview is gone (a fork's never built: its note stays)
+          if [[ $ACTION == closed ]]; then
+              [[ $id ]] && gh api "$api/comments/$id" --jq .body | grep -q '^<!-- ccs-preview -->' || exit 0
+              gh api -X PATCH "$api/comments/$id" -f body="$(body "⚫ offline: the pull request was $([[ $MERGED == true ]] && echo merged || echo closed)" offline)" > /dev/null
+              exit 0
+          fi
           if [[ $id ]]; then say "🟡 building \`${SHA::7}\`…"
           else id=$(gh api "$api/$PR/comments" -f body="$(body "🟡 building \`${SHA::7}\`…")" --jq .id); fi
           # live: the preview answers, and its banner links this commit
