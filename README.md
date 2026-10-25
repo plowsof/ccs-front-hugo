@@ -120,8 +120,10 @@ Nothing about it is built in here: ccs-front-bash fills the Verify page (`parts/
 `{{fingerprint}}`, and the wallet's `{{address}}`, `{{viewkey}}`, `{{network}}` and
 `{{wallet_source}}` (where the address and view key were published) for asking a copy of the
 wallet about an address; or `parts/no-list.html`) and each donation box's link (`{{verify_link}}`,
-`parts/verify-link.html`). The key's fingerprint, published here too so it doesn't come only from
-the site it vouches for:
+`parts/verify-link.html`). The key and its fingerprint are published here too, so that they don't
+come only from the site they vouch for (a taken-over site could change the list, signature, key and
+fingerprint together): the key in `keys/`, named by its fingerprint, and the fingerprint below. The
+Verify page sends visitors here for them. A new list: add its key there and its line here.
 
 | | |
 |---|---|
