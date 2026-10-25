@@ -93,6 +93,10 @@ The parts are rendered from the same templates as the example pages, so they can
 - No `<script>`, no inline event handlers, no `style=` attributes: the site works under
   `Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self' data:; font-src 'self'`.
 - Nothing from other sites: fonts are in `static/assets/`, icons in `assets/assets/icons/` (PNG, no SVG: Tor Browser at "Safest" draws none; `tools/icons-png.sh` makes them from `tools/icons.svg`).
+- After changing a stylesheet, run `tools/hidden-classes.py` and commit the
+  `static/assets/hidden-classes.txt` it writes: the classes the stylesheets hide text with, which
+  the web server's gate reads from the release zip (ccs-bash, `contrib/ccs-receive`). CI checks
+  it is up to date.
 - Raw HTML in Markdown is dropped (`markup.goldmark.renderer.unsafe = false`).
 
 ## Credits
