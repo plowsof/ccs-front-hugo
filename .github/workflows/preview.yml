@@ -2,10 +2,14 @@ name: preview
 # On a new pull request: comment the link to its Coolify preview, the site with its example data
 # built from the PR (Dockerfile) at https://ccs-<PR>.beta.monerodevs.org. Checks out nothing and
 # runs none of the PR's code, so pull_request_target (which may comment on PRs from forks) is safe.
+# Coolify builds a preview by itself only for a branch of this repository (pushed by someone with
+# write access); a PR from a fork is untrusted code, so its preview waits until a maintainer has
+# read it and deploys it by hand (Coolify: the app's Preview Deployments, the PR's number), then
+# runs this workflow with the number to post the link.
 on:
   pull_request_target:
     types: [opened]
-  workflow_dispatch:   # for a PR opened before this workflow: Actions, preview, Run workflow
+  workflow_dispatch:   # after deploying a fork's preview by hand: Actions, preview, Run workflow
     inputs:
       pr:
         description: Pull request number
@@ -22,8 +26,14 @@ jobs:
       - env:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ github.event.pull_request.number || inputs.pr }}
+          # a fork: the head repository isn't this one (a run by hand: a maintainer deployed it)
+          FORK: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.repo.full_name != github.repository }}
         run: |
           [[ $PR =~ ^[0-9]+$ ]] || { echo "error: not a PR number: $PR" >&2; exit 1; }
+          if [[ $FORK == true ]]; then
+              gh pr comment "$PR" -R "$GITHUB_REPOSITORY" --body "Thank you! A preview of this pull request is built once a maintainer has read it: it is code from a fork, and previews run on the CCS's own machines. The link will follow here."
+              exit 0
+          fi
           gh pr comment "$PR" -R "$GITHUB_REPOSITORY" --body "|What|Link|
           |:---:|---|
           |🕵️‍♂️ Review|[Files changed](https://github.com/$GITHUB_REPOSITORY/pull/$PR/files)|
