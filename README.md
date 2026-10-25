@@ -39,6 +39,10 @@ machine as the original (`unzip` it into `/opt/ccs-front-hugo/public`).
 
 ## What ccs-front-bash fills in
 
+The web server's gate (ccs-bash, `contrib/ccs-receive`) holds the same contract: it has this
+release's zip too, and lets a page live only if it is one of these pages filled with these parts.
+A new marker, part or `{{slot}}` is a new release of ccs-front-bash and of the gate as well.
+
 **Markers** around everything that changes, in the built pages:
 
 | Marker | Where | Filled with |
@@ -93,10 +97,6 @@ The parts are rendered from the same templates as the example pages, so they can
 - No `<script>`, no inline event handlers, no `style=` attributes: the site works under
   `Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self' data:; font-src 'self'`.
 - Nothing from other sites: fonts are in `static/assets/`, icons in `assets/assets/icons/` (PNG, no SVG: Tor Browser at "Safest" draws none; `tools/icons-png.sh` makes them from `tools/icons.svg`).
-- After changing a stylesheet, run `tools/hidden-classes.py` and commit the
-  `static/assets/hidden-classes.txt` it writes: the classes the stylesheets hide text with, which
-  the web server's gate reads from the release zip (ccs-bash, `contrib/ccs-receive`). CI checks
-  it is up to date.
 - Raw HTML in Markdown is dropped (`markup.goldmark.renderer.unsafe = false`).
 
 ## Credits
