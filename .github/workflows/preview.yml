@@ -50,13 +50,15 @@ jobs:
           [[ $SHA =~ ^[0-9a-f]{40}$ ]] || { echo "error: not a commit: $SHA" >&2; exit 1; }
           url=https://ccs-$PR.beta.monerodevs.org
           api=repos/$GITHUB_REPOSITORY/issues
-          # the comment: found again by its first line, which GitHub doesn't show
+          # the comment: found again by its first line, which GitHub doesn't show; or this workflow's
+          # earlier ones, before it had that line, and the note on a fork's PR: only this bot's
           body() {
               printf '<!-- ccs-preview -->\n|What|Link|\n|:---:|---|\n|🕵️‍♂️ Review|[Files changed](https://github.com/%s/pull/%s/files)|\n|🌐 Deploy|[Preview #%s](%s) %s|\n' \
                   "$GITHUB_REPOSITORY" "$PR" "$PR" "$url" "$1"
           }
           say() { gh api -X PATCH "$api/comments/$id" -f body="$(body "$1")" > /dev/null; }
-          id=$(gh api --paginate "$api/$PR/comments" --jq '.[] | select(.body | startswith("<!-- ccs-preview -->")) | .id' | tail -n 1)
+          id=$(gh api --paginate "$api/$PR/comments" --jq '.[] | select(.user.login == "github-actions[bot]")
+              | select(.body | startswith("<!-- ccs-preview -->") or startswith("|What|Link|") or startswith("Thank you! A preview of this pull request")) | .id' | tail -n 1)
           if [[ $id ]]; then say "🟡 building \`${SHA::7}\`…"
           else id=$(gh api "$api/$PR/comments" -f body="$(body "🟡 building \`${SHA::7}\`…")" --jq .id); fi
           # live: the preview answers, and its banner links this commit
