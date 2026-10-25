@@ -24,7 +24,10 @@
   <div class="tabs {{ $s }}">
     <input type="radio" name="tab" id="tab-proposal" checked><label for="tab-proposal">Proposal</label>
     <input type="radio" name="tab" id="tab-milestones"><label for="tab-milestones">Milestones</label>
+    {{- /* Payouts: once work has started (work in progress, completed); nothing is paid out while funding */}}
+    {{- if ne $s "fr" }}
     <input type="radio" name="tab" id="tab-payouts"><label for="tab-payouts">Payouts</label>
+    {{- end }}
 
     <section class="panel panel-proposal body">
       {{ if $ph }}{{ $v.body }}{{ else }}{{ .Content }}{{ end }}
@@ -39,12 +42,14 @@
       {{ partial "marker.html" "/milestones" }}
     </section>
 
+    {{- if ne $s "fr" }}
     <section class="panel panel-payouts">
       {{ partial "marker.html" "payouts" }}
       {{- if $ph }}{{ "{{payouts_list}}" }}{{ else }}{{ range .Params.payout_list }}
       {{ partial "payout.html" . }}{{ else }}<p class="empty">No payouts yet.</p>{{ end }}{{ end }}
       {{ partial "marker.html" "/payouts" }}
     </section>
+    {{- end }}
   </div>
 </article>
 {{ end }}
