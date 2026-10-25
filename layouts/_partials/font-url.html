@@ -1,0 +1,4 @@
+{{- /* A font ("dm-sans-latin"), named by its hash (assets/fonts/dm-sans-latin.<sha256>.woff2) like
+   the stylesheet and the icons: the web server can let browsers keep it for good, and a changed
+   font is a new file. */ -}}
+{{- return (resources.Get (printf "assets/fonts/%s.woff2" .) | fingerprint "sha256").RelPermalink -}}
