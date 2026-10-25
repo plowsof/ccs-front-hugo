@@ -8,17 +8,27 @@ Every donation address on this site is one of the CCS wallet's subaddresses, tak
 list made once, offline, from a view-only copy of the wallet, and signed. The site is checked
 against the list each time it is made: an address that is not in it is never shown.
 
-You can check it yourself, with nothing from this site but the files below:
+**Check it with something that doesn't come from this site.** Whoever took over this site could
+change the donation addresses, and with them the list, its signature, its key and everything
+written on this page, all to match each other. So the one thing this check trusts, the key (or
+the wallet's address and view key, below), must come from somewhere else.
 
-1. Download [the list](/subaddresses.txt), [its signature](/subaddresses.txt.asc) and
-   [the public key](/subaddresses.txt.key.asc).
-2. Check the key's fingerprint against the one the CCS maintainers publish elsewhere (in the
-   [design repository]({{< param designRepo >}}), in its README), then:
+1. **Get the key from outside this site.** The CCS maintainers publish it, and its fingerprint,
+   in the design repository on GitHub, `github.com/plowsof/ccs-front-hugo`: the key in its
+   `keys/` folder, the fingerprint in its README. Type that address yourself, or find the
+   repository from getmonero.org or the Monero community, rather than following a link from this
+   page. Better still, ask someone you trust for the fingerprint.
+2. Download [the list](/subaddresses.txt) and [its signature](/subaddresses.txt.asc) from here:
+   the signature is what makes them trustworthy, not where they come from. Then, with the key you
+   got in step 1:
 
    ```
-   gpg --import subaddresses.txt.key.asc
+   gpg --import <the key from step 1>
+   gpg --fingerprint                          # the fingerprint you got in step 1
    gpg --verify subaddresses.txt.asc subaddresses.txt
    ```
+
+   `Good signature` from that key: the list is the one the maintainers signed.
 
 3. Look for the address you are about to pay to: the one **your wallet shows** after you scan the
    QR code or paste the address, not the one on this page (a QR code can hold another address
@@ -30,13 +40,18 @@ You can check it yourself, with nothing from this site but the files below:
 
    `1` means it is the wallet's. `0` means do not send: tell the CCS maintainers.
 
-The key's fingerprint: `{{fingerprint}}`
+What this site says the key's fingerprint is: `{{fingerprint}}`. Only a cross-check: if it
+differs from the one you got elsewhere, do not send, and tell the CCS maintainers.
 
 ## Or ask the wallet itself
 
 The wallet's address and view key are public ({{wallet_source}}), so you can also ask a copy of
-the wallet whether an address is one of its own, without the list. A view key can't spend; it only shows
-what the wallet received.
+the wallet whether an address is one of its own, without the list or the key. A view key can't
+spend; it only shows what the wallet received. **Take them from where they were published**
+(monero-project/meta issue #935 on GitHub, found yourself), not from this page: a copy of another
+wallet would say yes to that wallet's addresses.
+
+What this site says they are, to compare:
 
 The wallet's address: `{{address}}`
 
@@ -49,7 +64,7 @@ check its hashes as the site explains), offline, in one terminal:
 monero-wallet-rpc{{network}} --offline --wallet-dir ccs-check --rpc-bind-port 18088 --disable-rpc-login
 ```
 
-and in another:
+and in another, with the address and view key from where they were published:
 
 ```
 rpc() { curl -s http://127.0.0.1:18088/json_rpc -d "{\"jsonrpc\":\"2.0\",\"id\":0,\"method\":\"$1\",\"params\":$2}"; }
