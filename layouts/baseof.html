@@ -17,6 +17,8 @@
 {{- /* named by its hash (assets/style.<sha256>.css): a changed stylesheet is a new file, so no
    browser keeps showing an old one; beside fonts/, so its url()s still work */}}
 {{- $css := resources.Get "assets/style.css" | resources.ExecuteAsTemplate "assets/style.css" . | fingerprint "sha256" }}
+{{- /* the main font with the stylesheet, so it is there for the first paint (style.css: optional) */}}
+<link rel="preload" href="{{ partial "font-url.html" "dm-sans-latin" }}" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 {{- /* The theme, kept in the address without cookies or JavaScript: the web server serves the
    same files under /dark/ and /light/, but there this one file is theme-dark.css or
