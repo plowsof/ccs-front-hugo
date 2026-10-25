@@ -309,15 +309,27 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 .donate-page { max-width: 900px; margin-inline: auto; }
 .donate-page h1 { text-align: center; }
 .donate-page .box { margin-top: 24px; padding: 28px 32px; }
-.donate-page .qr { width: 200px; margin: 12px 0; }
-.donate-page .address { font-size: 1rem; font-weight: 600; padding: 16px 18px; margin-top: 8px; }
+.donate-page .qr { margin: 16px 0; }
+.donate-page .address { margin-top: 8px; }
 @media (max-width: 520px) {
   .donate-page .box { padding: 20px 14px; }
   .donate-page .address { font-size: 0.85rem; padding: 12px; }
 }
-.qr { display: block; width: 190px; margin: 8px auto; background: #fff; padding: 8px; border-radius: 8px; }
-.qr svg, .qr img { display: block; width: 100%; height: auto; }
-.address { user-select: all; cursor: text; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.78rem; overflow-wrap: anywhere; background: var(--bg); border: 1px solid var(--line); border-radius: 6px; padding: 8px; }
+/* A QR code: a white card (it must stay white to scan) with a soft ring of shadow, so it stands out
+   on a light card too; an address: a shaded panel, bold, as the original ccs.getmonero.org's */
+.qr {
+  display: block; width: 15rem; max-width: 100%; margin: 16px auto; padding: 8px;
+  background: #fff; border-radius: 10px;
+  box-shadow: 0 0 6px light-dark(rgb(50 50 93 / 0.4), rgb(255 255 255 / 0.25));
+}
+.qr svg, .qr img { display: block; width: 100%; height: auto; border-radius: 6px; }
+.address {
+  user-select: all; cursor: text; overflow-wrap: anywhere;
+  font-weight: 700; font-size: 0.95rem; line-height: 1.6; color: var(--heading);
+  background: light-dark(#edeff2, #2b2930); border-radius: 8px; padding: 1.2rem 1.4rem;
+  box-shadow: 0 1px 3px light-dark(rgb(50 50 93 / 0.18), rgb(0 0 0 / 0.4));
+}
+@media (max-width: 520px) { .address { font-size: 0.85rem; padding: 1rem; } }
 .pending { color: var(--muted); font-size: 0.9rem; }
 
 .milestones { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
@@ -394,17 +406,13 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
 .contribute summary::after { content: " ▾"; }
 .contribute[open] summary::after { content: " ▴"; }
 .contribute ol {
-  margin: 20px auto 4px;
-  padding: 22px 24px 10px;
-  max-width: 30rem;
+  margin: 22px auto 4px;
+  padding: 0;
+  max-width: 44rem;
   list-style-position: inside;
-  background: var(--bg);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
 }
-.contribute li { margin: 0 0 14px; }
-.contribute .qr { margin: 12px auto 4px; }
-.contribute .address { margin-top: 8px; text-align: center; }
+.contribute li { margin: 0 0 16px; }
+.contribute .address { margin-top: 12px; text-align: center; }
 
 /* tabs: radio buttons, the checked one's panel is shown (no JavaScript) */
 .tabs { display: flex; flex-wrap: wrap; margin-top: 28px; }
@@ -416,7 +424,7 @@ progress::-moz-progress-bar { background: var(--bar, var(--stage, var(--orange))
   border-bottom: 3px solid var(--line);
   cursor: pointer;
 }
-.tabs > label:hover { color: var(--heading); }
+.tabs > label:hover { color: var(--orange); border-bottom-color: color-mix(in srgb, var(--orange) 45%, var(--line)); }
 .tabs > input:checked + label { color: var(--orange); border-bottom-color: var(--orange); }
 .tabs > input:focus-visible + label { outline: 2px solid var(--orange); outline-offset: 2px; }
 .tabs .panel { display: none; order: 1; width: 100%; padding-top: 24px; }
