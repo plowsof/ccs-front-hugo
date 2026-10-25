@@ -20,7 +20,9 @@ You can check it yourself, with nothing from this site but the files below:
    gpg --verify subaddresses.txt.asc subaddresses.txt
    ```
 
-3. Look for the address you are about to pay to:
+3. Look for the address you are about to pay to: the one **your wallet shows** after you scan the
+   QR code or paste the address, not the one on this page (a QR code can hold another address
+   than the text beside it):
 
    ```
    grep -c " THE_ADDRESS$" subaddresses.txt
@@ -40,7 +42,7 @@ The wallet's address: `{{address}}`
 
 Its view key: `{{viewkey}}`
 
-With `monero-wallet-rpc` from the Monero CLI ([getmonero.org](https://www.getmonero.org/downloads/),
+Here too, use the address your wallet shows, after scanning or pasting. With `monero-wallet-rpc` from the Monero CLI ([getmonero.org](https://www.getmonero.org/downloads/),
 check its hashes as the site explains), offline, in one terminal:
 
 ```

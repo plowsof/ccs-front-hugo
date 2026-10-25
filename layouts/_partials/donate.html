@@ -8,7 +8,7 @@
       <a class="qr" {{ printf "href=%q" (printf "monero:%s" .address) | safeHTMLAttr }}><img {{ printf "src=%q" .qr | safeHTMLAttr }} alt="QR code of the address below"></a></li>
     <li>or copy the address:
       <div class="address">{{ .address }}</div></li>
-    <li>Send. Thank you!</li>
+    <li>Check that your wallet shows this address, then send. Thank you!</li>
   </ol>
   {{- /* the link to /verify/: ccs-front-bash fills it in when a signed list is installed */}}
   {{- with .verify_link }}{{ . | safeHTML }}{{ end }}
