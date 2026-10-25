@@ -22,8 +22,16 @@
 <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
 {{- /* The theme, kept in the address without cookies or JavaScript: the web server serves the
    same files under /dark/ and /light/, but there this one file is theme-dark.css or
-   theme-light.css (ccs-bash's docs/two-machines.md, "The theme"). Not hashed, so it can differ. */}}
-<link rel="stylesheet" href="/assets/theme.css">
+   theme-light.css (ccs-bash's docs/two-machines.md, "The theme"). Not named by its hash, so it
+   can differ; but its integrity lists all three hashes, and a browser takes it only if it is one
+   of them (any other stylesheet could hide the donation address and show another). */}}
+{{- $themes := slice }}
+{{- range slice "theme" "theme-dark" "theme-light" }}
+{{- $t := resources.Get (printf "assets/%s.css" .) }}
+{{- $t.Publish }}
+{{- $themes = $themes | append ($t | fingerprint "sha256").Data.Integrity }}
+{{- end }}
+<link rel="stylesheet" href="/assets/theme.css" integrity="{{ delimit $themes " " }}">
 <link rel="icon" href="{{ partial "icons-url.html" "favicon-32" }}" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="{{ partial "icons-url.html" "favicon-180" }}">
 </head>
