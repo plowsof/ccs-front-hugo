@@ -17,6 +17,12 @@ hugo build --cleanDestinationDir   # Hugo 0.167.0 → public/
 Preview with `hugo server`, or any static server on `public/`. The pages show example data
 in ccs-bash's JSON format (`data/example/`).
 
+**Pull request previews:** every pull request gets the site built from it, served at
+`https://ccs-<PR>.beta.monerodevs.org` and linked in a comment on the pull request
+(`.github/workflows/preview.yml`; a fork's once a maintainer has read it). The previews and their
+comment were a task plowsof worked on for months, then ofrnxmr picked it up and finished it, with
+blood, sweat and tears. Thank you, ofrnxmr.
+
 The pages and URLs are today's ccs-front's, so links keep working: `/`, `/ideas/`,
 `/funding-required/`, `/work-in-progress/`, `/completed-proposals/`, `/proposals/<name>.html`,
 `/donate/`, `/what-is-ccs/`, `/how-to-ccs/`, plus `/explore/` (every stage on one page).
