@@ -1,16 +1,20 @@
 name: preview
 # The previews and this comment: a task plowsof worked on for months, picked up and finished by
 # ofrnxmr. Thank you.
-# On a new pull request: comment the link to its Coolify preview, the site with its example data
-# built from the PR (Dockerfile) at https://ccs-<PR>.beta.monerodevs.org. Checks out nothing and
-# runs none of the PR's code, so pull_request_target (which may comment on PRs from forks) is safe.
+# On a pull request: comment the link to its Coolify preview, the site with its example data
+# built from the PR (Dockerfile) at https://ccs-<PR>.beta.monerodevs.org, then wait for it: once
+# the preview serves this push's commit (the banner at the bottom of every page links it), the
+# comment says it is live; after 15 minutes without, that it isn't. One comment per PR, edited on
+# every push; a newer push cancels the wait for the older one. Checks out nothing and runs none of
+# the PR's code (it only fetches the preview), so pull_request_target (which may comment on PRs
+# from forks) is safe.
 # Coolify builds a preview by itself only for a branch of this repository (pushed by someone with
 # write access); a PR from a fork is untrusted code, so its preview waits until a maintainer has
 # read it and deploys it by hand (Coolify: the app's Preview Deployments, the PR's number), then
-# runs this workflow with the number to post the link.
+# runs this workflow with the number to post the link and wait for it.
 on:
   pull_request_target:
-    types: [opened]
+    types: [opened, reopened, synchronize]
   workflow_dispatch:   # after deploying a fork's preview by hand: Actions, preview, Run workflow
     inputs:
       pr:
@@ -18,25 +22,50 @@ on:
         required: true
 permissions:
   pull-requests: write
+concurrency:   # a new push: stop waiting for the old one
+  group: preview-${{ github.event.pull_request.number || inputs.pr }}
+  cancel-in-progress: true
 defaults:
   run:
     shell: bash
 jobs:
   comment:
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - env:
           GH_TOKEN: ${{ github.token }}
           PR: ${{ github.event.pull_request.number || inputs.pr }}
+          ACTION: ${{ github.event.action }}
+          SHA: ${{ github.event.pull_request.head.sha }}
           # a fork: the head repository isn't this one (a run by hand: a maintainer deployed it)
           FORK: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.repo.full_name != github.repository }}
         run: |
           [[ $PR =~ ^[0-9]+$ ]] || { echo "error: not a PR number: $PR" >&2; exit 1; }
           if [[ $FORK == true ]]; then
-              gh pr comment "$PR" -R "$GITHUB_REPOSITORY" --body "Thank you! A preview of this pull request is built once a maintainer has read it: it is code from a fork, and previews run on the CCS's own machines. The link will follow here."
+              [[ $ACTION == opened ]] && gh pr comment "$PR" -R "$GITHUB_REPOSITORY" --body "Thank you! A preview of this pull request is built once a maintainer has read it: it is code from a fork, and previews run on the CCS's own machines. The link will follow here."
               exit 0
           fi
-          gh pr comment "$PR" -R "$GITHUB_REPOSITORY" --body "|What|Link|
-          |:---:|---|
-          |🕵️‍♂️ Review|[Files changed](https://github.com/$GITHUB_REPOSITORY/pull/$PR/files)|
-          |🌐 Deploy|[Preview #$PR](https://ccs-$PR.beta.monerodevs.org)|"
+          [[ $SHA ]] || SHA=$(gh pr view "$PR" -R "$GITHUB_REPOSITORY" --json headRefOid -q .headRefOid)
+          [[ $SHA =~ ^[0-9a-f]{40}$ ]] || { echo "error: not a commit: $SHA" >&2; exit 1; }
+          url=https://ccs-$PR.beta.monerodevs.org
+          api=repos/$GITHUB_REPOSITORY/issues
+          # the comment: found again by its first line, which GitHub doesn't show
+          body() {
+              printf '<!-- ccs-preview -->\n|What|Link|\n|:---:|---|\n|🕵️‍♂️ Review|[Files changed](https://github.com/%s/pull/%s/files)|\n|🌐 Deploy|[Preview #%s](%s) %s|\n' \
+                  "$GITHUB_REPOSITORY" "$PR" "$PR" "$url" "$1"
+          }
+          say() { gh api -X PATCH "$api/comments/$id" -f body="$(body "$1")" > /dev/null; }
+          id=$(gh api --paginate "$api/$PR/comments" --jq '.[] | select(.body | startswith("<!-- ccs-preview -->")) | .id' | tail -n 1)
+          if [[ $id ]]; then say "🟡 building \`${SHA::7}\`…"
+          else id=$(gh api "$api/$PR/comments" -f body="$(body "🟡 building \`${SHA::7}\`…")" --jq .id); fi
+          # live: the preview answers, and its banner links this commit
+          end=$((SECONDS + 15 * 60))
+          until curl -fsS --max-time 20 "$url/" 2> /dev/null | grep -q "/changes/$SHA\""; do
+              if ((SECONDS >= end)); then
+                  say "🔴 not live after 15 minutes (\`${SHA::7}\`): see Coolify"
+                  exit 0
+              fi
+              sleep 20
+          done
+          say "🟢 live (\`${SHA::7}\`)"
