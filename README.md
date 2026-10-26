@@ -122,5 +122,5 @@ Visitors check a donation address in a view-only copy of the CCS wallet (`conten
 ccs-front-bash fills `parts/verify.html` with the wallet's `{{address}}`, `{{viewkey}}` and
 `{{wallet_source}}` (where those were published), or `parts/no-list.html` when the backend has no
 signed list, and each donation box's link to it (`{{verify_link}}`, `parts/verify-link.html`).
-The signed list of the wallet's subaddresses (ccs-front-bash's docs/setup.md, step 5) is the
-backend's and the web server's; the site doesn't publish it.
+The signed list of the wallet's subaddresses (ccs-front-bash's docs/setup.md, step 5) is for the
+backend and the web server.
