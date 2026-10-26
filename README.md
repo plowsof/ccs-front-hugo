@@ -118,16 +118,20 @@ buttons shown by CSS: like today's ccs-front, and with no JavaScript.
 
 ## The signed subaddress list
 
-Every donation address on the site is checked against a list of the wallet's subaddresses, signed
-with a key made only for that and destroyed right after (ccs-front-bash's docs/setup.md, step 5).
+Every donation address on the site is checked against a list of the wallet's subaddresses
+(ccs-front-bash's docs/setup.md, step 5). The mainnet list is signed by a Core Team member with
+their own key, the one the Monero repository publishes for them (`utils/gpg_keys/`: binaryFate or
+luigi1111), so who signed it is checked against keys Monero already vouches for; the testnet's are
+signed with a key made only for that and destroyed right after.
 Nothing about it is built in here: ccs-front-bash fills the Verify page (`parts/verify.html`, with
 `{{fingerprint}}`, and the wallet's `{{address}}`, `{{viewkey}}`, `{{network}}` and
 `{{wallet_source}}` (where the address and view key were published) for asking a copy of the
 wallet about an address; or `parts/no-list.html`) and each donation box's link (`{{verify_link}}`,
 `parts/verify-link.html`). The key and its fingerprint are published here too, so that they don't
 come only from the site they vouch for (a taken-over site could change the list, signature, key and
-fingerprint together): the key in `keys/`, named by its fingerprint, and the fingerprint below. The
-Verify page sends visitors here for them. A new list: add its key there and its line here.
+fingerprint together): the key in `keys/`, named by its fingerprint, and the fingerprint below (a
+Core Team member's key: also in the Monero repository's `utils/gpg_keys/`). The Verify page sends
+visitors here for them. A new list: add its key there and its line here.
 
 | | |
 |---|---|
