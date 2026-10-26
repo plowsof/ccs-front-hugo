@@ -116,24 +116,11 @@ The parts are rendered from the same templates as the example pages, so they can
 The Contribute dropdown is a `<details>`, the Proposal / Milestones / Payouts tabs are radio
 buttons shown by CSS: like today's ccs-front, and with no JavaScript.
 
-## The signed subaddress list
+## The Verify page
 
-Every donation address on the site is checked against a list of the wallet's subaddresses
-(ccs-front-bash's docs/setup.md, step 5). The mainnet list is signed by a Core Team member with
-their own key, the one the Monero repository publishes for them (`utils/gpg_keys/`: binaryFate or
-luigi1111), so who signed it is checked against keys Monero already vouches for; the testnet's are
-signed with a key made only for that and destroyed right after.
-Nothing about it is built in here: ccs-front-bash fills the Verify page (`parts/verify.html`, with
-`{{fingerprint}}`, and the wallet's `{{address}}`, `{{viewkey}}`, `{{network}}` and
-`{{wallet_source}}` (where the address and view key were published) for asking a copy of the
-wallet about an address; or `parts/no-list.html`) and each donation box's link (`{{verify_link}}`,
-`parts/verify-link.html`). The key and its fingerprint are published here too, so that they don't
-come only from the site they vouch for (a taken-over site could change the list, signature, key and
-fingerprint together): the key in `keys/`, named by its fingerprint, and the fingerprint below (a
-Core Team member's key: also in the Monero repository's `utils/gpg_keys/`). The Verify page sends
-visitors here for them. A new list: add its key there and its line here.
-
-| | |
-|---|---|
-| testnet CCS (ccs.monerodevs.org), 15,000 subaddresses, since 2026-10-24 | `1997 07EE FAE5 4975 D00F  D471 FDA3 BB89 E3EF EFF8` |
-| (the testnet's first list, 100,000, until 2026-10-24; its first 15,000 lines are the list above) | `3CB9 30B3 11B4 9080 8775  A4C9 290C 5085 B75F 4D61` |
+Visitors check a donation address in a view-only copy of the CCS wallet (`content/verify.md`):
+ccs-front-bash fills `parts/verify.html` with the wallet's `{{address}}`, `{{viewkey}}` and
+`{{wallet_source}}` (where those were published), or `parts/no-list.html` when the backend has no
+signed list, and each donation box's link to it (`{{verify_link}}`, `parts/verify-link.html`).
+The signed list of the wallet's subaddresses (ccs-front-bash's docs/setup.md, step 5) is for the
+backend and the web server.
