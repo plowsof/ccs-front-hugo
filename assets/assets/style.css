@@ -79,6 +79,9 @@ main { flex: 1; }
 }
 {{- end }}
 
+/* the menu button's burger, between burger (0) and X (1): registered, so it can be animated */
+@property --t { syntax: "<number>"; inherits: true; initial-value: 0; }
+
 /* phones: no blue flash on what you tap (as getmonero.org); the keyboard's focus ring stays */
 a, button, label, summary, input, select, textarea { -webkit-tap-highlight-color: transparent; }
 
@@ -376,16 +379,30 @@ progress::-moz-progress-bar {
     border-radius: 8px; cursor: pointer; color: var(--heading);
   }
   .nav-button:hover { background: var(--secondary); }
-  /* getmonero.org's burger (monero-site css/custom.css .burger), its colour the theme's: three
-     lines (its bottom border, ::before, ::after); open, the outer two turn into an X */
-  .burger { display: block; width: 1.5rem; border-bottom: 2px solid currentColor; transition: border-bottom 0.5s ease-in-out; }
-  .burger::before, .burger::after {
-    content: ""; display: block; width: 100%; margin-bottom: 5px;
-    border-bottom: 2px solid currentColor; transition: transform 0.5s ease-in-out;
+  /* the burger, getmonero.org's size (monero-site css/custom.css .burger), in the theme's colour:
+     four lines that, opening, fold into Monero's M, hold it a moment, then into an X; closing, back
+     the same way. --t goes from 0 (burger) to 1 (X); --a moves each line from the burger to the M
+     (t 0 to 0.4), --c from the M to the X (t 0.6 to 1). Where @property isn't known, no
+     animation: the burger or the X at once. Each line: its centre (x, y, px, from the button's
+     centre), angle (deg) and length (of 24 px) in the burger (0), the M (1) and the X (2). */
+  .burger { --t: 0; position: relative; display: block; width: 24px; height: 24px; transition: --t 0.7s linear; }
+  .nav-toggle:checked ~ .site-header .burger { --t: 1; }
+  .burger span {
+    --a: clamp(0, var(--t) * 2.5, 1);
+    --c: clamp(0, var(--t) * 2.5 - 1.5, 1);
+    --x0: 0; --r0: 0; --s0: 1; --x2: 0; --y2: 0; --s2: 0.9;
+    position: absolute; top: 11px; left: 0; width: 24px; height: 2px; border-radius: 1px; background: currentColor;
+    transform:
+      translate(calc((var(--x0) + (var(--x1) - var(--x0)) * var(--a) + (var(--x2) - var(--x1)) * var(--c)) * 1px),
+                calc((var(--y0) + (var(--y1) - var(--y0)) * var(--a) + (var(--y2) - var(--y1)) * var(--c)) * 1px))
+      rotate(calc((var(--r0) + (var(--r1) - var(--r0)) * var(--a) + (var(--r2) - var(--r1)) * var(--c)) * 1deg))
+      scaleX(calc(var(--s0) + (var(--s1) - var(--s0)) * var(--a) + (var(--s2) - var(--s1)) * var(--c)));
   }
-  .nav-toggle:checked ~ .site-header .burger { border-bottom: 4px solid transparent; }
-  .nav-toggle:checked ~ .site-header .burger::before { transform: rotate(-405deg) translateY(6px) translateX(-5px); }
-  .nav-toggle:checked ~ .site-header .burger::after { transform: rotate(405deg) translateY(0px) translateX(1.3px); }
+  /* the M: its left stroke, down to the middle, up again, its right stroke */
+  .burger span:nth-child(1) { --y0: -7.5; --x1: -8; --y1: 0; --r1: 90; --s1: 0.667; --r2: 45; }
+  .burger span:nth-child(2) { --y0: -2.5; --x1: -4; --y1: -3; --r1: 51.34; --s1: 0.534; --r2: 45; }
+  .burger span:nth-child(3) { --y0: 2.5; --x1: 4; --y1: -3; --r1: -51.34; --s1: 0.534; --r2: -45; }
+  .burger span:nth-child(4) { --y0: 7.5; --x1: 8; --y1: 0; --r1: -90; --s1: 0.667; --r2: -45; }
   .site-header { justify-content: flex-start; gap: 12px; }
   .header-end { margin-left: auto; }
   /* the menu button opens the sidebar as a drawer from the left, on every page */
