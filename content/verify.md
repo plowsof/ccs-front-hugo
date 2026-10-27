@@ -6,7 +6,8 @@ layout: verify
 
 Check the address **your wallet shows** (after scanning or pasting) in a view-only copy of the CCS
 wallet, made from its public address and view key ({{wallet_source}}; take them from there, not
-from this page):
+from this page, and open it yourself rather than only through this page's link: a web server that
+lies could change the link too):
 
 - Address: `{{address}}`
 - View key: `{{viewkey}}`
