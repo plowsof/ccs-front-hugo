@@ -380,7 +380,8 @@ progress::-moz-progress-bar {
   }
   .nav-button:hover { background: var(--secondary); }
   /* the burger, getmonero.org's size (monero-site css/custom.css .burger), in the theme's colour:
-     four lines that, opening, fold into Monero's M, hold it a moment, then into an X; closing, back
+     three lines 7 px apart as theirs (the middle one two, on top of each other), that, opening,
+     fold into Monero's M (four lines), hold it a moment, then into an X; closing, back
      the same way. --t goes from 0 (burger) to 1 (X); --a moves each line from the burger to the M
      (t 0 to 0.4), --c from the M to the X (t 0.6 to 1). Where @property isn't known, no
      animation: the burger or the X at once. Each line: its centre (x, y, px, from the button's
@@ -398,11 +399,12 @@ progress::-moz-progress-bar {
       rotate(calc((var(--r0) + (var(--r1) - var(--r0)) * var(--a) + (var(--r2) - var(--r1)) * var(--c)) * 1deg))
       scaleX(calc(var(--s0) + (var(--s1) - var(--s0)) * var(--a) + (var(--s2) - var(--s1)) * var(--c)));
   }
-  /* the M: its left stroke, down to the middle, up again, its right stroke */
-  .burger span:nth-child(1) { --y0: -7.5; --x1: -8; --y1: 0; --r1: 90; --s1: 0.667; --r2: 45; }
-  .burger span:nth-child(2) { --y0: -2.5; --x1: -4; --y1: -3; --r1: 51.34; --s1: 0.534; --r2: 45; }
-  .burger span:nth-child(3) { --y0: 2.5; --x1: 4; --y1: -3; --r1: -51.34; --s1: 0.534; --r2: -45; }
-  .burger span:nth-child(4) { --y0: 7.5; --x1: 8; --y1: 0; --r1: -90; --s1: 0.667; --r2: -45; }
+  /* the burger's top, middle (twice) and bottom lines; the M's left stroke, down to the middle, up
+     again, its right stroke */
+  .burger span:nth-child(1) { --y0: -7; --x1: -8; --y1: 0; --r1: 90; --s1: 0.667; --r2: 45; }
+  .burger span:nth-child(2) { --y0: 0; --x1: -4; --y1: -3; --r1: 51.34; --s1: 0.534; --r2: 45; }
+  .burger span:nth-child(3) { --y0: 0; --x1: 4; --y1: -3; --r1: -51.34; --s1: 0.534; --r2: -45; }
+  .burger span:nth-child(4) { --y0: 7; --x1: 8; --y1: 0; --r1: -90; --s1: 0.667; --r2: -45; }
   .site-header { justify-content: flex-start; gap: 12px; }
   .header-end { margin-left: auto; }
   /* the menu button opens the sidebar as a drawer from the left, on every page */
