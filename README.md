@@ -103,8 +103,8 @@ The parts are rendered from the same templates as the example pages, so they can
 
 - Layout after the concept screenshots in redsh4de's CCS proposal
   ("CCS Frontend Astro Rewrite").
-- The piggy bank: from redsh4de/monero-ccs-site (`src/assets/funding-required.png`, branch
-  `feat/landing-draft`), BSD-3, Copyright (c) 2026, SyntheticBird, `static/assets/piggy-LICENSE`.
+- The piggy bank: ccs-front's `img/funding-required.png` (by rehrar, 2018; scaled to 760 px),
+  BSD-3, Copyright (c) 2021, monero-project, `static/assets/piggy-LICENSE`.
 - The Monero symbol: monero-project/monero-site `img/favicons.svg` (BSD-3).
 - The General Fund's QR code (`static/assets/general-fund-qr.png`): monero-project/monero-site
   `public/contributing/donate-monero.png` (BSD-3); it reads as `monero:` and the General Fund address.
