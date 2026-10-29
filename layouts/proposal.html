@@ -7,7 +7,7 @@
   {{- /* no stage label: the link above already names the stage, the strip shows its colour */}}
   <header class="card head {{ $s }}">
     <h1>{{ $v.name }}</h1>
-    {{ partial "meta.html" (dict "s" $s "v" $v) }}
+    {{ partial "meta.html" (dict "s" $s "v" $v "page" true) }}
     <p class="labels">{{ if $ph }}{{ $v.tag_links }}{{ else }}{{ range .Params.tags }}{{ partial "label.html" (dict "tag" . "link" true "href" "/explore/tag/example/") }}{{ end }}{{ end }}</p>
     {{ if eq $s "fr" -}}
     {{ partial "marker.html" "donate" }}

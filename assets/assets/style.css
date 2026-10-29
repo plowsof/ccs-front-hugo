@@ -52,6 +52,8 @@ body {
   color: var(--text);
   background: var(--bg);
   line-height: 1.55;
+  /* DM Sans is variable: a little heavier than 400, nearer ccs.getmonero.org's Open Sans */
+  font-weight: 450;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -255,7 +257,9 @@ a, button, label, summary, input, select, textarea { -webkit-tap-highlight-color
 a.card { box-shadow: 0 0 20px rgba(50, 50, 93, 0.4); transition: background 0.15s ease, box-shadow 0.15s ease; }
 a.card:hover, a.card:focus, a.card:active { color: var(--text); box-shadow: 0 0 40px rgba(50, 50, 93, 0.4); }
 @media (prefers-reduced-motion: reduce) { .card { transition: none; } }
-.card h3 { color: var(--heading); margin: 0 110px 10px 0; font-size: 1.12rem; }
+/* the lists' cards and a proposal page at ccs.getmonero.org's sizes (its custom.css: titles 1.25-1.5rem,
+   the details 1.1rem, the amount bold 1.2rem) */
+.card h3 { color: var(--heading); margin: 0 110px 10px 0; font-size: 1.3rem; }
 .tag {
   position: absolute;
   top: 0;
@@ -270,10 +274,10 @@ a.card:hover, a.card:focus, a.card:active { color: var(--text); box-shadow: 0 0 
   background: var(--stage);
   border-radius: 0 0 0 6px;
 }
-.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.92rem; margin: 0; padding: 0; list-style: none; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 1rem; margin: 0; padding: 0; list-style: none; }
 .meta li { display: inline-flex; align-items: center; gap: 7px; }
 .meta .icon { color: var(--orange); }
-.progress-label { text-align: right; font-size: 0.9rem; margin: 14px 0 6px; }
+.progress-label { text-align: right; font-size: 1.1rem; font-weight: 700; color: var(--heading); margin: 14px 0 6px; }
 
 /* A funding bar: an outlined pill with the bar inside it, a little glossy, as the original
    ccs.getmonero.org's; taller on a proposal page than on the lists' cards */
@@ -308,9 +312,21 @@ progress::-moz-progress-bar {
 .segments span.done { background: var(--stage); }
 
 /* proposal page */
-.proposal { max-width: 1000px; margin: 24px auto 56px; padding: 0 max(16px, 4vw); }
+.proposal { max-width: 1180px; margin: 24px auto 56px; padding: 0 max(16px, 4vw); }
 .proposal .head { position: relative; padding: 26px 26px 22px; }
-.proposal .head h1 { margin: 4px 0 12px; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; }
+.proposal .head h1 { margin: 4px 0 12px; font-size: clamp(1.5rem, 3vw, 1.75rem); font-weight: 600; line-height: 1.2; }
+.proposal .head .meta { font-size: 1.05rem; gap: 6px 18px; }
+/* roomy, as ccs.getmonero.org's: the title just above its details, and "Raised X of Y XMR" at
+   the right end of their line (a long one wraps in its own column) */
+@media (min-width: 861px) {
+  .proposal .head { padding: 56px 64px 44px; }
+  .proposal .head h1 { margin: 0 0 6px; }
+  .proposal .head.fr { display: grid; grid-template-columns: 1fr auto; column-gap: 24px; align-items: baseline; }
+  .proposal .head.fr > * { grid-column: 1 / -1; }
+  .proposal .head.fr > .meta { grid-column: 1; grid-row: 2; }
+  .proposal .head.fr > .progress-label { grid-column: 2; grid-row: 2; margin: 0; }
+  .proposal .head.fr > progress { margin-top: 14px; }
+}
 .columns { display: grid; grid-template-columns: 1fr 330px; gap: 32px; margin-top: 28px; align-items: start; }
 .body { min-width: 0; overflow-wrap: anywhere; }
 .body img { max-width: 100%; }
@@ -436,13 +452,16 @@ progress::-moz-progress-bar {
   .brand img { width: 24px; height: 24px; }
   .stage-grid { grid-template-columns: 1fr; }
   .card h3, .proposal .head h1 { margin-right: 0; margin-top: 18px; }
+  .card h3 { font-size: 1.15rem; }
+  .meta, .tabs .panel { font-size: 1rem; }
+  .progress-label { font-size: 1rem; }
 }
 
 .box + .box { margin-top: 16px; }
 
 /* proposal page: the Contribute dropdown (a <details>, no JavaScript) */
 /* a proposal page: the amount at the right end of the bar, bold, as on the current CCS */
-.head .progress-label { text-align: right; font-size: 1.05rem; font-weight: 700; color: var(--heading); margin-top: 18px; }
+.head .progress-label { text-align: right; font-size: 1.2rem; font-weight: 700; color: var(--heading); margin-top: 18px; }
 .contribute { margin-top: 22px; text-align: center; }
 .contribute summary { list-style: none; cursor: pointer; display: inline-block; }
 .contribute summary::-webkit-details-marker { display: none; }
@@ -462,15 +481,27 @@ progress::-moz-progress-bar {
 .tabs > input { position: absolute; opacity: 0; pointer-events: none; }
 .tabs > label {
   padding: 10px 20px;
-  font-weight: 600;
-  color: var(--muted);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
   border-bottom: 3px solid var(--line);
   cursor: pointer;
 }
 .tabs > label:hover { color: var(--orange); border-bottom-color: color-mix(in srgb, var(--orange) 45%, var(--line)); }
 .tabs > input:checked + label { color: var(--orange); border-bottom-color: var(--orange); }
 .tabs > input:focus-visible + label { outline: 2px solid var(--orange); outline-offset: 2px; }
-.tabs .panel { display: none; order: 1; width: 100%; padding-top: 24px; }
+.tabs .panel { display: none; order: 1; width: 100%; padding-top: 24px; font-size: 1.1rem; line-height: 1.7; }
+/* the proposal's own headings at ccs.getmonero.org's sizes (2, 1.75, 1.5rem, semibold) */
+.panel-proposal h1, .panel-proposal h2, .panel-proposal h3 { font-weight: 600; line-height: 1.25; margin: 1.2em 0 0.4em; }
+.panel-proposal h1 { font-size: 2rem; }
+.panel-proposal h2 { font-size: 1.75rem; }
+.panel-proposal h3 { font-size: 1.5rem; }
+.panel-proposal > :first-child { margin-top: 0; }
+@media (max-width: 520px) {
+  .panel-proposal h1 { font-size: 1.6rem; }
+  .panel-proposal h2 { font-size: 1.4rem; }
+  .panel-proposal h3 { font-size: 1.2rem; }
+}
 #tab-proposal:checked ~ .panel-proposal,
 #tab-milestones:checked ~ .panel-milestones,
 #tab-payouts:checked ~ .panel-payouts { display: block; }
@@ -483,11 +514,15 @@ progress::-moz-progress-bar {
   margin-bottom: 12px;
 }
 .payout { padding-left: 20px; }
-.milestone h3 { margin: 0 0 6px; font-size: 1.02rem; color: var(--heading); }
-.milestone p, .payout p { margin: 2px 0; color: var(--muted); }
-.milestone .label, .payout .label { font-weight: 600; color: var(--text); }
+.milestone h3 { margin: 0 0 6px; font-size: 1.25rem; font-weight: 700; color: var(--heading); }
+.milestone p, .payout p { margin: 2px 0; color: var(--text); }
+/* (not the tags' .label below: "To be paid:" as large as its value) */
+.milestone .label, .payout .label {
+  display: inline; font-size: inherit; line-height: inherit; padding: 0; border-radius: 0; background: none;
+  font-weight: 700; color: var(--text);
+}
 .milestone .mark {
-  position: absolute; left: 20px; top: 19px;
+  position: absolute; left: 20px; top: 24px;
   width: 16px; height: 16px; border-radius: 50%;
   border: 2px solid var(--wip);
 }
