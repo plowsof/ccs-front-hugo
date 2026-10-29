@@ -315,7 +315,7 @@ progress::-moz-progress-bar {
 .proposal { max-width: 1000px; margin: 24px auto 56px; padding: 0 max(16px, 4vw); }
 .proposal .head { position: relative; padding: 26px 26px 22px; }
 .proposal .head h1 { margin: 4px 0 12px; font-size: clamp(1.5rem, 3vw, 1.75rem); font-weight: 600; line-height: 1.2; }
-.proposal .head .meta { font-size: 1.1rem; }
+.proposal .head .meta { font-size: 1.05rem; gap: 6px 18px; }
 /* a funding-required proposal's head as ccs.getmonero.org's: roomy, the title just above its
    details, and "Raised X of Y XMR" at the end of their line, over the bar */
 @media (min-width: 861px) {
