@@ -61,7 +61,8 @@ A new marker, part or `{{slot}}` is a new release of ccs-front-bash and of the g
 `{{url}}`, `{{amount}}`, `{{raised}}`, `{{percentage}}`, `{{contributors}}`, `{{milestones}}`,
 `{{done}}`, `{{segments}}` (made of `segment-done.html` / `segment-todo.html`), `{{address}}`,
 `{{pending_note}}` (" · 1.5 XMR pending", or empty), `{{funding_note}}` (" · funding since …", or
-empty), `{{gitlab_url}}`, `{{funds}}` (a milestone's), `{{date}}` (a milestone's
+empty), `{{funding_date}}` (a funding-required proposal's one date: when funding started, or the
+date its front matter gives when there is none; needs ccs-front-bash with that slot), `{{gitlab_url}}`, `{{funds}}` (a milestone's), `{{date}}` (a milestone's
 completion or a payout's). Each is replaced with its value HTML-escaped once
 (ccs-bash's JSON is already escaped). `{{qr}}` is the QR code
 as a PNG data URI (`data:image/png;base64,…`, ccs-bash's `donate-qr-code`). The exception is

@@ -1,6 +1,10 @@
 <ul class="meta">
   <li>{{ partial "icon.html" "user" }}{{ .v.author }}</li>
+  {{- if eq .s "fr" }}
+  <li>{{ partial "icon.html" "calendar" }}{{ .v.funding_date }}</li>
+  {{- else }}
   <li>{{ partial "icon.html" "calendar" }}{{ .v.date }}{{ .v.funding_note }}</li>
+  {{- end }}
   {{- if ne .s "idea" }}
   <li>{{ partial "icon.html" "users" }}{{ .v.contributors }} contributors</li>
   {{- /* the amount only where no "raised X of Y XMR" says it: wip and completed cards */}}
