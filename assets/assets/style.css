@@ -322,8 +322,6 @@ progress::-moz-progress-bar {
   .proposal .head { padding: 56px 48px 44px; }
   .proposal .head h1 { margin: 0 0 6px; }
   .proposal .head.fr { display: grid; grid-template-columns: 1fr auto; column-gap: 16px; align-items: baseline; }
-  /* (its "N XMR", the meta's last item, is in "Raised X of N XMR" beside it) */
-  .proposal .head.fr .meta li:last-child { display: none; }
   .proposal .head.fr > * { grid-column: 1 / -1; }
   .proposal .head.fr > .meta { grid-column: 1; grid-row: 2; }
   .proposal .head.fr > .progress-label { grid-column: 2; grid-row: 2; margin: 0; }
