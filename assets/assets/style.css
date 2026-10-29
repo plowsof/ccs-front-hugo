@@ -249,12 +249,11 @@ a, button, label, summary, input, select, textarea { -webkit-tap-highlight-color
   text-decoration: none;
   transition: box-shadow 0.15s ease;
 }
-/* as ccs.getmonero.org's proposal cards: a soft shadow all round that lifts them off the page
-   (theirs 0 0 20px rgba(50,50,93,.4)), twice as wide on hover (0 0 40px). Only a card that is a
-   link (the lists' proposals): a proposal page's own head is a card too. In dark mode a black one,
-   opaque, so it still shows on the dark page. */
-a.card { --card-glow: light-dark(rgb(50 50 93 / 0.4), rgb(0 0 0)); box-shadow: 0 0 20px var(--card-glow); }
-a.card:hover, a.card:focus-visible { color: var(--text); box-shadow: 0 0 40px var(--card-glow); }
+/* ccs.getmonero.org's proposal cards exactly (its custom.css, .ffs a.ffs-idea), in both themes:
+   0 0 20px rgba(50,50,93,.4), 40px on hover, focus and while pressed. Only a card that is a link
+   (the lists' proposals): a proposal page's own head is a card too. */
+a.card { box-shadow: 0 0 20px rgba(50, 50, 93, 0.4); transition: background 0.15s ease, box-shadow 0.15s ease; }
+a.card:hover, a.card:focus, a.card:active { color: var(--text); box-shadow: 0 0 40px rgba(50, 50, 93, 0.4); }
 @media (prefers-reduced-motion: reduce) { .card { transition: none; } }
 .card h3 { color: var(--heading); margin: 0 110px 10px 0; font-size: 1.12rem; }
 .tag {
