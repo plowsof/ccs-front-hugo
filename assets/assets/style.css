@@ -52,6 +52,8 @@ body {
   color: var(--text);
   background: var(--bg);
   line-height: 1.55;
+  /* DM Sans is variable: a little heavier than 400, nearer ccs.getmonero.org's Open Sans */
+  font-weight: 450;
   display: flex;
   flex-direction: column;
   min-height: 100vh;
@@ -255,7 +257,9 @@ a, button, label, summary, input, select, textarea { -webkit-tap-highlight-color
 a.card { box-shadow: 0 0 20px rgba(50, 50, 93, 0.4); transition: background 0.15s ease, box-shadow 0.15s ease; }
 a.card:hover, a.card:focus, a.card:active { color: var(--text); box-shadow: 0 0 40px rgba(50, 50, 93, 0.4); }
 @media (prefers-reduced-motion: reduce) { .card { transition: none; } }
-.card h3 { color: var(--heading); margin: 0 110px 10px 0; font-size: 1.12rem; }
+/* the lists' cards and a proposal page at ccs.getmonero.org's sizes (its custom.css: titles 1.25-1.5rem,
+   the details 1.1rem, the amount bold 1.2rem) */
+.card h3 { color: var(--heading); margin: 0 110px 10px 0; font-size: 1.3rem; }
 .tag {
   position: absolute;
   top: 0;
@@ -270,10 +274,10 @@ a.card:hover, a.card:focus, a.card:active { color: var(--text); box-shadow: 0 0 
   background: var(--stage);
   border-radius: 0 0 0 6px;
 }
-.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 0.92rem; margin: 0; padding: 0; list-style: none; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 1rem; margin: 0; padding: 0; list-style: none; }
 .meta li { display: inline-flex; align-items: center; gap: 7px; }
 .meta .icon { color: var(--orange); }
-.progress-label { text-align: right; font-size: 0.9rem; margin: 14px 0 6px; }
+.progress-label { text-align: right; font-size: 1.1rem; font-weight: 700; color: var(--heading); margin: 14px 0 6px; }
 
 /* A funding bar: an outlined pill with the bar inside it, a little glossy, as the original
    ccs.getmonero.org's; taller on a proposal page than on the lists' cards */
@@ -436,13 +440,16 @@ progress::-moz-progress-bar {
   .brand img { width: 24px; height: 24px; }
   .stage-grid { grid-template-columns: 1fr; }
   .card h3, .proposal .head h1 { margin-right: 0; margin-top: 18px; }
+  .card h3 { font-size: 1.15rem; }
+  .meta, .tabs .panel { font-size: 1rem; }
+  .progress-label { font-size: 1rem; }
 }
 
 .box + .box { margin-top: 16px; }
 
 /* proposal page: the Contribute dropdown (a <details>, no JavaScript) */
 /* a proposal page: the amount at the right end of the bar, bold, as on the current CCS */
-.head .progress-label { text-align: right; font-size: 1.05rem; font-weight: 700; color: var(--heading); margin-top: 18px; }
+.head .progress-label { text-align: right; font-size: 1.2rem; font-weight: 700; color: var(--heading); margin-top: 18px; }
 .contribute { margin-top: 22px; text-align: center; }
 .contribute summary { list-style: none; cursor: pointer; display: inline-block; }
 .contribute summary::-webkit-details-marker { display: none; }
@@ -462,15 +469,16 @@ progress::-moz-progress-bar {
 .tabs > input { position: absolute; opacity: 0; pointer-events: none; }
 .tabs > label {
   padding: 10px 20px;
-  font-weight: 600;
-  color: var(--muted);
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--text);
   border-bottom: 3px solid var(--line);
   cursor: pointer;
 }
 .tabs > label:hover { color: var(--orange); border-bottom-color: color-mix(in srgb, var(--orange) 45%, var(--line)); }
 .tabs > input:checked + label { color: var(--orange); border-bottom-color: var(--orange); }
 .tabs > input:focus-visible + label { outline: 2px solid var(--orange); outline-offset: 2px; }
-.tabs .panel { display: none; order: 1; width: 100%; padding-top: 24px; }
+.tabs .panel { display: none; order: 1; width: 100%; padding-top: 24px; font-size: 1.1rem; line-height: 1.7; }
 #tab-proposal:checked ~ .panel-proposal,
 #tab-milestones:checked ~ .panel-milestones,
 #tab-payouts:checked ~ .panel-payouts { display: block; }
@@ -483,11 +491,11 @@ progress::-moz-progress-bar {
   margin-bottom: 12px;
 }
 .payout { padding-left: 20px; }
-.milestone h3 { margin: 0 0 6px; font-size: 1.02rem; color: var(--heading); }
-.milestone p, .payout p { margin: 2px 0; color: var(--muted); }
+.milestone h3 { margin: 0 0 6px; font-size: 1.25rem; font-weight: 700; color: var(--heading); }
+.milestone p, .payout p { margin: 2px 0; color: var(--text); }
 .milestone .label, .payout .label { font-weight: 600; color: var(--text); }
 .milestone .mark {
-  position: absolute; left: 20px; top: 19px;
+  position: absolute; left: 20px; top: 24px;
   width: 16px; height: 16px; border-radius: 50%;
   border: 2px solid var(--wip);
 }
