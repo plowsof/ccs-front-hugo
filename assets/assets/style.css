@@ -314,7 +314,19 @@ progress::-moz-progress-bar {
 /* proposal page */
 .proposal { max-width: 1000px; margin: 24px auto 56px; padding: 0 max(16px, 4vw); }
 .proposal .head { position: relative; padding: 26px 26px 22px; }
-.proposal .head h1 { margin: 4px 0 12px; font-size: clamp(1.5rem, 3vw, 2rem); line-height: 1.2; }
+.proposal .head h1 { margin: 4px 0 12px; font-size: clamp(1.5rem, 3vw, 1.75rem); font-weight: 600; line-height: 1.2; }
+.proposal .head .meta { font-size: 1.1rem; }
+/* a funding-required proposal's head as ccs.getmonero.org's: roomy, the title just above its
+   details, and "Raised X of Y XMR" at the end of their line, over the bar */
+@media (min-width: 861px) {
+  .proposal .head { padding: 56px 64px 44px; }
+  .proposal .head h1 { margin: 0 0 6px; }
+  .proposal .head.fr { display: grid; grid-template-columns: 1fr auto; column-gap: 24px; align-items: baseline; }
+  .proposal .head.fr > * { grid-column: 1 / -1; }
+  .proposal .head.fr > .meta { grid-column: 1; grid-row: 2; }
+  .proposal .head.fr > .progress-label { grid-column: 2; grid-row: 2; margin: 0; }
+  .proposal .head.fr > progress { margin-top: 12px; }
+}
 .columns { display: grid; grid-template-columns: 1fr 330px; gap: 32px; margin-top: 28px; align-items: start; }
 .body { min-width: 0; overflow-wrap: anywhere; }
 .body img { max-width: 100%; }
@@ -479,6 +491,17 @@ progress::-moz-progress-bar {
 .tabs > input:checked + label { color: var(--orange); border-bottom-color: var(--orange); }
 .tabs > input:focus-visible + label { outline: 2px solid var(--orange); outline-offset: 2px; }
 .tabs .panel { display: none; order: 1; width: 100%; padding-top: 24px; font-size: 1.1rem; line-height: 1.7; }
+/* the proposal's own headings at ccs.getmonero.org's sizes (2, 1.75, 1.5rem, semibold) */
+.panel-proposal h1, .panel-proposal h2, .panel-proposal h3 { font-weight: 600; line-height: 1.25; margin: 1.6em 0 0.5em; }
+.panel-proposal h1 { font-size: 2rem; }
+.panel-proposal h2 { font-size: 1.75rem; }
+.panel-proposal h3 { font-size: 1.5rem; }
+.panel-proposal > :first-child { margin-top: 0; }
+@media (max-width: 520px) {
+  .panel-proposal h1 { font-size: 1.6rem; }
+  .panel-proposal h2 { font-size: 1.4rem; }
+  .panel-proposal h3 { font-size: 1.2rem; }
+}
 #tab-proposal:checked ~ .panel-proposal,
 #tab-milestones:checked ~ .panel-milestones,
 #tab-payouts:checked ~ .panel-payouts { display: block; }
