@@ -316,16 +316,10 @@ progress::-moz-progress-bar {
 .proposal .head { position: relative; padding: 26px 26px 22px; }
 .proposal .head h1 { margin: 4px 0 12px; font-size: clamp(1.5rem, 3vw, 1.75rem); font-weight: 600; line-height: 1.2; }
 .proposal .head .meta { font-size: 1.05rem; gap: 6px 18px; }
-/* a funding-required proposal's head as ccs.getmonero.org's: roomy, the title just above its
-   details, and "Raised X of Y XMR" at the end of their line, over the bar */
+/* roomy, as ccs.getmonero.org's: the title just above its details, "Raised X of Y XMR" under them */
 @media (min-width: 861px) {
   .proposal .head { padding: 56px 48px 44px; }
   .proposal .head h1 { margin: 0 0 6px; }
-  .proposal .head.fr { display: grid; grid-template-columns: 1fr auto; column-gap: 16px; align-items: baseline; }
-  .proposal .head.fr > * { grid-column: 1 / -1; }
-  .proposal .head.fr > .meta { grid-column: 1; grid-row: 2; }
-  .proposal .head.fr > .progress-label { grid-column: 2; grid-row: 2; margin: 0; }
-  .proposal .head.fr > progress { margin-top: 12px; }
 }
 .columns { display: grid; grid-template-columns: 1fr 330px; gap: 32px; margin-top: 28px; align-items: start; }
 .body { min-width: 0; overflow-wrap: anywhere; }
