@@ -84,7 +84,9 @@ and tag pages on a wide screen, and on a phone the drawer the menu button opens 
 header's "Proposals" goes to Funding Required.
 `explore/tag/example/index.html` is the tag page: copied to `explore/tag/<tag>/` for each tag
 (the same depth, so its links work), with its lists, filters and title filled; it is not
-published itself. In the preview every tag links to it (it shows "Abandoned").
+published itself. A preview has a page for each example tag as well, made from it the way
+ccs-front-bash makes them (`content/_content.gotmpl`, only when the Dockerfile sets
+`HUGO_PARAMS_PREVIEWTAGS`), and its tags link there. A release has only the example page, built as before.
 
 **Proposal pages** are `parts/proposal-fr.html`, `proposal-wip.html` and `proposal-cp.html` with
 their slots filled, `{{milestones_list}}` and `{{payouts_list}}` being the milestone and
