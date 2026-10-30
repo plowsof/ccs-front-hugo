@@ -1,0 +1,6 @@
+{{- /* A tag -> the link to its page. In a release, the one example tag page, which ccs-front-bash
+   copies to /explore/tag/<slug>/ for each tag and fills in; in a preview (params.previewtags, set
+   by the Dockerfile), each example tag's own page (content/_content.gotmpl). */ -}}
+{{- $href := "/explore/tag/example/" -}}
+{{- if site.Params.previewtags }}{{ $href = printf "/explore/tag/%s/" (partial "tag-slug.html" .) }}{{ end -}}
+{{- return $href -}}
