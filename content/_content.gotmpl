@@ -1,0 +1,12 @@
+{{- /* A preview only (params.previewtags, set by the Dockerfile): a page for each example tag, at
+   /explore/tag/<slug>/, made from explore-tag.md's as ccs-front-bash makes one for each tag on the
+   server. A release has none of them: there explore-tag.md's page is the original. */ -}}
+{{- if site.Params.previewtags }}
+{{- range partial "tags.html" . }}
+{{- $.AddPage (dict
+  "path" (printf "explore/tag/%s" (partial "tag-slug.html" .tag))
+  "title" "Tagged proposals"
+  "layout" "stage"
+  "params" (dict "page" "explore" "show" (slice "fr" "wip" "cp") "tag" .tag)) }}
+{{- end }}
+{{- end }}

@@ -1,0 +1,4 @@
+{{- /* A tag -> the slug of its page, /explore/tag/<slug>/, as ccs-front-bash makes it (its
+   lib/common.jq, slug): lower case, each run of anything but letters and digits a dash, none at
+   either end. */ -}}
+{{- return strings.Trim (replaceRE `[^\p{L}\p{N}]+` "-" (lower .)) "-" -}}

@@ -15,7 +15,8 @@ COPY --from=hugo / /
 ARG SOURCE_COMMIT
 ARG COOLIFY_BRANCH
 COPY . /src
-RUN cd /src && hugo build --quiet --noBuildLock --cacheDir /tmp/hugo-cache --destination /site
+# HUGO_PARAMS_PREVIEWTAGS: a page for each example tag (content/_content.gotmpl), as the server has
+RUN cd /src && HUGO_PARAMS_PREVIEWTAGS=1 hugo build --quiet --noBuildLock --cacheDir /tmp/hugo-cache --destination /site
 
 # nginx, as on the real web server, so the theme button works too (StageX has no nginx; this
 # official image, pinned by digest, serves previews only)

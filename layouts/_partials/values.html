@@ -6,7 +6,7 @@
 {{- $labels := "" -}}{{- $links := "" -}}
 {{- range $p.tags }}
   {{- $labels = print $labels (partial "label.html" (dict "tag" .)) -}}
-  {{- $links = print $links (partial "label.html" (dict "tag" . "link" true "href" "/explore/tag/example/")) -}}
+  {{- $links = print $links (partial "label.html" (dict "tag" . "link" true "href" (partial "tag-href.html" .))) -}}
 {{- end -}}
 {{- return dict
   "url" (or (index $p "local-url") (index $p "gitlab-url"))
