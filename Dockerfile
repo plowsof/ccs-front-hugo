@@ -15,8 +15,10 @@ COPY --from=hugo / /
 ARG SOURCE_COMMIT
 ARG COOLIFY_BRANCH
 COPY . /src
-# HUGO_PARAMS_PREVIEWTAGS: a page for each example tag (content/_content.gotmpl), as the server has
-RUN cd /src && HUGO_PARAMS_PREVIEWTAGS=1 hugo build --quiet --noBuildLock --cacheDir /tmp/hugo-cache --destination /site
+# HUGO_PARAMS_PREVIEWTAGS: a page for each example tag (content/_content.gotmpl), as the server has;
+# HUGO_PARAMS_PREVIEWONION: the footer's onion link filled in (layouts/baseof.html), as ccs-front-bash
+# fills it with CCS_ONION: ccs.monerodevs.org's onion
+RUN cd /src && HUGO_PARAMS_PREVIEWTAGS=1 HUGO_PARAMS_PREVIEWONION=euofv4oczbu32vr4my73diw3dwelcnazsnx55wd7ouoimrvstk4wqyid.onion hugo build --quiet --noBuildLock --cacheDir /tmp/hugo-cache --destination /site
 
 # nginx, as on the real web server, so the theme button works too (StageX has no nginx; this
 # official image, pinned by digest, serves previews only)
