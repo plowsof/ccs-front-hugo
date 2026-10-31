@@ -81,6 +81,10 @@
   <a href="{{ site.Params.backendRepo }}">Backend (ccs-bash) {{ partial "icon.html" "external" }}</a>
   <a href="{{ site.Params.proposalsRepo }}">Proposals (ccs-proposals) {{ partial "icon.html" "external" }}</a>
   </nav>
+  {{- /* the site's onion address, when it has one: ccs-front-bash fills the onion part in, the
+     web server's gate accepts only the address its own config names; empty otherwise */}}
+  {{ partial "marker.html" "onion" }}
+  {{ partial "marker.html" "/onion" }}
 </footer>
 {{ partial "preview.html" . }}
 </body>
