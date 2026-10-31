@@ -384,8 +384,14 @@ progress::-moz-progress-bar {
 .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 .site-footer a { color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .site-footer a:hover { color: var(--orange); }
-.footer-onion { margin: 18px 0 0; font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
-.site-footer .footer-onion a { display: inline; text-decoration: underline; }
+/* the Tor onion logo, before "Tor Onion service": a PNG in its own colours (no SVG: Tor Browser at
+   "Safest" doesn't draw it), from the stylesheet, so the part has no path that depends on the page */
+.tor-logo {
+  display: inline-block; width: 13px; height: 20px; flex: none;
+  background: no-repeat center / contain;
+  background-image: url({{ partial "icons-url.html" "tor-1x" | strings.TrimPrefix "/assets/" }});
+  background-image: image-set({{ range $i, $x := slice "1x" "2x" "3x" }}{{ if $i }}, {{ end }}url({{ partial "icons-url.html" (print "tor-" $x) | strings.TrimPrefix "/assets/" }}) {{ $x }}{{ end }});
+}
 
 /* small screens */
 @media (max-width: 860px) {
