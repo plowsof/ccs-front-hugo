@@ -384,6 +384,8 @@ progress::-moz-progress-bar {
 .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 .site-footer a { color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .site-footer a:hover { color: var(--orange); }
+.footer-onion { margin: 18px 0 0; font-size: 0.85rem; color: var(--muted); overflow-wrap: anywhere; }
+.site-footer .footer-onion a { display: inline; text-decoration: underline; }
 
 /* small screens */
 @media (max-width: 860px) {

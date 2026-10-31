@@ -1,0 +1,3 @@
+{{- /* The footer's line for the site's onion service, for Tor Browser users: .onion is its address
+   (NAME.onion; in the part, the slot ccs-front-bash fills), shown as text too, to copy. */ -}}
+<p class="footer-onion">Also on Tor: <a {{ printf "href=%q" (printf "http://%s/" .onion) | safeHTMLAttr }}>{{ .onion }}</a></p>
