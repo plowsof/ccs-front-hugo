@@ -22,11 +22,16 @@
 /* light or dark follows the OS setting: no JavaScript, no toggle */
 :root {
   color-scheme: light dark;
-  --orange: #e2611f;
-  --orange-dark: #c8551b;
+  /* Monero's orange; as text, darker on the light theme (4.5:1 on its backgrounds, WCAG AA); on
+     buttons, a shade white text reads on (4.6:1); the brand's own for large text and bars */
+  --brand: #e2611f;
+  --orange: light-dark(#b24b17, #e2611f);
+  --orange-dark: light-dark(#953f13, #e98653);   /* hover */
+  --button: #c25219;
+  --button-hover: #ab4916;
   --text: light-dark(#2e3038, #c6c6d0);
   --heading: light-dark(#191b23, #f0f0f0);
-  --muted: light-dark(#5c5e67, #9a9ba3);
+  --muted: light-dark(#5c5e67, #a3a4ac);
   --bg: light-dark(#ffffff, #171717);
   --card: light-dark(#f9f7fc, #211f26);
   --line: light-dark(#e4e1e9, #36343b);
@@ -136,8 +141,8 @@ a, button, label, summary, input, select, textarea { -webkit-tap-highlight-color
   background: var(--secondary);
   color: var(--heading);
 }
-.button.primary { background: var(--orange); color: #fff; }
-.button.primary:hover { background: var(--orange-dark); color: #fff; }
+.button.primary { background: var(--button); color: #fff; }
+.button.primary:hover { background: var(--button-hover); color: #fff; }
 .button.block { display: block; text-align: center; }
 
 /* home */
@@ -150,7 +155,7 @@ a, button, label, summary, input, select, textarea { -webkit-tap-highlight-color
   margin: 40px auto 0;
   padding: 0 max(16px, 4vw);
 }
-.hero h1 { color: var(--orange); font-size: clamp(2rem, 4.2vw, 3rem); line-height: 1.15; margin: 0 0 20px; }
+.hero h1 { color: var(--brand); font-size: clamp(2rem, 4.2vw, 3rem); line-height: 1.15; margin: 0 0 20px; }
 .hero p { color: var(--muted); max-width: 34em; font-size: 1.05rem; }
 .hero .actions { display: flex; gap: 14px; margin-top: 28px; flex-wrap: wrap; }
 .hero .art { width: 100%; height: auto; max-width: 380px; justify-self: center; }
@@ -268,12 +273,13 @@ a.card:hover, a.card:focus, a.card:active { color: var(--text); box-shadow: 0 0 
   align-items: center;
   gap: 5px;
   padding: 3px 9px;
-  font-size: 0.8rem;
+  font-size: 0.9rem;
   font-weight: 700;
-  color: #fff;
+  color: #191b23;   /* dark on the light stage colours (6:1 and more), white on Work in Progress's blue */
   background: var(--stage);
   border-radius: 0 0 0 6px;
 }
+.wip .tag { color: #fff; }
 .meta { display: flex; flex-wrap: wrap; gap: 6px 22px; color: var(--muted); font-size: 1rem; margin: 0; padding: 0; list-style: none; }
 .meta li { display: inline-flex; align-items: center; gap: 7px; }
 .meta .icon { color: var(--orange); }
@@ -296,12 +302,12 @@ progress {
 progress::-webkit-progress-bar { background: transparent; border-radius: 20px; }
 /* separate rules: a browser drops a whole rule with a pseudo-element it doesn't know */
 progress::-webkit-progress-value {
-  background: var(--bar, var(--stage, var(--orange)));
+  background: var(--bar, var(--stage, var(--brand)));
   border-radius: 20px;
   box-shadow: inset 0 2px 9px rgb(255 255 255 / 0.3), inset 0 -2px 6px rgb(0 0 0 / 0.07);
 }
 progress::-moz-progress-bar {
-  background: var(--bar, var(--stage, var(--orange)));
+  background: var(--bar, var(--stage, var(--brand)));
   border-radius: 20px;
   box-shadow: inset 0 2px 9px rgb(255 255 255 / 0.3), inset 0 -2px 6px rgb(0 0 0 / 0.07);
 }
@@ -349,7 +355,7 @@ progress::-moz-progress-bar {
 .donate-page .address { margin-top: 8px; }
 @media (max-width: 520px) {
   .donate-page .box { padding: 20px 14px; }
-  .donate-page .address { font-size: 0.85rem; padding: 12px; }
+  .donate-page .address { font-size: 0.9rem; padding: 12px; }
 }
 /* A QR code: a white card (it must stay white to scan) with a soft ring of shadow, so it stands out
    on a light card too; an address: a shaded panel, bold, as the original ccs.getmonero.org's */
@@ -365,7 +371,7 @@ progress::-moz-progress-bar {
   background: light-dark(#edeff2, #2b2930); border-radius: 8px; padding: 1.2rem 1.4rem;
   box-shadow: 0 1px 3px light-dark(rgb(50 50 93 / 0.18), rgb(0 0 0 / 0.4));
 }
-@media (max-width: 520px) { .address { font-size: 0.85rem; padding: 1rem; } }
+@media (max-width: 520px) { .address { font-size: 0.9rem; padding: 1rem; } }
 .pending { color: var(--muted); font-size: 0.9rem; }
 
 .milestones { list-style: none; padding: 0; margin: 0; display: grid; gap: 10px; }
@@ -380,7 +386,7 @@ progress::-moz-progress-bar {
 .general-fund h2 { margin: 0 0 10px; font-size: 1.25rem; color: var(--heading); }
 .general-fund p { color: var(--muted); }
 .general-fund .qr { width: 150px; margin: 16px auto; }
-.general-fund .address { user-select: all; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.8rem; overflow-wrap: anywhere; color: var(--text); }
+.general-fund .address { user-select: all; font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace; font-size: 0.9rem; overflow-wrap: anywhere; color: var(--text); }
 .footer-links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; border-top: 1px solid var(--line); padding-top: 22px; }
 .site-footer a { color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
 .site-footer a:hover { color: var(--orange); }
@@ -560,11 +566,11 @@ body:not(.page-explore) .list .card h3 { margin-right: 0; }
   border-radius: 6px; font-weight: 700; text-decoration: none; line-height: 1.5;
   background: var(--tag-bg); color: var(--tag-fg);
 }
-.label { font-size: 0.75rem; padding: 1px 8px; }
+.label { font-size: 0.9rem; padding: 1px 8px; }
 a.label:hover, .filter:hover { color: var(--tag-fg); outline: 2px solid var(--tag-bg); outline-offset: 2px; }
-.side .tags-title { margin: 0 0 10px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
+.side .tags-title { margin: 0 0 10px; font-size: 0.9rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
 .filters { display: flex; flex-wrap: wrap; gap: 8px; }
-.filter { font-size: 0.82rem; padding: 4px 10px; }
+.filter { font-size: 0.9rem; padding: 4px 10px; }
 .filter .count { font-weight: 600; opacity: 0.8; }
 .filter .count:empty { display: none; }
 .filter.active { outline: 2px solid var(--orange); outline-offset: 2px; }
@@ -577,7 +583,7 @@ a.label:hover, .filter:hover { color: var(--tag-fg); outline: 2px solid var(--ta
 /* how many proposals a stage has: in the sidebar's stage menu and on the home page's stage cards */
 .side .stage-menu a .count, .stage-card .count {
   margin-left: auto; min-width: 1.6em; padding: 0 7px; border-radius: 999px; text-align: center;
-  font-size: 0.78rem; font-weight: 700; line-height: 1.6; background: var(--line); color: var(--muted);
+  font-size: 0.9rem; font-weight: 700; line-height: 1.6; background: var(--line); color: var(--muted);
 }
 .stage-card .count { margin-left: 8px; vertical-align: 2px; }
 
@@ -587,7 +593,7 @@ a.label:hover, .filter:hover { color: var(--tag-fg); outline: 2px solid var(--ta
 /* a Coolify preview's commit line (layouts/_partials/preview.html) */
 .preview-banner {
   position: fixed; bottom: 8px; left: 0; right: 0; z-index: 40; width: fit-content; margin: 0 auto;
-  padding: 4px 14px; border-radius: 8px; background: #000; color: #fff; font-size: 0.85rem;
+  padding: 4px 14px; border-radius: 8px; background: #000; color: #fff; font-size: 0.9rem;
 }
 .preview-banner a { color: #fff; }
 body:has(.preview-banner) { padding-bottom: 44px; }   /* so it covers no footer link */
