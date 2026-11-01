@@ -27,4 +27,4 @@ milestone_list:
     funds: "33% (25 XMR)"
 ---
 
-A Funding Required proposal that has reached its goal: "Fully funded" in place of the Contribute button.
+A Funding Required proposal that has reached its goal: "Funded" in place of the Contribute button.
