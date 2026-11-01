@@ -26,4 +26,7 @@ FROM nginx:stable-alpine@sha256:47928bf67eb62a1863cb08d9ecb52d3e704304ba614eaee1
 RUN rm -f /etc/nginx/conf.d/*
 COPY preview/nginx.conf /etc/nginx/conf.d/ccs.conf
 COPY --from=build /site /site
+# an example of the feed ccs-front-bash writes (feed.xml), for the footer's RSS link (nginx puts
+# the preview's own address in its links)
+COPY preview/feed.xml /site/feed.xml
 EXPOSE 8080
