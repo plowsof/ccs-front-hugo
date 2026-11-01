@@ -32,6 +32,23 @@
         "stage": "Funding Required",
         "proposals": [
             {
+                "name": "Example: a fully funded proposal",
+                "donate-address": "80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007",
+                "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/8",
+                "local-url": "/proposals/example-funded.html",
+                "contributions": 31,
+                "milestones": 3,
+                "milestones-completed": 0,
+                "percentage": 100,
+                "amount": "75.0000",
+                "amount-funded": "75.5000",
+                "amount-pending": 0,
+                "author": "example",
+                "date": "December 25, 2025",
+                "funding-required-date": "January 2, 2026",
+                "tags": []
+            },
+            {
                 "name": "Example part-time work on a wallet, 2026Q1",
                 "donate-address": "80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007",
                 "gitlab-url": "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/7",
