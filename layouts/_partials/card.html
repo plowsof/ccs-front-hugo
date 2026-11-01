@@ -9,7 +9,7 @@
   <p class="votes"><span title="Upvotes">{{ partial "icon.html" "thumbs-up" }}{{ $v.upvotes }}</span><span title="Downvotes">{{ partial "icon.html" "thumbs-down" }}{{ $v.downvotes }}</span></p>
   {{- end }}
   {{- if eq $s "fr" }}
-  <p class="progress-label">Raised {{ $v.raised }} of {{ $v.amount }} XMR{{ $v.pending_note }}</p>
+  <p class="progress-label">Raised {{ $v.raised }} of {{ $v.amount }} XMR<span class="pending">{{ $v.pending_note }}</span></p>
   <progress max="100" value="{{ $v.percentage }}" aria-label="{{ $v.percentage }}% funded">{{ $v.percentage }}%</progress>
   {{- else if eq $s "wip" }}
   <p class="progress-label">Completed {{ $v.done }} of {{ $v.milestones }} milestones</p>

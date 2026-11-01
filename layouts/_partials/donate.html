@@ -1,9 +1,9 @@
-<p class="progress-label">Raised <strong>{{ .raised }}</strong> of {{ .amount }} XMR{{ .pending_note }}</p>
+<p class="progress-label">Raised <strong>{{ .raised }}</strong> of {{ .amount }} XMR<span class="pending">{{ .pending_note }}</span></p>
 <progress max="100" value="{{ .percentage }}" aria-label="{{ .percentage }}% funded">{{ .percentage }}%</progress>
 <details class="contribute">
   <summary class="button primary">Contribute</summary>
   <ol>
-    <li>Choose how much XMR to contribute to this proposal.</li>
+    <li>Choose how much XMR to contribute to this proposal.{{ with .needed_note }}<strong class="needed">{{ . }}</strong>{{ end }}</li>
     <li>Scan the QR code, or tap it to open your Monero wallet:
       <a class="qr" {{ printf "href=%q" (printf "monero:%s" .address) | safeHTMLAttr }}><img {{ printf "src=%q" .qr | safeHTMLAttr }} alt="QR code of the address below"></a></li>
     <li>or copy the address:
