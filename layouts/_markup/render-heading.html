@@ -1,0 +1,6 @@
+{{- /* A proposal's Markdown headings one level down (# is h2, h6 at most), as ccs-front-bash's
+   markdown.awk: under the page's h1, the proposal's title. (The real site's proposal pages are
+   ccs-front-bash's; a preview's are Hugo's.) Other pages' headings as written: their h1 is their
+   title and their Markdown starts at ##. */ -}}
+{{- $l := .Level }}{{ if eq .Page.Section "proposals" }}{{ $l = add $l 1 }}{{ if gt $l 6 }}{{ $l = 6 }}{{ end }}{{ end -}}
+<h{{ $l }} id="{{ .Anchor }}">{{ .Text }}</h{{ $l }}>
