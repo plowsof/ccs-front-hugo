@@ -8,7 +8,16 @@
       <a class="button" href="/what-is-ccs/">About</a>
     </div>
   </div>
-  <img class="art" src="/assets/piggy.png" width="760" height="760" alt="">
+  {{- /* the piggy: AVIF at the largest size it is shown (380px) and twice that for dense screens; a
+     PNG for a browser without AVIF; named by their hashes, so browsers keep them (a slow Tor
+     circuit fetches them once) */}}
+  {{- $a1 := resources.Get "assets/piggy-380.avif" | fingerprint "sha256" }}
+  {{- $a2 := resources.Get "assets/piggy-760.avif" | fingerprint "sha256" }}
+  {{- $png := resources.Get "assets/piggy-380.png" | fingerprint "sha256" }}
+  <picture class="art">
+    <source type="image/avif" srcset="{{ $a1.RelPermalink }} 1x, {{ $a2.RelPermalink }} 2x">
+    <img src="{{ $png.RelPermalink }}" width="380" height="380" alt="">
+  </picture>
 </section>
 <section class="stages" id="proposals">
   <h2>View Proposals</h2>
