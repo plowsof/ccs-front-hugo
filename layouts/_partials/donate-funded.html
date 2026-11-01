@@ -1,0 +1,7 @@
+{{- /* A Funding Required proposal at its goal: the amount raised and a full bar, and "Funded" (the
+   Contribute button's size and shape, but nothing to open) in place of that button and its address.
+   ccs-front-bash puts this part in the donate region instead of donate.html; the web server's gate
+   takes it only with the bar at 100. */ -}}
+<p class="progress-label">Raised <strong>{{ .raised }}</strong> of {{ .amount }} XMR{{ .pending_note }}</p>
+<progress max="100" value="{{ .percentage }}" aria-label="{{ .percentage }}% funded">{{ .percentage }}%</progress>
+<div class="contribute"><span class="button primary funded">Funded</span></div>

@@ -11,7 +11,12 @@
     <p class="labels">{{ if $ph }}{{ $v.tag_links }}{{ else }}{{ range .Params.tags }}{{ partial "label.html" (dict "tag" . "link" true "href" (partial "tag-href.html" .)) }}{{ end }}{{ end }}</p>
     {{ if eq $s "fr" -}}
     {{ partial "marker.html" "donate" }}
+    {{- /* at its goal: "Fully funded" in place of the Contribute button (an example: proposals/example-funded) */}}
+    {{- if and (not $ph) (ge (int $v.percentage) 100) }}
+    {{ partial "donate-funded.html" $v }}
+    {{- else }}
     {{ partial "donate.html" (merge $v (dict "qr" (cond $ph $v.qr "/assets/example-qr.png") "verify_link" (cond $ph $v.verify_link (partial "verify-link.html" .)))) }}
+    {{- end }}
     {{ partial "marker.html" "/donate" }}
     {{- else -}}
     {{ partial "marker.html" "funded" }}
