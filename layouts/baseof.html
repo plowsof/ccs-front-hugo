@@ -38,6 +38,9 @@
 <link rel="alternate" type="application/rss+xml" title="CCS: funding required and fully funded" href="/feed.xml">
 </head>
 <body class="page-{{ .Params.page | default "other" }}">
+{{- /* first on the page: a keyboard or screen reader goes straight to the content, past the header,
+   the menu and the sidebar (shown only once it has the focus) */}}
+<a class="skip-link" href="#main">Skip to content</a>
 {{- /* the menu button's state: before everything it opens (the drawer, the backdrop) */}}
 <input type="checkbox" id="nav-toggle" class="nav-toggle">
 <header class="site-header">
@@ -61,7 +64,7 @@
 </header>
 <div class="layout{{ if eq .Layout "stage" }} with-side{{ end }}">
   {{ partial "sidebar.html" . }}
-  <main>
+  <main id="main">
 {{ block "main" . }}{{ end }}
   </main>
 </div>
