@@ -292,6 +292,8 @@ a.card:hover, a.card:focus, a.card:active { color: var(--text); box-shadow: 0 0 
 .meta li { display: inline-flex; align-items: center; gap: 7px; }
 .meta .icon { color: var(--orange); }
 .progress-label { text-align: right; font-size: 1.1rem; font-weight: 700; color: var(--heading); margin: 14px 0 6px; }
+/* a donation not yet counted (short of MIN_CONFIRMATIONS): "+N XMR pending", lighter than the total */
+.progress-label .pending { font-weight: 400; color: var(--muted); }
 
 /* A funding bar: an outlined pill with the bar inside it, a little glossy, as the original
    ccs.getmonero.org's; taller on a proposal page than on the lists' cards */

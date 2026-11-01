@@ -2,6 +2,7 @@
    (exact to 4 decimals, cut off, never rounded up), shown without trailing zeros: 60, 60.5, 0.1234. */ -}}
 {{- $p := . -}}
 {{- $pending := index $p "amount-pending" | default 0 -}}
+{{- $needed := index $p "amount-needed" | default "0" -}}
 {{- $since := index $p "funding-required-date" -}}
 {{- $labels := "" -}}{{- $links := "" -}}
 {{- range $p.tags }}
@@ -15,7 +16,8 @@
   "contributors" (index $p "contributions")
   "amount" (partial "xmr.html" $p.amount)
   "raised" (partial "xmr.html" (index $p "amount-funded"))
-  "pending_note" (cond (gt (float $pending) 0) (printf " · %v XMR pending" $pending) "")
+  "pending_note" (cond (gt (float $pending) 0) (printf " +%v XMR pending" $pending) "")
+  "needed_note" (cond (gt (float $needed) 0) (printf " %v XMR would fund it 100%%!" (partial "xmr.html" $needed)) "")
   "funding_note" (cond (ne $since nil) (printf " · funding since %s" $since) "")
   "funding_date" (or $since $p.date)
   "percentage" $p.percentage
