@@ -16,6 +16,7 @@ v:
   funding_note: " · funding since January 2, 2026"
   funding_date: "January 2, 2026"
   pending_note: " +1.5 XMR pending"
+  needed_note: " 13.5 XMR would fund it 100%!"
   address: "80000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000007"
   gitlab_url: "https://repo.getmonero.org/monero-project/ccs-proposals/-/merge_requests/2"
 milestone_list:
