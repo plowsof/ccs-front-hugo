@@ -1,4 +1,4 @@
-<p class="progress-label">Raised <strong>{{ .raised }}</strong> of {{ .amount }} XMR{{ .pending_note }}</p>
+<p class="progress-label">Raised <strong>{{ .raised }}</strong> of {{ .amount }} XMR<span class="pending">{{ .pending_note }}</span></p>
 <progress max="100" value="{{ .percentage }}" aria-label="{{ .percentage }}% funded">{{ .percentage }}%</progress>
 <details class="contribute">
   <summary class="button primary">Contribute</summary>
