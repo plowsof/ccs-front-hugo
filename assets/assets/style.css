@@ -140,7 +140,7 @@ a, button, label, summary, input, select, textarea { -webkit-tap-highlight-color
 .button.primary:hover { background: var(--orange-dark); color: #fff; }
 /* "Funded", in place of the Contribute button on a proposal at its goal: its size and shape, but a
    label: nothing to open, no hover */
-.button.funded { pointer-events: none; }
+.button.funded { pointer-events: none; box-sizing: border-box; min-width: 9.9em; text-align: center; }   /* Contribute ▾'s width */
 .button.block { display: block; text-align: center; }
 
 /* home */
