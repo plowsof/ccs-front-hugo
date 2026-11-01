@@ -138,6 +138,9 @@ a, button, label, summary, input, select, textarea { -webkit-tap-highlight-color
 }
 .button.primary { background: var(--orange); color: #fff; }
 .button.primary:hover { background: var(--orange-dark); color: #fff; }
+/* "Fully funded", in place of the Contribute button on a proposal at its goal: a label, not a button */
+.funded-badge { display: inline-block; margin: 6px 0 0; padding: 10px 22px; border-radius: 999px;
+  background: var(--cp); color: #191b23; font-weight: 700; }
 .button.block { display: block; text-align: center; }
 
 /* home */
