@@ -2,7 +2,8 @@
 # icons-png.sh: the site's icons as PNGs, from tools/icons.svg (Lucide, and the Monero logo). The
 # site ships no SVG: Tor Browser at "Safest" doesn't draw it. Each icon at 1x, 2x and 3x, the
 # browser takes the sharpest its screen needs (image-set, srcset). The line icons are black on
-# transparent, used as CSS masks so they keep the text's colour; the logo keeps its own.
+# transparent, used as CSS masks so they keep the text's colour; the logo and the Tor onion keep
+# their own.
 # Run it after changing tools/icons.svg, with Chrome or Chromium and Python's Pillow; commit what
 # it writes. (PNG rather than WebP or AVIF: optimised, it is nearly as small for icons this size,
 # and every browser draws it, Tor Browser at any level included.)
@@ -38,7 +39,7 @@ import glob, sys
 from PIL import Image
 for f in glob.glob(sys.argv[1] + "/*.png"):
     im = Image.open(f)
-    if "/logo-" not in f and "/favicon-" not in f:
+    if "/logo-" not in f and "/favicon-" not in f and "/tor-" not in f:
         im = Image.merge("LA", (Image.new("L", im.size, 0), im.getchannel("A")))
     im.save(f, "PNG", optimize=True)
 PY
