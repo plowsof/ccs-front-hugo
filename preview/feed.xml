@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+<channel>
+<title>Monero Community Crowdfunding System</title>
+<link>{{site}}/</link>
+<description>Proposals put to Funding Required, and fully funded</description>
+<atom:link href="{{site}}/feed.xml" rel="self" type="application/rss+xml"/>
+<item>
+<title>Funding required: Example part-time work on a wallet, 2026Q1</title>
+<link>{{site}}/proposals/example.html</link>
+<guid isPermaLink="false">{{site}}/proposals/example.html#funding-required</guid>
+<pubDate>Sat, 31 Oct 2026 12:00:00 +0000</pubDate>
+</item>
+<item>
+<title>Fully funded: Example research, 2025Q4</title>
+<link>{{site}}/proposals/example-wip.html</link>
+<guid isPermaLink="false">{{site}}/proposals/example-wip.html#funded</guid>
+<pubDate>Fri, 30 Oct 2026 09:30:00 +0000</pubDate>
+</item>
+</channel>
+</rss>

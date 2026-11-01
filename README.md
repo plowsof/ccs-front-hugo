@@ -58,6 +58,9 @@ A new marker, part or `{{slot}}` is a new release of ccs-front-bash and of the g
 | `<!-- ccs:number fr -->…<!-- /ccs:number fr -->` (`idea`, `fr`, `wip`, `cp`) | the home page's stage cards | the same number (a marker is used once a page) |
 | `<!-- ccs:onion -->…<!-- /ccs:onion -->` | every page's footer (proposal and tag pages too) | `parts/onion.html` with `{{onion}}`, the site's onion address (ccs-front-bash's `CCS_ONION`; the web server's gate takes only its own `/etc/ccs-gate/onion`), or nothing |
 
+**Not a marker:** every page's head and footer link to `/feed.xml`, the feed ccs-front-bash writes
+(with its `CCS_SITE_URL`); a preview serves an example of it (`preview/feed.xml`).
+
 **Parts** (`public/parts/`) are fragments with `{{slot}}`s: `{{name}}`, `{{author}}`, `{{date}}`,
 `{{url}}`, `{{amount}}`, `{{raised}}`, `{{percentage}}`, `{{contributors}}`, `{{milestones}}`,
 `{{done}}`, `{{segments}}` (made of `segment-done.html` / `segment-todo.html`), `{{address}}`,

@@ -34,6 +34,8 @@
 <link rel="stylesheet" href="/assets/theme.css" integrity="{{ delimit $themes " " }}">
 <link rel="icon" href="{{ partial "icons-url.html" "favicon-32" }}" sizes="32x32" type="image/png">
 <link rel="apple-touch-icon" href="{{ partial "icons-url.html" "favicon-180" }}">
+{{- /* the feed ccs-front-bash writes (feed.xml): proposals put to Funding Required, and fully funded */}}
+<link rel="alternate" type="application/rss+xml" title="CCS: funding required and fully funded" href="/feed.xml">
 </head>
 <body class="page-{{ .Params.page | default "other" }}">
 {{- /* the menu button's state: before everything it opens (the drawer, the backdrop) */}}
@@ -88,6 +90,7 @@
   <a href="{{ site.Params.builderRepo }}">Site builder (ccs-front-bash) {{ partial "icon.html" "external" }}</a>
   <a href="{{ site.Params.backendRepo }}">Backend (ccs-bash) {{ partial "icon.html" "external" }}</a>
   <a href="{{ site.Params.proposalsRepo }}">Proposals (ccs-proposals) {{ partial "icon.html" "external" }}</a>
+  <a href="/feed.xml">{{ partial "icon.html" "rss" }} RSS feed</a>
   </nav>
 </footer>
 {{ partial "preview.html" . }}
