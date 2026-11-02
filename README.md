@@ -69,8 +69,10 @@ dropdown: " 8.5 XMR would fund it 100%!", or empty), `{{funding_note}}` (" · fu
 empty), `{{funding_date}}` (a funding-required proposal's one date: when funding started, or the
 date its front matter gives when there is none; needs ccs-front-bash with that slot), `{{gitlab_url}}`, `{{funds}}` (a milestone's), `{{date}}` (a milestone's
 completion or a payout's). Each is replaced with its value HTML-escaped once
-(ccs-bash's JSON is already escaped). `{{qr}}` is the QR code
-as a PNG data URI (`data:image/png;base64,…`, ccs-bash's `donate-qr-code`). The exception is
+(ccs-bash's JSON is already escaped). `{{qr}}` is the QR code's path, `/qr/<address>.png`
+(made relative to the page): the signed subaddress list's own file of that address, which the web
+server's gate takes only by its sum (ccs-front-bash after v0.1.25; before, a PNG `data:` URI). The
+exception is
 `{{body}}`, the proposal's Markdown rendered with everything escaped first.
 
 **Votes:** `parts/card-idea.html` has `{{upvotes}}` and `{{downvotes}}`, the idea's 👍/👎 on its
@@ -103,7 +105,7 @@ The parts are rendered from the same templates as the example pages, so they can
 ## Rules
 
 - No `<script>`, no inline event handlers, no `style=` attributes: the site works under
-  `Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self' data:; font-src 'self'`.
+  `Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self'; font-src 'self'`.
 - Nothing from other sites: fonts are in `static/assets/`, icons in `assets/assets/icons/` (PNG, no SVG: Tor Browser at "Safest" draws none; `tools/icons-png.sh` makes them from `tools/icons.svg`).
 - Raw HTML in Markdown is dropped (`markup.goldmark.renderer.unsafe = false`).
 
