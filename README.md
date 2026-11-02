@@ -48,7 +48,7 @@ A new marker, part or `{{slot}}` is a new release of ccs-front-bash and of the g
 | Marker | Where | Filled with |
 |---|---|---|
 | `<!-- ccs:list fr -->…<!-- /ccs:list fr -->` (`idea`, `fr`, `wip`, `cp`) | the stage pages, the tag page | one `parts/card-<stage>.html` per proposal, or `parts/empty.html` |
-| `<!-- ccs:donate -->…<!-- /ccs:donate -->` | funding-required proposal pages | `parts/donate.html`: raised, progress, and the Contribute dropdown |
+| `<!-- ccs:donate -->…<!-- /ccs:donate -->` | funding-required proposal pages | `parts/donate.html`: raised, progress, and the Contribute dropdown; at its goal, `parts/donate-funded.html` in its place ("Fully funded", no address or QR code; the gate takes it only with the bar at 100) |
 | `<!-- ccs:funded -->…<!-- /ccs:funded -->` | other proposal pages | `parts/funded.html` |
 | `<!-- ccs:milestones -->…<!-- /ccs:milestones -->` | proposal pages, Milestones tab | `parts/milestone-done.html` / `milestone-todo.html` per milestone |
 | `<!-- ccs:payouts -->…<!-- /ccs:payouts -->` | proposal pages, Payouts tab | `parts/payout.html` per payout |
@@ -64,7 +64,8 @@ A new marker, part or `{{slot}}` is a new release of ccs-front-bash and of the g
 **Parts** (`public/parts/`) are fragments with `{{slot}}`s: `{{name}}`, `{{author}}`, `{{date}}`,
 `{{url}}`, `{{amount}}`, `{{raised}}`, `{{percentage}}`, `{{contributors}}`, `{{milestones}}`,
 `{{done}}`, `{{segments}}` (made of `segment-done.html` / `segment-todo.html`), `{{address}}`,
-`{{pending_note}}` (" · 1.5 XMR pending", or empty), `{{funding_note}}` (" · funding since …", or
+`{{pending_note}}` (" +1.5 XMR pending", or empty), `{{needed_note}}` (in the Contribute
+dropdown: " 8.5 XMR would fund it 100%!", or empty), `{{funding_note}}` (" · funding since …", or
 empty), `{{funding_date}}` (a funding-required proposal's one date: when funding started, or the
 date its front matter gives when there is none; needs ccs-front-bash with that slot), `{{gitlab_url}}`, `{{funds}}` (a milestone's), `{{date}}` (a milestone's
 completion or a payout's). Each is replaced with its value HTML-escaped once
@@ -110,7 +111,8 @@ The parts are rendered from the same templates as the example pages, so they can
 
 - Layout after the concept screenshots in redsh4de's CCS proposal
   ("CCS Frontend Astro Rewrite").
-- The piggy bank: ccs-front's `img/funding-required.png` (by rehrar, 2018; scaled to 760 px),
+- The piggy bank: ccs-front's `img/funding-required.png` (by rehrar, 2018; as AVIF at the sizes
+  shown, 380 and 760 px, and a PNG for browsers without AVIF),
   BSD-3, Copyright (c) 2021, monero-project, `static/assets/piggy-LICENSE`.
 - The Monero symbol: monero-project/monero-site `img/favicons.svg` (BSD-3).
 - The General Fund's QR code (`static/assets/general-fund-qr.png`): monero-project/monero-site
@@ -126,8 +128,9 @@ buttons shown by CSS: like today's ccs-front, and with no JavaScript.
 ## The Verify page
 
 Visitors check a donation address in a view-only copy of the CCS wallet (`content/verify.md`):
-ccs-front-bash fills `parts/verify.html` with the wallet's `{{address}}`, `{{viewkey}}` and
-`{{wallet_source}}` (where those were published), or `parts/no-list.html` when the backend has no
+ccs-front-bash fills `parts/verify.html` with the wallet's `{{address}}`, `{{viewkey}}`,
+`{{wallet_source}}` (where those were published), the list's signer `{{fingerprint}}` and the
+wallet's `{{network}}` (the commands' `--testnet` or `--stagenet`, or nothing), or `parts/no-list.html` when the backend has no
 signed list, and each donation box's link to it (`{{verify_link}}`, `parts/verify-link.html`).
 The signed list of the wallet's subaddresses (ccs-front-bash's docs/setup.md, step 5) is for the
 backend and the web server.
