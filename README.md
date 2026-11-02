@@ -10,6 +10,11 @@ Hugo only runs **offline**, once per design change. Its output, `public/`, is th
 in on the backend every run (see [the design](https://github.com/plowsof/ccs-bash/blob/master/docs/design.md)).
 No framework runs on a live machine.
 
+**For the CCS maintainers** a design is a release zip, checked and unpacked on the backend
+([ccs-bash's setup](https://github.com/plowsof/ccs-bash/blob/master/docs/setup.md#the-backend),
+step 3; deploying a new one: [the handover](https://github.com/plowsof/ccs-bash/blob/master/docs/handover.md#deploying-a-set-the-docker-setup)).
+This page is for whoever changes the design: building it, and its contract with ccs-front-bash.
+
 ```
 hugo build --cleanDestinationDir   # Hugo 0.167.0 → public/
 ```
@@ -35,7 +40,7 @@ every build from the copy in `container/sigs/`), run by StageX's BuildKit (`cont
 rather than the host's, with no network. `container/update-images.sh` repins and refreshes the copy. The same commit gives the same zip, byte for byte, on any machine:
 CI builds it on two at once and compares, and a tag `v*` attaches the zip and its sha256 to a
 GitHub release only when both match. That zip, sha256 checked, is what goes to the ccs-front-bash
-machine as the original (`unzip` it into `/opt/ccs-front-hugo/public`).
+machine as the original (`unzip` it into `/opt/ccs-front-hugo/public`: [ccs-bash's setup](https://github.com/plowsof/ccs-bash/blob/master/docs/setup.md#the-backend), step 3).
 
 ## What ccs-front-bash fills in
 
@@ -134,5 +139,5 @@ ccs-front-bash fills `parts/verify.html` with the wallet's `{{address}}`, `{{vie
 `{{wallet_source}}` (where those were published), the list's signer `{{fingerprint}}` and the
 wallet's `{{network}}` (the commands' `--testnet` or `--stagenet`, or nothing), or `parts/no-list.html` when the backend has no
 signed list, and each donation box's link to it (`{{verify_link}}`, `parts/verify-link.html`).
-The signed list of the wallet's subaddresses (ccs-front-bash's docs/setup.md, step 5) is for the
+The signed list of the wallet's subaddresses ([ccs-bash's docs](https://github.com/plowsof/ccs-bash/blob/master/docs/signed-list.md)) is for the
 backend and the web server.
