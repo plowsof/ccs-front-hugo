@@ -4,14 +4,14 @@
 {{- $v := .Params.v -}}{{- if $ph }}{{ $v = partial "placeholders.html" . }}{{ end -}}
 <article class="proposal">
   <div class="side"><a class="back" href="{{ $st.page }}">{{ partial "icon.html" "back" }}{{ $st.label }}</a></div>
-  {{- /* no stage label: the link above already names the stage, the strip shows its colour */}}
+  {{- /* No stage label: the link above names the stage, and the strip shows its colour */}}
   <header class="card head {{ $s }}">
     <h1>{{ $v.name }}</h1>
     {{ partial "meta.html" (dict "s" $s "v" $v "page" true) }}
     <p class="labels">{{ if $ph }}{{ $v.tag_links }}{{ else }}{{ range .Params.tags }}{{ partial "label.html" (dict "tag" . "link" true "href" (partial "tag-href.html" .)) }}{{ end }}{{ end }}</p>
     {{ if eq $s "fr" -}}
     {{ partial "marker.html" "donate" }}
-    {{- /* at its goal: "Fully funded" in place of the Contribute button (an example: proposals/example-funded) */}}
+    {{- /* At its goal, "Fully funded" replaces the Contribute button */}}
     {{- if and (not $ph) (ge (int $v.percentage) 100) }}
     {{ partial "donate-funded.html" $v }}
     {{- else }}
@@ -25,11 +25,11 @@
     {{- end }}
   </header>
 
-  {{- /* Tabs without JavaScript: radio buttons, and CSS shows the panel of the checked one. */}}
+  {{- /* Tabs without JavaScript: radio buttons, and CSS shows the checked one's panel. */}}
   <div class="tabs {{ $s }}">
     <input type="radio" name="tab" id="tab-proposal" checked><label for="tab-proposal">Proposal</label>
     <input type="radio" name="tab" id="tab-milestones"><label for="tab-milestones">Milestones</label>
-    {{- /* Payouts: once work has started (work in progress, completed); nothing is paid out while funding */}}
+    {{- /* Payouts, once work has started. Nothing is paid out while funding. */}}
     {{- if ne $s "fr" }}
     <input type="radio" name="tab" id="tab-payouts"><label for="tab-payouts">Payouts</label>
     {{- end }}

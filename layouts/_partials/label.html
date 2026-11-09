@@ -1,6 +1,6 @@
-{{- /* One tag of a proposal, a coloured pill. On a card (the whole card is a link) a label; on a
-   proposal page a link to the tag's page. In the preview every tag page is the one example
-   page, and the colours go by the example tags' order (ccs-front-bash: by the tag's name). */ -}}
+{{- /* A proposal's tag, as a coloured pill.
+   On a card it is a label, since the whole card is a link. On a proposal page it links to the tag's page.
+   In the preview, colours follow the example tags' order. ccs-front-bash uses the tag's name. */ -}}
 {{- $color := .color -}}
 {{- if not $color }}{{ range partial "tags.html" . }}{{ if eq .tag $.tag }}{{ $color = .color }}{{ end }}{{ end }}{{ end -}}
 {{- if .link }}<a class="label {{ $color }}" {{ printf "href=%q" .href | safeHTMLAttr }}>{{ .tag }}</a>

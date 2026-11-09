@@ -7,7 +7,7 @@
   {{- end }}
   {{- if ne .s "idea" }}
   <li>{{ partial "icon.html" "users" }}{{ .v.contributors }} contributors</li>
-  {{- /* the amount only where no "raised X of Y XMR" says it: wip and completed cards */}}
+  {{- /* The amount, only on wip and completed cards. The others already say "raised X of Y XMR". */}}
   {{- if and (ne .s "fr") (not .page) }}
   <li>{{ partial "icon.html" "coins" }}{{ .v.amount }} XMR</li>
   {{- end }}

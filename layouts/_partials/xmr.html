@@ -1,4 +1,4 @@
-{{- /* "75.0000" -> "75", "60.5000" -> "60.5": how ccs-bash's 4-decimal amounts are shown */ -}}
+{{- /* "75.0000" becomes "75", and "60.5000" becomes "60.5" */ -}}
 {{- $x := printf "%v" (. | default "") -}}
 {{- if strings.Contains $x "." }}{{ $x = strings.TrimSuffix "." (strings.TrimRight "0" $x) }}{{ end -}}
 {{- return $x -}}

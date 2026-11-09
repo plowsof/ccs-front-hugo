@@ -1,5 +1,5 @@
-{{- /* A proposal from ccs-bash's JSON -> the values a card or a page shows. Amounts are ccs-bash's
-   (exact to 4 decimals, cut off, never rounded up), shown without trailing zeros: 60, 60.5, 0.1234. */ -}}
+{{- /* The values a card or page shows for a proposal.
+   Amounts are exact to 4 decimals and shown without trailing zeros: 60, 60.5, 0.1234. */ -}}
 {{- $p := . -}}
 {{- $pending := index $p "amount-pending" | default 0 -}}
 {{- $needed := index $p "amount-needed" | default "0" -}}

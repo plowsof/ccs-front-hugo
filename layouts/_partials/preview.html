@@ -1,6 +1,5 @@
-{{- /* A Coolify preview only (Dockerfile): the commit it was built from, at the bottom of every
-   page. Coolify builds a PR's preview from "pull/<PR>/head" (COOLIFY_BRANCH); a release build
-   has no such variables, so nothing shows there. */ -}}
+{{- /* Coolify previews only: the commit it was built from, at the bottom of every page.
+   A release build has no such variables, so nothing shows. */ -}}
 {{- $commit := os.Getenv "SOURCE_COMMIT" -}}
 {{- $pr := "" -}}
 {{- with findRESubmatch `^pull/([0-9]+)/` (os.Getenv "COOLIFY_BRANCH") }}{{ $pr = index (index . 0) 1 }}{{ end -}}

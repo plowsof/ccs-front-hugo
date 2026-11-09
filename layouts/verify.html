@@ -1,7 +1,6 @@
 {{ define "main" }}
-{{- /* ccs-front-bash fills this: the steps below (parts/verify.html, with the wallet's address,
-   view key and where they were published) when a signed list is installed, else
-   parts/no-list.html. Here, the preview: the steps, with placeholder values. */}}
+{{- /* ccs-front-bash fills this with parts/verify.html when a signed list is installed,
+   or else parts/no-list.html. The preview shows the steps with placeholder values. */}}
 <article class="proposal"><div class="body">
   <h1>{{ .Title }}</h1>
   {{ partial "marker.html" "verify" }}

@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
-# icons-png.sh: the site's icons as PNGs, from tools/icons.svg (Lucide, and the Monero logo). The
-# site ships no SVG: Tor Browser at "Safest" doesn't draw it. Each icon at 1x, 2x and 3x, the
-# browser takes the sharpest its screen needs (image-set, srcset). The line icons are black on
-# transparent, used as CSS masks so they keep the text's colour; the logo and the Tor onion keep
-# their own.
-# Run it after changing tools/icons.svg, with Chrome or Chromium and Python's Pillow; commit what
-# it writes. (PNG rather than WebP or AVIF: optimised, it is nearly as small for icons this size,
-# and every browser draws it, Tor Browser at any level included.)
+# icons-png.sh: make the site's icons as PNGs from tools/icons.svg.
+# The site ships no SVG, since Tor Browser at "Safest" doesn't draw it.
+# Each icon comes at 1x, 2x and 3x. The browser picks the one its screen needs.
+# Line icons are black on transparent, used as CSS masks to take the text's colour.
+# Run it after changing tools/icons.svg, with Chrome or Chromium and Pillow. Commit the output.
+# PNG, not WebP or AVIF: it is nearly as small at these sizes, and every browser draws it.
 set -euo pipefail
 here=$(dirname "$(readlink -f "$0")")
 out=$here/../assets/assets/icons
@@ -33,7 +31,7 @@ for f in "$tmp"/*.svg; do
 done
 render "$tmp/logo.svg" 32 "$out/favicon-32.png"
 render "$tmp/logo.svg" 180 "$out/favicon-180.png"
-# smallest PNGs: the line icons as black plus transparency only (a mask uses just that)
+# The smallest PNGs: line icons as black plus transparency only, which is all a mask uses.
 python3 - "$out" <<'PY'
 import glob, sys
 from PIL import Image
