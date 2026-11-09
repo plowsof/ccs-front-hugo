@@ -1,5 +1,5 @@
-{{- /* The example proposals' tags (fr, wip, cp: ideas have none) -> [{tag, count}], most used
-   first. Only for the preview: on the server ccs-front-bash counts them. */ -}}
+{{- /* The example proposals' tags with their counts, most used first.
+   Only for the preview. On the server, ccs-front-bash counts them. */ -}}
 {{- $d := hugo.Data.example -}}
 {{- $n := dict -}}{{- $order := slice -}}
 {{- range slice (index $d.proposals 1).proposals (index $d.proposals 2).proposals (index (index $d "completed-proposals") 0).proposals }}{{ range . }}{{ range .tags }}

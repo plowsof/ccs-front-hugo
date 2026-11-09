@@ -1,29 +1,25 @@
 name: preview
 # The previews and this comment: a task plowsof worked on for months, picked up and finished by
 # ofrnxmr. Thank you.
-# On a pull request: comment the link to its Coolify preview, the site with its example data
-# built from the PR (Dockerfile) at https://ccs-<PR>.beta.monerodevs.org, then wait for it: once
-# the preview serves this push's commit (the banner at the bottom of every page links it), the
-# comment says it is live; after 15 minutes without, that it isn't. One comment per PR, edited on
-# every push; a newer push cancels the wait for the older one. Merged or closed, Coolify takes the
-# preview down: the comment says it is offline. Checks out nothing and runs none of
-# the PR's code (it only fetches the preview), so pull_request_target (which may comment on PRs
-# from forks) is safe.
-# Coolify builds a preview by itself only for a branch of this repository (pushed by someone with
-# write access); a PR from a fork is untrusted code, so its preview waits until a maintainer has
-# read it and deploys it by hand (Coolify: the app's Preview Deployments, the PR's number), then
-# runs this workflow with the number to post the link and wait for it.
+# On a pull request, comment the link to its preview at https://ccs-<PR>.beta.monerodevs.org.
+# Then wait until the preview serves this push's commit, and say it is live.
+# After 15 minutes without it, say it isn't.
+# One comment per PR, edited on every push. A newer push cancels the older wait.
+# When the PR is merged or closed, the comment says the preview is offline.
+# It checks out nothing and runs none of the PR's code, so pull_request_target is safe.
+# A PR from a fork is untrusted, so its preview waits for a maintainer to read it.
+# The maintainer deploys it by hand in Coolify, then runs this workflow with the PR number.
 on:
   pull_request_target:
     types: [opened, reopened, synchronize, closed]
-  workflow_dispatch:   # after deploying a fork's preview by hand: Actions, preview, Run workflow
+  workflow_dispatch:   # after deploying a fork's preview by hand
     inputs:
       pr:
         description: Pull request number
         required: true
 permissions:
   pull-requests: write
-concurrency:   # a new push: stop waiting for the old one
+concurrency:   # a new push stops the wait for the old one
   group: preview-${{ github.event.pull_request.number || inputs.pr }}
   cancel-in-progress: true
 defaults:
@@ -40,7 +36,7 @@ jobs:
           ACTION: ${{ github.event.action }}
           SHA: ${{ github.event.pull_request.head.sha }}
           MERGED: ${{ github.event.pull_request.merged }}
-          # a fork: the head repository isn't this one (a run by hand: a maintainer deployed it)
+          # A fork: the head repository isn't this one. A run by hand means a maintainer deployed it.
           FORK: ${{ github.event_name == 'pull_request_target' && github.event.pull_request.head.repo.full_name != github.repository }}
         run: |
           [[ $PR =~ ^[0-9]+$ ]] || { echo "error: not a PR number: $PR" >&2; exit 1; }
@@ -52,9 +48,8 @@ jobs:
           [[ $SHA =~ ^[0-9a-f]{40}$ ]] || { echo "error: not a commit: $SHA" >&2; exit 1; }
           url=https://ccs-$PR.beta.monerodevs.org
           api=repos/$GITHUB_REPOSITORY/issues
-          # the comment: found again by its first line, which GitHub doesn't show; or this workflow's
-          # earlier ones, before it had that line, and the note on a fork's PR: only this bot's
-          # body STATUS [offline]: offline, the preview without its link
+          # Find the comment by its hidden first line, or by older forms of it. Only this bot's.
+          # body STATUS [offline]. Offline shows the preview without its link.
           body() {
               local preview="[Preview #$PR]($url)"
               [[ ${2:-} ]] && preview="Preview #$PR"
@@ -64,7 +59,7 @@ jobs:
           say() { gh api -X PATCH "$api/comments/$id" -f body="$(body "$1")" > /dev/null; }
           id=$(gh api --paginate "$api/$PR/comments" --jq '.[] | select(.user.login == "github-actions[bot]")
               | select(.body | startswith("<!-- ccs-preview -->") or startswith("|What|Link|") or startswith("Thank you! A preview of this pull request")) | .id' | tail -n 1)
-          # merged or closed: the preview is gone (a fork's never built: its note stays)
+          # Merged or closed: the preview is gone. A fork's note stays.
           if [[ $ACTION == closed ]]; then
               [[ $id ]] && gh api "$api/comments/$id" --jq .body | grep -q '^<!-- ccs-preview -->' || exit 0
               gh api -X PATCH "$api/comments/$id" -f body="$(body "⚫ offline: the pull request was $([[ $MERGED == true ]] && echo merged || echo closed)" offline)" > /dev/null
@@ -72,7 +67,7 @@ jobs:
           fi
           if [[ $id ]]; then say "🟡 building \`${SHA::7}\`…"
           else id=$(gh api "$api/$PR/comments" -f body="$(body "🟡 building \`${SHA::7}\`…")" --jq .id); fi
-          # live: the preview answers, and its banner links this commit
+          # Live: the preview answers, and its banner links this commit.
           end=$((SECONDS + 15 * 60))
           until curl -fsS --max-time 20 "$url/" 2> /dev/null | grep -q "/changes/$SHA\""; do
               if ((SECONDS >= end)); then

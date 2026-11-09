@@ -1,6 +1,6 @@
 name: check
-# The site's zip is reproducible: built at once on two machines (the second from a clone made under
-# umask 077), the two must be the same, byte for byte. Once per change: PRs and pushes to master.
+# The zip must be reproducible. Two machines build it, one under umask 077, and the zips must match.
+# Runs on pull requests and on pushes to master.
 on:
   push:
     branches: [master]
@@ -12,7 +12,7 @@ permissions:
   contents: read
 defaults:
   run:
-    shell: bash   # -eo pipefail: a failed build piped into tee fails the step
+    shell: bash   # pipefail, so a failed build piped into tee fails the step
 jobs:
   zip:
     runs-on: ubuntu-24.04

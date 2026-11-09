@@ -1,4 +1,4 @@
-{{- /* A fragment ccs-front-bash fills ({{slot}}s) and puts between markers. Not a page. */ -}}
+{{- /* A fragment ccs-front-bash fills and puts between markers. Not a page. */ -}}
 {{- $v := partial "placeholders.html" . -}}
 {{- $p := .Params.part -}}
 {{- if eq $p "card" }}{{ partial "card.html" (dict "s" .Params.s "v" $v) }}

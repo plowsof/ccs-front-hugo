@@ -1,7 +1,7 @@
-# The site as a reproducible zip: StageX's Hugo, busybox and zip (container/images, signatures
-# checked by build.sh), no network. The same commit gives the same zip, byte for byte, anywhere:
-# every file gets the commit's time and fixed permissions, the zip lists them in one order and
-# keeps nothing of the machine (no uid/gid or extra timestamps, -X; no folder entries, -D).
+# The site as a reproducible zip, built with StageX's Hugo, busybox and zip, with no network.
+# The same commit gives the same zip anywhere.
+# Every file gets the commit's time and fixed permissions, in a fixed order.
+# The zip keeps nothing of the machine: no uid, gid, extra times (-X) or folder entries (-D).
 FROM scratch AS build
 COPY --from=busybox / /
 COPY --from=musl / /
