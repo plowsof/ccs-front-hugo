@@ -13,6 +13,7 @@
 {{- /* &#47; is "/" to a browser, and relativeURLs leaves it alone */}}
 {{- if eq .Kind "404" }}{{ `<base href="&#47;">` | safeHTML }}{{ end }}
 <title>{{ if .IsHome }}Monero Community Crowdfunding System{{ else if eq .Kind "404" }}Page not found · Monero CCS{{ else }}{{ .Title }} · Monero CCS{{ end }}</title>
+{{- partial "link-card.html" . }}
 {{- /* Minified, and named by its hash, so a changed stylesheet is a new file.
    It sits beside fonts/, so its url()s work */}}
 {{- $css := resources.Get "assets/style.css" | resources.ExecuteAsTemplate "assets/style.css" . | minify | fingerprint "sha256" }}

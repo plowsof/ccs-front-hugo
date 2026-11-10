@@ -64,7 +64,11 @@ A new marker, part or `{{slot}}` is a new release of ccs-front-bash and of the g
 | `<!-- ccs:onion -->…<!-- /ccs:onion -->` | every page's footer (proposal and tag pages too) | `parts/onion.html` with `{{onion}}`, the site's onion address (ccs-front-bash's `CCS_ONION`; the web server's gate takes only its own `/etc/ccs-gate/onion`), or nothing |
 
 **Not a marker:** every page's head and footer link to `/feed.xml`, the feed ccs-front-bash writes
-(with its `CCS_SITE_URL`); a preview serves an example of it (`preview/feed.xml`).
+(with its `CCS_SITE_URL`); a preview serves an example of it (`preview/feed.xml`). Every page's
+head also has a link card (`og:` and `twitter:` tags, `layouts/_partials/link-card.html`): the
+page's title, a line about it, and `assets/card.png` (made from `tools/card.html` by
+`tools/icons-png.sh`). A proposal page's line comes from its slots. ccs-front-bash puts the site's
+address before the card's `og:image` path.
 
 **Parts** (`public/parts/`) are fragments with `{{slot}}`s: `{{name}}`, `{{author}}`, `{{date}}`,
 `{{url}}`, `{{amount}}`, `{{raised}}`, `{{percentage}}`, `{{contributors}}`, `{{milestones}}`,

@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# icons-png.sh: make the site's icons as PNGs from tools/icons.svg.
+# icons-png.sh: make the site's icons as PNGs from tools/icons.svg,
+# and the link-preview card (assets/assets/card.png) from tools/card.html.
 # The site ships no SVG, since Tor Browser at "Safest" doesn't draw it.
 # Each icon comes at 1x, 2x and 3x. The browser picks the one its screen needs.
 # Line icons are black on transparent, used as CSS masks to take the text's colour.
@@ -14,9 +15,9 @@ command -v pngquant oxipng > /dev/null || { echo "icons-png.sh: needs pngquant a
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 rm -rf "$out" && mkdir -p "$out"
-render() {   # render SVG_FILE PX PNG
+render() {   # render FILE WIDTH PNG [HEIGHT]
     "$chrome" --headless=new --disable-gpu --hide-scrollbars --default-background-color=00000000 \
-        --window-size="$2,$2" --screenshot="$3" "file://$1" > /dev/null 2>&1
+        --virtual-time-budget=3000 --window-size="$2,${4:-$2}" --screenshot="$3" "file://$1" > /dev/null 2>&1
 }
 # One SVG file per <symbol>. Each <symbol> and </symbol> is on its own line.
 awk -v dir="$tmp" '
@@ -44,3 +45,9 @@ pngquant --speed 1 --nofs --strip --skip-if-larger --force --ext .png 256 \
 # Then every icon compressed losslessly. Line icons become grey plus transparency.
 oxipng -q -o max --strip safe --alpha "$out"/*.png
 du -cb "$out"/*.png | tail -n 1
+# The card that X, Mastodon, Discord and others show for a link. It uses the logo made above.
+card=$here/../assets/assets/card.png
+render "$here/card.html" 1200 "$card" 630
+pngquant --speed 1 --nofs --strip --skip-if-larger --force --ext .png 256 "$card" || [[ $? == 98 || $? == 99 ]]
+oxipng -q -o max --strip safe "$card"
+du -b "$card"

@@ -2,6 +2,7 @@
 layout: page
 url: /how-to-ccs/
 title: How to submit a CCS proposal.
+description: "How to submit a proposal to the Monero CCS, step by step."
 ---
 
 #### Note: Read the [What is the CCS and What Are Its Rules and Expectations](/what-is-ccs) page before continuing!
