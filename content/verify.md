@@ -1,5 +1,6 @@
 ---
 title: Check a donation address
+description: "Check that a donation address is the CCS wallet's own, in a view-only copy of the wallet."
 url: /verify/
 layout: verify
 ---

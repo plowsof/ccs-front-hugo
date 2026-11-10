@@ -1,0 +1,29 @@
+{{- /* The card a link to this page shows on X, Mastodon, Discord, Telegram and others.
+   og:image must be a full address: ccs-front-bash puts the site's address before it.
+   A proposal page's text is filled in by ccs-front-bash, from the same slots as the page. */ -}}
+{{- $title := .Title }}
+{{- if .IsHome }}{{ $title = "Monero Community Crowdfunding System" }}{{ else if eq .Kind "404" }}{{ $title = "Page not found" }}{{ end }}
+{{- $d := .Description }}
+{{- $stages := partial "stages.html" . }}
+{{- if eq .Layout "proposal" }}
+  {{- $v := .Params.v }}{{ if .Params.placeholders }}{{ $v = partial "placeholders.html" . }}{{ end }}
+  {{- $s := .Params.s }}
+  {{- if eq $s "fr" }}{{ $d = printf "Funding required: %v of %v XMR raised (%v%%)." $v.raised $v.amount $v.percentage }}
+  {{- else if eq $s "wip" }}{{ $d = printf "Work in progress: %v of %v milestones done, %v XMR funded." $v.done $v.milestones $v.amount }}
+  {{- else }}{{ $d = printf "Completed: %v milestones done, %v XMR funded." $v.milestones $v.amount }}{{ end }}
+{{- else if eq .Params.page "explore" }}{{ $d = "Monero CCS proposals with this tag." }}
+{{- else if eq .Params.page "ideas" }}{{ $d = $stages.idea.text }}
+{{- else if in (slice "fr" "wip" "cp") .Params.page }}{{ $d = (index $stages .Params.page).text }}
+{{- end }}
+{{- $d = $d | default "Monero is a decentralized, community-driven project. The CCS is a way for the community to fund development and other initiatives that benefit the Monero ecosystem." }}
+{{- $img := resources.Get "assets/card.png" | fingerprint "sha256" }}
+<meta name="description" content="{{ $d }}">
+<meta property="og:site_name" content="Monero CCS">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{{ $title }}">
+<meta property="og:description" content="{{ $d }}">
+<meta property="og:image" content="{{ $img.RelPermalink }}">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Monero CCS, the Community Crowdfunding System, with a piggy bank">
+<meta name="twitter:card" content="summary_large_image">

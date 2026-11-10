@@ -2,6 +2,7 @@
 layout: page
 url: /what-is-ccs/
 title: What is the CCS, and what are its rules and expectations?
+description: "What the CCS is, and the rules and expectations for proposals and the people who work on them."
 ---
 
 ## Introduction
