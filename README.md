@@ -111,7 +111,7 @@ The parts are rendered from the same templates as the example pages, so they can
 
 - No `<script>`, no inline event handlers, no `style=` attributes: the site works under
   `Content-Security-Policy: default-src 'none'; style-src 'self'; img-src 'self'; font-src 'self'`.
-- Nothing from other sites: fonts are in `static/assets/`, icons in `assets/assets/icons/` (PNG, no SVG: Tor Browser at "Safest" draws none; `tools/icons-png.sh` makes them from `tools/icons.svg`).
+- Nothing from other sites: fonts are in `static/assets/`, icons in `assets/assets/icons/` (PNG, no SVG: Tor Browser at "Safest" draws none; `tools/icons-png.sh` makes them from `tools/icons.svg` with Chrome, pngquant and oxipng; only whoever changes the icons runs it).
 - Raw HTML in Markdown is dropped (`markup.goldmark.renderer.unsafe = false`).
 
 ## Credits
