@@ -32,13 +32,19 @@ done
 render "$tmp/logo.svg" 32 "$out/favicon-32.png"
 render "$tmp/logo.svg" 180 "$out/favicon-180.png"
 # The smallest PNGs: line icons as black plus transparency only, which is all a mask uses.
+# The logo and the Tor onion get a 256-colour palette, when that is smaller.
 python3 - "$out" <<'PY'
-import glob, sys
+import glob, io, sys
 from PIL import Image
 for f in glob.glob(sys.argv[1] + "/*.png"):
     im = Image.open(f)
     if "/logo-" not in f and "/favicon-" not in f and "/tor-" not in f:
         im = Image.merge("LA", (Image.new("L", im.size, 0), im.getchannel("A")))
-    im.save(f, "PNG", optimize=True)
+        im.save(f, "PNG", optimize=True)
+        continue
+    full, pal = io.BytesIO(), io.BytesIO()
+    im.save(full, "PNG", optimize=True)
+    im.convert("RGBA").quantize(256, method=Image.Quantize.FASTOCTREE).save(pal, "PNG", optimize=True)
+    open(f, "wb").write(min(full, pal, key=lambda b: b.tell()).getvalue())
 PY
 du -cb "$out"/*.png | tail -n 1
