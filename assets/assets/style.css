@@ -602,6 +602,13 @@ a.label:hover, .filter:hover { color: var(--tag-fg); outline: 2px solid var(--ta
 .not-found .actions { display: flex; gap: 12px; flex-wrap: wrap; margin: 24px 0; }
 .not-found .clam { display: block; margin: 8px 0 12px; }
 
+/* A link to the light or dark theme loads the page again, so it would flash; this fades the old
+   page into the new. It needs both pages to have it, so every link fades the same way.
+   Chrome, Edge and Safari 18.2+; others load as before. None for reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition { navigation: auto; }
+}
+
 /* a Coolify preview's commit line (layouts/_partials/preview.html) */
 .preview-banner {
   position: fixed; bottom: 8px; left: 0; right: 0; z-index: 40; width: fit-content; margin: 0 auto;
