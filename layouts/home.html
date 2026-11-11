@@ -8,28 +8,15 @@
       <a class="button" href="/what-is-ccs/">About</a>
     </div>
   </div>
-  {{- /* The piggy, in layers: its body, its head as a lid, and the small coin, which drops into
-     the slot as the page opens. Clicking it is an easter egg: the man inside pushes the lid open
-     and gives a thumbs-up. No JavaScript: two radios take turns, so every click replays it.
-     His images are in the stylesheet and load only on the first click. All named by their
-     hashes, so browsers keep them. */}}
-  {{- $img := dict }}
-  {{- range slice "body-380" "body-760" "lid-380" "lid-760" "coin-68" "coin-136" }}
-  {{- $img = merge $img (dict . (resources.Get (printf "assets/piggy-%s.png" .) | fingerprint "sha256").RelPermalink) }}
-  {{- end }}
-  <div class="art egg">
-    <input type="radio" name="egg" id="egg-a">
-    <input type="radio" name="egg" id="egg-b">
-    <label class="first" for="egg-a"><span class="visually-hidden">Peek inside the piggy</span></label>
-    <label class="again" for="egg-b"><span class="visually-hidden">Peek inside the piggy again</span></label>
-    <div class="layers">
-      <img class="body" src="{{ index $img "body-380" }}" srcset="{{ index $img "body-760" }} 2x" width="380" height="380" alt="">
-      <span class="arm"></span>
-      <span class="man"></span>
-      <img class="lid" src="{{ index $img "lid-380" }}" srcset="{{ index $img "lid-760" }} 2x" width="380" height="380" alt="">
-      <span class="drop"><img class="coin" src="{{ index $img "coin-68" }}" srcset="{{ index $img "coin-136" }} 2x" width="68" height="68" alt=""></span>
-    </div>
-  </div>
+  {{- /* The piggy: AVIF at 380px and twice that for dense screens, and a PNG fallback.
+     Named by their hashes, so browsers keep them */}}
+  {{- $a1 := resources.Get "assets/piggy-380.avif" | fingerprint "sha256" }}
+  {{- $a2 := resources.Get "assets/piggy-760.avif" | fingerprint "sha256" }}
+  {{- $png := resources.Get "assets/piggy-380.png" | fingerprint "sha256" }}
+  <picture class="art">
+    <source type="image/avif" srcset="{{ $a1.RelPermalink }} 1x, {{ $a2.RelPermalink }} 2x">
+    <img src="{{ $png.RelPermalink }}" width="380" height="380" alt="">
+  </picture>
 </section>
 <section class="stages" id="proposals">
   <h2>View Proposals</h2>
