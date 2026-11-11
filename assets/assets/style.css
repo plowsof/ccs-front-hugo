@@ -168,6 +168,31 @@ a, button, label, summary, input, select, textarea { -webkit-tap-highlight-color
 .hero .art { width: 100%; max-width: 380px; justify-self: center; }
 .hero .art img { display: block; width: 100%; height: auto; }
 
+/* The piggy in layers (layouts/home.html). Each layer is the whole 380px square, so they line up.
+   The radios are hidden; the piggy is their label. */
+.egg { position: relative; aspect-ratio: 1; }
+.egg > input { position: absolute; opacity: 0; pointer-events: none; }
+.egg > label { position: absolute; inset: 0; z-index: 2; }
+.egg > .again, .egg > #egg-a:checked ~ .first { display: none; }
+.egg > #egg-a:checked ~ .again { display: block; }
+.egg > input:focus-visible ~ .layers { outline: 2px solid var(--orange); outline-offset: 4px; border-radius: var(--radius); }
+.egg .layers { position: absolute; inset: 0; transform-origin: 50% 92%; }
+.hero .egg .layers > * { position: absolute; inset: 0; width: 100%; height: 100%; }
+.egg .man, .egg .arm { background: no-repeat 0 0 / 100% 100%; }
+/* his images load only once someone clicks */
+.egg > input:checked ~ .layers .man { background-image: url({{ (resources.Get "assets/piggy-man.png" | fingerprint "sha256").RelPermalink | strings.TrimPrefix "/assets/" }}); }
+.egg > input:checked ~ .layers .arm { background-image: url({{ (resources.Get "assets/piggy-arm.png" | fingerprint "sha256").RelPermalink | strings.TrimPrefix "/assets/" }}); }
+/* the arm turns at his shoulder; the lid's hinge is the top of the back of the pig's head */
+.egg .arm { opacity: 0; transform-origin: 77.3% 62.7%; transform: rotate(70deg); }
+.egg .lid { transform-origin: 58.1% 32.6%; }
+.egg .body { transform-origin: 50% 92%; }
+/* the small coin, above the slot; the drop shows only what is above the slot's line */
+.egg .drop {
+  clip-path: polygon(0 0, 100% 0, 100% 39.24%, 46.8% 39.24%, 43.9% 39.6%, 42.44% 40.17%, 40.99% 40.7%,
+    39.53% 41.1%, 38.08% 41.51%, 36.63% 41.86%, 35.17% 42.5%, 33.72% 43.43%, 32.27% 44.53%, 30.81% 45.12%, 0 45.12%);
+}
+.hero .egg .coin { position: absolute; left: 45%; top: 5.233%; width: 17.674%; height: auto; }
+
 .stages { max-width: 720px; margin: 64px auto 72px; padding: 0 16px; text-align: center; }
 .stages h2 { font-size: 1.4rem; margin: 0 0 22px; }
 .stage-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
@@ -631,12 +656,62 @@ a.label:hover, .filter:hover { color: var(--tag-fg); outline: 2px solid var(--ta
   .list > a.card { animation: rise 0.45s ease-out backwards; }
   .list > a.card:nth-of-type(2) { animation-delay: 0.07s; }
   .list > a.card:nth-of-type(3) { animation-delay: 0.14s; }
+
+  /* The home page's small coin drops into the piggy as the page opens. */
+  .egg .coin { animation: coin-drop 2.6s 0.6s both; }
+  .egg .layers { animation: coin-bump 2.6s 0.6s both; }
+
+  /* The easter egg: a click on the piggy. Two names for each, one per radio, so each click
+     starts it again. */
+  #egg-a:checked ~ .layers .lid { animation: lid-a 4.6s ease-in-out; }
+  #egg-b:checked ~ .layers .lid { animation: lid-b 4.6s ease-in-out; }
+  #egg-a:checked ~ .layers .arm { animation: arm-a 4.6s ease-in-out; }
+  #egg-b:checked ~ .layers .arm { animation: arm-b 4.6s ease-in-out; }
+  #egg-a:checked ~ .layers .body { animation: thud-a 4.6s; }
+  #egg-b:checked ~ .layers .body { animation: thud-b 4.6s; }
 }
 @keyframes bar-fill {
   from { clip-path: inset(0 100% 0 0 round 20px); }
   to { clip-path: inset(0 0 0 0 round 20px); }
 }
 @keyframes rise { from { opacity: 0; transform: translateY(10px); } }
+/* a hop, a fall into the slot, then a new coin fades in where it was */
+@keyframes coin-drop {
+  0% { transform: none; opacity: 1; animation-timing-function: ease-out; }
+  8% { transform: translate(2%, -10%); animation-timing-function: cubic-bezier(0.5, 0, 1, 0.6); }
+  42% { transform: translate(-28%, 185%) scale(0.85); opacity: 1; }
+  42.1%, 70% { transform: none; opacity: 0; }
+  100% { transform: none; opacity: 1; }
+}
+@keyframes coin-bump {
+  0%, 30% { transform: none; } 34% { transform: scale(1.025, 0.975); }
+  40% { transform: scale(0.99, 1.012); } 47%, 100% { transform: none; }
+}
+/* he pushes the lid open, gives a thumbs-up, and it drops shut with a thud */
+@keyframes lid-a {
+  4% { transform: rotate(-2deg); } 8% { transform: rotate(1deg); } 12% { transform: none; }
+  16% { transform: rotate(-6deg); } 30% { transform: rotate(-82deg); } 34%, 66% { transform: rotate(-78deg); }
+  80% { transform: none; } 84% { transform: rotate(1.5deg); } 88%, 100% { transform: none; }
+}
+@keyframes lid-b {
+  4% { transform: rotate(-2deg); } 8% { transform: rotate(1deg); } 12% { transform: none; }
+  16% { transform: rotate(-6deg); } 30% { transform: rotate(-82deg); } 34%, 66% { transform: rotate(-78deg); }
+  80% { transform: none; } 84% { transform: rotate(1.5deg); } 88%, 100% { transform: none; }
+}
+@keyframes arm-a {
+  0%, 8% { opacity: 0; transform: rotate(70deg); } 12% { opacity: 1; transform: rotate(45deg); }
+  30% { transform: rotate(0deg); } 38% { transform: rotate(-7deg); } 42% { transform: rotate(5deg); }
+  46%, 58% { transform: rotate(0deg); opacity: 1; } 70% { transform: rotate(60deg); opacity: 1; }
+  74%, 100% { transform: rotate(70deg); opacity: 0; }
+}
+@keyframes arm-b {
+  0%, 8% { opacity: 0; transform: rotate(70deg); } 12% { opacity: 1; transform: rotate(45deg); }
+  30% { transform: rotate(0deg); } 38% { transform: rotate(-7deg); } 42% { transform: rotate(5deg); }
+  46%, 58% { transform: rotate(0deg); opacity: 1; } 70% { transform: rotate(60deg); opacity: 1; }
+  74%, 100% { transform: rotate(70deg); opacity: 0; }
+}
+@keyframes thud-a { 0%, 80% { transform: none; } 84% { transform: scale(1.02, 0.98); } 89%, 100% { transform: none; } }
+@keyframes thud-b { 0%, 80% { transform: none; } 84% { transform: scale(1.02, 0.98); } 89%, 100% { transform: none; } }
 
 /* a Coolify preview's commit line (layouts/_partials/preview.html) */
 .preview-banner {

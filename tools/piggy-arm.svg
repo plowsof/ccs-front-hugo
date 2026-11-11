@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="1720" viewBox="0 0 1720 1720">
+<!-- His arm with a thumbs-up, for the home page easter egg. Rendered to PNG at 760px. -->
+  <!-- his right arm: from the shoulder (under the suit's collar) out to the elbow, then up -->
+  <path d="M1330 1078 Q1395 1080 1420 1048 L1436 1010" stroke="#4d4f57" stroke-width="50" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M1330 1078 Q1395 1080 1420 1048 L1436 1010" stroke="#5c5e67" stroke-width="38" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+  <!-- white shirt cuff -->
+  <rect x="1408" y="978" width="58" height="26" rx="10" fill="#ffffff" transform="rotate(8 1437 991)"/>
+  <!-- fist, knuckles to the viewer -->
+  <rect x="1404" y="912" width="70" height="66" rx="20" fill="#f3c7a1"/>
+  <path d="M1410 932 L1458 932 M1410 950 L1460 950 M1412 966 L1456 966" stroke="#d99a74" stroke-width="5" stroke-linecap="round"/>
+  <!-- thumb up -->
+  <rect x="1446" y="852" width="28" height="74" rx="14" fill="#f3c7a1"/>
+  <path d="M1452 862 L1468 862" stroke="#e7a57f" stroke-width="5" stroke-linecap="round"/>
+</svg>

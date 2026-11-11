@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1720" height="1720" viewBox="0 0 1720 1720">
+<!-- The man inside the piggy, for the home page easter egg. Rendered to PNG at 760px; the site ships no SVG. -->
+<g transform="translate(230.4 265) scale(0.8)">
+  <!-- shirt collar and grey waistcoat at the neck -->
+  <path d="M1140 975 Q1260 905 1380 975 L1380 1015 L1140 1015 Z" fill="#5c5e67"/>
+  <path d="M1210 925 L1260 985 L1310 925 L1296 912 L1260 950 L1224 912 Z" fill="#ffffff"/>
+  <!-- neck -->
+  <rect x="1218" y="880" width="84" height="120" rx="20" fill="#e9b58f"/>
+  <ellipse cx="1260" cy="1012" rx="150" ry="40" fill="#f28080" stroke="#d66a6a" stroke-width="10"/>
+  <!-- ear -->
+  <ellipse cx="1158" cy="808" rx="26" ry="32" fill="#e9b58f"/>
+  <!-- face -->
+  <ellipse cx="1262" cy="800" rx="116" ry="124" fill="#f3c7a1"/>
+  <!-- eyebrows -->
+  <path d="M1232 752 Q1258 738 1284 750" stroke="#5b3a29" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <path d="M1314 750 Q1336 740 1356 752" stroke="#5b3a29" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <!-- round glasses -->
+  <circle cx="1260" cy="792" r="30" fill="#ffffff" fill-opacity="0.35" stroke="#33343a" stroke-width="8"/>
+  <circle cx="1336" cy="792" r="27" fill="#ffffff" fill-opacity="0.35" stroke="#33343a" stroke-width="8"/>
+  <path d="M1290 790 Q1299 782 1309 790" stroke="#33343a" stroke-width="7" fill="none"/>
+  <path d="M1230 790 L1170 784" stroke="#33343a" stroke-width="7" fill="none" stroke-linecap="round"/>
+  <circle cx="1265" cy="795" r="8" fill="#2e3038"/>
+  <circle cx="1340" cy="795" r="7" fill="#2e3038"/>
+  <!-- nose -->
+  <ellipse cx="1354" cy="836" rx="30" ry="25" fill="#e7a57f"/>
+  <!-- smile -->
+  <path d="M1278 902 Q1312 926 1346 900" stroke="#9a4a3a" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <!-- a big curly mustache -->
+  <path d="M1352 858
+           C1330 852 1300 852 1280 868 C1262 882 1244 888 1226 878 C1212 870 1214 852 1228 850
+           C1214 868 1236 876 1252 866 C1272 852 1290 842 1316 846 C1334 849 1346 852 1352 856
+           C1358 852 1370 849 1388 846 C1414 842 1432 852 1452 866 C1468 876 1490 868 1476 850
+           C1490 852 1492 870 1478 878 C1460 888 1442 882 1424 868 C1404 852 1374 852 1352 858 Z"
+        fill="#5b3a29"/>
+  <!-- orange flat cap: crown, band and a brim to the front -->
+  <path d="M1142 770 C1140 690 1200 650 1270 650 C1340 650 1392 690 1396 752 L1396 770 Z" fill="#e2611f"/>
+  <path d="M1142 762 L1396 762 L1396 780 L1142 780 Z" fill="#c25219"/>
+  <path d="M1360 764 C1400 756 1440 758 1462 772 C1440 786 1400 788 1360 782 Z" fill="#c25219"/>
+  <circle cx="1270" cy="652" r="10" fill="#c25219"/>
+</g>
+</svg>
